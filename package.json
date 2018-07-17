@@ -1,0 +1,37 @@
+{
+  "name": "@folio/myprofile",
+  "version": "0.1.0",
+  "description": "My profile",
+  "repository": "folio-org/ui-myprofile",
+  "publishConfig": {
+    "registry": "https://repository.folio.org/repository/npm-folio/"
+  },
+  "license": "Apache-2.0",
+  "engines": {
+    "node": ">=6.0.0"
+  },
+  "stripes": {
+    "type": "settings",
+    "displayName": "ui-myprofile.meta.title",
+    "route": "/myprofile"
+  },
+  "scripts": {
+    "babel-eslint": "^8.0.3",
+    "lint": "eslint .",
+    "test": "echo 'placeholder. no tests implemented'"
+  },
+  "devDependencies": {
+    "babel-eslint": "^8.0.3",
+    "eslint": "^4.8.0",
+    "@folio/eslint-config-stripes": "^2.0.0"
+  },
+  "dependencies": {
+    "@folio/stripes-components": "^2.0.0",
+    "prop-types": "^15.6.0",
+    "react-router-dom": "^4.1.1"
+  },
+  "peerDependencies": {
+    "@folio/stripes-core": "^2.7.0",
+    "react": "*"
+  }
+}
