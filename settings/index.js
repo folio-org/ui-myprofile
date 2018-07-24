@@ -2,18 +2,32 @@ import React, { Component } from 'react';
 import Settings from '@folio/stripes-components/lib/Settings';
 import { stripesShape } from '@folio/stripes-core/src/Stripes'; // eslint-disable-line import/no-unresolved
 
+import ChangePassword from './ChangePassword';
+
 class MyProfile extends Component {
   static propTypes = {
     stripes: stripesShape.isRequired,
   };
 
-  render() {
-    const { stripes } = this.props;
+  constructor(props) {
+    super(props);
 
+    this.pages = [
+      {
+        route: 'change-password',
+        label: this.props.stripes.intl.formatMessage({ id: 'ui-myprofile.settings.changePassword' }),
+        component: ChangePassword,
+        perm: 'ui-my-profile.view',
+      },
+    ];
+  }
+
+  render() {
     return (
       <Settings
         {...this.props}
-        paneTitle={stripes.intl.formatMessage({ id: 'ui-myprofile.settings.index.paneTitle' })}
+        pages={this.pages}
+        paneTitle={this.props.stripes.intl.formatMessage({ id: 'ui-myprofile.settings.index.paneTitle' })}
       />
     );
   }
