@@ -7,7 +7,7 @@ Version 2.0. See the file "[LICENSE](LICENSE)" for more information.
 
 ## Introduction
 
-This is a [Stripes](https://github.com/folio-org/stripes-core/) UI module for managing organization settings. This exists only to provide a settings section: there is no app.
+This is a [Stripes](https://github.com/folio-org/stripes-core/) UI module for managing user profile settings. This exists only to provide a settings section: there is no app.
 
 ## Additional information
 

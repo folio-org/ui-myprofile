@@ -17,7 +17,7 @@ class MyProfile extends Component {
         route: 'change-password',
         label: this.props.stripes.intl.formatMessage({ id: 'ui-myprofile.settings.changePassword' }),
         component: ChangePassword,
-        perm: 'ui-my-profile.view',
+        perm: 'ui-myprofile.view',
       },
     ];
   }

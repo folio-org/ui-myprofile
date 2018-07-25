@@ -16,20 +16,20 @@
     "route": "/myprofile",
     "permissionSets": [
       {
-        "permissionName": "settings.my-profile.enabled",
+        "permissionName": "settings.myprofile.enabled",
         "displayName": "UI: Users profile module is enabled"
       },
       {
-        "permissionName": "ui-my-profile.view",
+        "permissionName": "ui-myprofile.view",
         "displayName": "My profile: Can view settings for users profile",
         "description": "Some subperms can be deleted later when submodules use modern permission names",
         "subPermissions": [
-          "module.my-profile.enabled",
+          "module.myprofile.enabled",
           "users-bl.item.get",
           "users.item.get",
           "login.item.get"
         ],
-        "visible": false
+        "visible": true
       }
     ]
   },
