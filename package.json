@@ -13,7 +13,25 @@
   "stripes": {
     "type": "settings",
     "displayName": "ui-myprofile.meta.title",
-    "route": "/myprofile"
+    "route": "/myprofile",
+    "permissionSets": [
+      {
+        "permissionName": "settings.my-profile.enabled",
+        "displayName": "UI: Users profile module is enabled"
+      },
+      {
+        "permissionName": "ui-my-profile.view",
+        "displayName": "My profile: Can view settings for users profile",
+        "description": "Some subperms can be deleted later when submodules use modern permission names",
+        "subPermissions": [
+          "module.my-profile.enabled",
+          "users-bl.item.get",
+          "users.item.get",
+          "login.item.get"
+        ],
+        "visible": false
+      }
+    ]
   },
   "scripts": {
     "babel-eslint": "^8.0.3",
@@ -33,23 +51,5 @@
   "peerDependencies": {
     "@folio/stripes-core": "^2.7.0",
     "react": "*"
-  },
-  "permissionSets": [
-    {
-      "permissionName": "settings.my-profile.enabled",
-      "displayName": "UI: Users profile module is enabled"
-    },
-    {
-      "permissionName": "ui-my-profile.view",
-      "displayName": "My profile: Can view settings for users profile",
-      "description": "Some subperms can be deleted later when submodules use modern permission names",
-      "subPermissions": [
-        "module.my-profile.enabled",
-        "users-bl.item.get",
-        "users.item.get",
-        "login.item.get"
-      ],
-      "visible": false
-    }
-  ]
+  }
 }
