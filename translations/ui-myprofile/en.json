@@ -1,5 +1,6 @@
 {
   "meta.title": "My profile",
   "settings.index.paneTitle": "My profile",
-  "settings.changePassword": "Change password"
+  "settings.changePassword": "Change password",
+  "userDropdown.changePassword.caption": "Change Password"
 }

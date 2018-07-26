@@ -31,7 +31,16 @@
         ],
         "visible": true
       }
-    ]
+    ],
+    "links": {
+      "userDropdown": [
+        {
+          "caption": "ui-myprofile.userDropdown.changePassword.caption",
+          "route": "/settings/myprofile/password",
+          "check": "isLocalLogin"
+        }
+      ]
+    }
   },
   "scripts": {
     "babel-eslint": "^8.0.3",
