@@ -11,8 +11,8 @@ class MyProfile extends Component {
         ssoEnabled: PropTypes.bool,
       }).isRequired,
       intl: PropTypes.shape({
-        formatMessage: PropTypes.func.isRequired
-      }).isRequired
+        formatMessage: PropTypes.func.isRequired,
+      }).isRequired,
     }).isRequired,
   };
 
@@ -49,6 +49,8 @@ class MyProfile extends Component {
   }
 
   render() {
+    if (!this.pages.length) return null;
+
     return (
       <Settings
         {...this.props}
