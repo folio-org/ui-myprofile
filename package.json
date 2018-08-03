@@ -1,6 +1,6 @@
 {
   "name": "@folio/myprofile",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "My profile",
   "repository": "folio-org/ui-myprofile",
   "publishConfig": {
@@ -53,12 +53,17 @@
     "@folio/eslint-config-stripes": "^2.0.0"
   },
   "dependencies": {
-    "@folio/stripes-components": "^2.0.0",
+    "@folio/stripes-components": "^3.0.0",
+    "@folio/stripes-smart-components": "^1.4.0",
+    "@folio/react-intl-safe-html": "^1.0.1",
+    "@folio/stripes-form": "^0.8.0",
+    "react-intl": "^2.3.0",
     "prop-types": "^15.6.0",
+    "redux-form": "^7.0.3",
     "react-router-dom": "^4.1.1"
   },
   "peerDependencies": {
-    "@folio/stripes-core": "^2.7.0",
+    "@folio/stripes-core": "^2.10.5",
     "react": "*"
   }
 }
