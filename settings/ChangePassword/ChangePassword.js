@@ -7,6 +7,7 @@ import Button from '@folio/stripes-components/lib/Button';
 import TextField from '@folio/stripes-components/lib/TextField';
 import Callout from '@folio/stripes-components/lib/Callout';
 import { Row, Col } from '@folio/stripes-components/lib/LayoutGrid';
+import { stripesShape } from '@folio/stripes-core/src/Stripes'; // eslint-disable-line import/no-unresolved
 
 import ChangePasswordForm from './ChangePasswordForm';
 
@@ -21,19 +22,7 @@ class ChangePassword extends Component {
   });
 
   static propTypes = {
-    stripes: PropTypes.shape({
-      intl: PropTypes.shape({
-        formatMessage: PropTypes.func.isRequired,
-      }).isRequired,
-      user: PropTypes.shape({
-        user: PropTypes.shape({
-          id: PropTypes.string,
-          firstName: PropTypes.string,
-          lastName: PropTypes.string,
-          username: PropTypes.string,
-        }).isRequired,
-      }).isRequired,
-    }),
+    stripes: stripesShape,
     mutator: PropTypes.shape({
       changePassword: PropTypes.shape({
         POST: PropTypes.func.isRequired,
@@ -67,7 +56,7 @@ class ChangePassword extends Component {
   };
 
   getFullUserName() {
-    const { user: { firstName, lastName } } = this.props.stripes.user;
+    const { firstName, lastName } = this.props.stripes.user.user;
 
     return { firstName, lastName };
   }
@@ -92,12 +81,10 @@ class ChangePassword extends Component {
   };
 
   handleChangePasswordSuccess = () => {
-    const fullUserName = this.getFullUserName();
-
     const successMessage = (
       <SafeHTMLMessage
         id={`${this.translateNamespace}.successfullyChanged`}
-        values={fullUserName}
+        values={this.getFullUserName()}
       />
     );
 
@@ -130,13 +117,13 @@ class ChangePassword extends Component {
       errors.confirmPassword = enterValueError;
     }
 
-    const isFormValid = (
+    const isConfirmPasswordInvalid = (
       values.newPassword &&
       values.confirmPassword &&
       values.newPassword !== values.confirmPassword
     );
 
-    if (isFormValid) {
+    if (isConfirmPasswordInvalid) {
       const confirmPasswordMatchError = this.translate('confirmPasswordMatchError');
 
       errors.confirmPassword = confirmPasswordMatchError;
@@ -176,6 +163,7 @@ class ChangePassword extends Component {
                 id="current-password"
                 name="currentPassword"
                 label={this.translate('currentPassword')}
+                autoFocus
               />
             </Col>
           </Row>

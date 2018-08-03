@@ -1,19 +1,12 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import Settings from '@folio/stripes-components/lib/Settings';
+import { stripesShape } from '@folio/stripes-core/src/Stripes'; // eslint-disable-line import/no-unresolved
 
 import ChangePassword from './ChangePassword';
 
 class MyProfile extends Component {
   static propTypes = {
-    stripes: PropTypes.shape({
-      okapi: PropTypes.shape({
-        ssoEnabled: PropTypes.bool,
-      }).isRequired,
-      intl: PropTypes.shape({
-        formatMessage: PropTypes.func.isRequired,
-      }).isRequired,
-    }).isRequired,
+    stripes: stripesShape.isRequired,
   };
 
   constructor(props) {
