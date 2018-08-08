@@ -61,7 +61,7 @@ class ChangePassword extends Component {
     return { firstName, lastName };
   }
 
-  onChangePasswordFormSubmit = (values, dispatch, { reset }) => {
+  onChangePasswordFormSubmit = (values) => {
     const { changePassword } = this.props.mutator;
     const { currentPassword, newPassword } = values;
     const { username, id: userId } = this.props.stripes.user.user;
@@ -75,7 +75,6 @@ class ChangePassword extends Component {
       })
       .then(() => {
         this.handleChangePasswordSuccess();
-        reset();
       })
       .catch(this.handleChangePasswordError);
   };
@@ -99,6 +98,11 @@ class ChangePassword extends Component {
         currentPassword: this.translate('wrongPassword')
       });
     }
+  };
+
+  resetForm = (values, dispatch, { reset }) => {
+    // form need to be reset inside of "onSubmitSuccess" callback in order to properly reset the "submitSucceed" flag
+    reset();
   };
 
   validateForm = values => {
@@ -154,6 +158,7 @@ class ChangePassword extends Component {
           validate={this.validateForm}
           saveButtonText={this.translate('save')}
           onSubmit={this.onChangePasswordFormSubmit}
+          onSubmitSuccess={this.resetForm}
         >
           <Row>
             <Col xs={6}>
