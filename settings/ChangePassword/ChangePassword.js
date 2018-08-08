@@ -101,6 +101,7 @@ class ChangePassword extends Component {
   };
 
   resetForm = (values, dispatch, { reset }) => {
+    // form need to be reset inside of "onSubmitSuccess" callback in order to properly reset the "submitSucceed" flag
     reset();
   };
 
