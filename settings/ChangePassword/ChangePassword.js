@@ -9,6 +9,7 @@ import Callout from '@folio/stripes-components/lib/Callout';
 import { Row, Col } from '@folio/stripes-components/lib/LayoutGrid';
 import { stripesShape } from '@folio/stripes-core/src/Stripes'; // eslint-disable-line import/no-unresolved
 
+import Recaptcha from './Recaptcha';
 import ChangePasswordForm from './ChangePasswordForm';
 
 class ChangePassword extends Component {
@@ -79,6 +80,12 @@ class ChangePassword extends Component {
       .catch(this.handleChangePasswordError);
   };
 
+  captchaRef = ref => {
+    this.recaptcha = ref;
+
+    return this.recaptcha;
+  };
+
   handleChangePasswordSuccess = () => {
     const successMessage = (
       <SafeHTMLMessage
@@ -103,6 +110,7 @@ class ChangePassword extends Component {
   resetForm = (values, dispatch, { reset }) => {
     // form need to be reset inside of "onSubmitSuccess" callback in order to properly reset the "submitSucceed" flag
     reset();
+    this.recaptcha.reset();
   };
 
   validateForm = values => {
@@ -203,6 +211,15 @@ class ChangePassword extends Component {
                   <FormattedMessage id={passwordToggleLabelId} />
                 </Button>
               </div>
+            </Col>
+          </Row>
+          <Row>
+            <Col xs={6}>
+              <Field
+                name="captcharesponse"
+                component={Recaptcha}
+                refName={this.captchaRef}
+              />
             </Col>
           </Row>
         </ChangePasswordForm>
