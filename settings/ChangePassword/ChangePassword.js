@@ -87,9 +87,11 @@ class ChangePassword extends Component {
   };
 
   handleChangePasswordSuccess = () => {
+    const messageId = `${this.translateNamespace}.successfullyChanged`;
+
     const successMessage = (
       <SafeHTMLMessage
-        id={`${this.translateNamespace}.successfullyChanged`}
+        id={messageId}
         values={this.getFullUserName()}
       />
     );
@@ -116,6 +118,7 @@ class ChangePassword extends Component {
   validateForm = values => {
     const errors = {};
     const enterValueError = this.translate('enterValue');
+    const isTestEnv = process.env.NODE_ENV === 'test';
 
     if (!values.currentPassword) {
       errors.currentPassword = enterValueError;
@@ -127,6 +130,11 @@ class ChangePassword extends Component {
 
     if (!values.confirmPassword) {
       errors.confirmPassword = enterValueError;
+    }
+
+    // recaptcha is disabled for testing environment
+    if (!values.captchaResponse && !isTestEnv) {
+      errors.captchaResponse = this.translate('recaptchaError');
     }
 
     const isConfirmPasswordInvalid = (
@@ -216,7 +224,7 @@ class ChangePassword extends Component {
           <Row>
             <Col xs={6}>
               <Field
-                name="captcharesponse"
+                name="captchaResponse"
                 component={Recaptcha}
                 refName={this.captchaRef}
               />
