@@ -66,7 +66,7 @@
     "@folio/stripes-form": "^0.8.0",
     "@folio/stripes-smart-components": "^1.4.0",
     "prop-types": "^15.6.0",
-    "react-google-recaptcha": "^0.14.0",
+    "react-google-recaptcha": "^1.0.0",
     "react-intl": "^2.3.0",
     "react-router-dom": "^4.1.1",
     "redux-form": "^7.0.3"

@@ -100,6 +100,9 @@ class ChangePassword extends Component {
   };
 
   handleChangePasswordError = err => {
+    // reset recaptcha as google verify service needs new key each time
+    this.recaptcha.reset();
+
     const isWrongCurrentPassword = err.status === 401;
 
     if (isWrongCurrentPassword) {
