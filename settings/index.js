@@ -5,6 +5,10 @@ import { stripesShape } from '@folio/stripes-core/src/Stripes'; // eslint-disabl
 import ChangePassword from './ChangePassword';
 
 class MyProfile extends Component {
+  static isLocalLogin(stripes) {
+    return !stripes.okapi.ssoEnabled;
+  }
+
   static propTypes = {
     stripes: stripesShape.isRequired,
   };

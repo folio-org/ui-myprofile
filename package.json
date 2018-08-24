@@ -71,7 +71,7 @@
     "react-router-dom": "^4.1.1"
   },
   "peerDependencies": {
-    "@folio/stripes-core": "^2.10.5",
+    "@folio/stripes-core": "^2.10.7",
     "react": "*"
   }
 }
