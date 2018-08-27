@@ -40,10 +40,10 @@ class ChangePassword extends Component {
 
     this.translateNamespace = 'ui-myprofile.settings.changePassword';
     this.styles = {
-      changePasswordFormWrap: {
+      changePasswordFormWrapper: {
         width: '100%',
       },
-      toggleMaskButtonWrap: {
+      toggleMaskButtonWrapper: {
         marginTop: '20px',
       },
     };
@@ -64,7 +64,7 @@ class ChangePassword extends Component {
   onChangePasswordFormSubmit = (values) => {
     const { changePassword } = this.props.mutator;
     const { currentPassword, newPassword } = values;
-    const { username, id: userId } = this.props.stripes.user.user;
+    const { user: { username, id: userId } = {} } = this.props.stripes.user;
 
     return changePassword
       .POST({
@@ -152,7 +152,10 @@ class ChangePassword extends Component {
     const passwordToggleLabelId = `${this.translateNamespace}.${passwordMasked ? 'show' : 'hide'}Password`;
 
     return (
-      <div style={this.styles.changePasswordFormWrap}>
+      <div
+        style={this.styles.changePasswordFormWrapper}
+        data-test-change-password-page
+      >
         <ChangePasswordForm
           title={label}
           validate={this.validateForm}
@@ -162,39 +165,48 @@ class ChangePassword extends Component {
         >
           <Row>
             <Col xs={6}>
-              <Field
-                component={TextField}
-                type={passwordType}
-                id="current-password"
-                name="currentPassword"
-                label={this.translate('currentPassword')}
-                autoFocus
-              />
+              <div data-test-change-password-current-password-field>
+                <Field
+                  component={TextField}
+                  type={passwordType}
+                  id="current-password"
+                  name="currentPassword"
+                  label={this.translate('currentPassword')}
+                  autoFocus
+                />
+              </div>
             </Col>
           </Row>
           <Row>
             <Col xs={6}>
-              <Field
-                component={TextField}
-                type={passwordType}
-                id="new-password"
-                name="newPassword"
-                label={this.translate('newPassword')}
-              />
+              <div data-test-change-password-new-password-field>
+                <Field
+                  component={TextField}
+                  type={passwordType}
+                  id="new-password"
+                  name="newPassword"
+                  label={this.translate('newPassword')}
+                />
+              </div>
             </Col>
           </Row>
           <Row>
             <Col xs={6}>
-              <Field
-                component={TextField}
-                type={passwordType}
-                id="confirm-password"
-                name="confirmPassword"
-                label={this.translate('confirmPassword')}
-              />
+              <div data-test-change-password-confirm-password-field>
+                <Field
+                  component={TextField}
+                  type={passwordType}
+                  id="confirm-password"
+                  name="confirmPassword"
+                  label={this.translate('confirmPassword')}
+                />
+              </div>
             </Col>
             <Col>
-              <div style={this.styles.toggleMaskButtonWrap}>
+              <div
+                data-test-change-password-toggle-mask-btn
+                style={this.styles.toggleMaskButtonWrapper}
+              >
                 <Button
                   type="button"
                   buttonStyle="link"
