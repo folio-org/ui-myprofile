@@ -51,7 +51,6 @@
     }
   },
   "scripts": {
-    "babel-eslint": "^8.0.3",
     "lint": "eslint .",
     "test": "echo 'placeholder. no tests implemented'"
   },
