@@ -9,6 +9,7 @@ import Callout from '@folio/stripes-components/lib/Callout';
 import { Row, Col } from '@folio/stripes-components/lib/LayoutGrid';
 import { stripesShape } from '@folio/stripes-core/src/Stripes'; // eslint-disable-line import/no-unresolved
 
+import Recaptcha from './Recaptcha';
 import ChangePasswordForm from './ChangePasswordForm';
 
 class ChangePassword extends Component {
@@ -79,10 +80,18 @@ class ChangePassword extends Component {
       .catch(this.handleChangePasswordError);
   };
 
+  captchaRef = ref => {
+    this.recaptcha = ref;
+
+    return this.recaptcha;
+  };
+
   handleChangePasswordSuccess = () => {
+    const messageId = `${this.translateNamespace}.successfullyChanged`;
+
     const successMessage = (
       <SafeHTMLMessage
-        id={`${this.translateNamespace}.successfullyChanged`}
+        id={messageId}
         values={this.getFullUserName()}
       />
     );
@@ -91,6 +100,9 @@ class ChangePassword extends Component {
   };
 
   handleChangePasswordError = err => {
+    // reset recaptcha as google verify service needs new key each time
+    this.recaptcha.reset();
+
     const isWrongCurrentPassword = err.status === 401;
 
     if (isWrongCurrentPassword) {
@@ -103,11 +115,13 @@ class ChangePassword extends Component {
   resetForm = (values, dispatch, { reset }) => {
     // form need to be reset inside of "onSubmitSuccess" callback in order to properly reset the "submitSucceed" flag
     reset();
+    this.recaptcha.reset();
   };
 
   validateForm = values => {
     const errors = {};
     const enterValueError = this.translate('enterValue');
+    const isTestEnv = process.env.NODE_ENV === 'test';
 
     if (!values.currentPassword) {
       errors.currentPassword = enterValueError;
@@ -119,6 +133,11 @@ class ChangePassword extends Component {
 
     if (!values.confirmPassword) {
       errors.confirmPassword = enterValueError;
+    }
+
+    // recaptcha is disabled for testing environment
+    if (!values.captchaResponse && !isTestEnv) {
+      errors.captchaResponse = this.translate('recaptchaError');
     }
 
     const isConfirmPasswordInvalid = (
@@ -203,6 +222,15 @@ class ChangePassword extends Component {
                   <FormattedMessage id={passwordToggleLabelId} />
                 </Button>
               </div>
+            </Col>
+          </Row>
+          <Row>
+            <Col xs={6}>
+              <Field
+                name="captchaResponse"
+                component={Recaptcha}
+                refName={this.captchaRef}
+              />
             </Col>
           </Row>
         </ChangePasswordForm>

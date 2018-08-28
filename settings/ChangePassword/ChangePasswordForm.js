@@ -7,7 +7,6 @@ import stripesForm from '@folio/stripes-form';
 const ChangePasswordForm = (props) => {
   const {
     handleSubmit,
-    handleSubmitSuccess,
     pristine,
     submitting,
     title,
@@ -28,7 +27,7 @@ const ChangePasswordForm = (props) => {
   );
 
   return (
-    <form id="change-password-form" onSubmit={handleSubmit} onSubmitSuccess={handleSubmitSuccess}>
+    <form id="change-password-form" onSubmit={handleSubmit}>
       <Pane defaultWidth="fill" fluidContentWidth paneTitle={title} lastMenu={lastMenu}>
         {children}
       </Pane>
@@ -38,7 +37,6 @@ const ChangePasswordForm = (props) => {
 
 ChangePasswordForm.propTypes = {
   handleSubmit: PropTypes.func.isRequired,
-  handleSubmitSuccess: PropTypes.func.isRequired,
   pristine: PropTypes.bool,
   submitting: PropTypes.bool,
   title: PropTypes.string,
