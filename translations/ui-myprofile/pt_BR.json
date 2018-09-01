@@ -1,0 +1,16 @@
+{
+    "meta.title": "Meu perfil",
+    "settings.index.paneTitle": "Meu perfil",
+    "settings.changePassword.label": "Mudar senha",
+    "settings.changePassword.save": "Salvar",
+    "settings.changePassword.hidePassword": "Ocultar a senha",
+    "settings.changePassword.showPassword": "Mostrar senha",
+    "settings.changePassword.currentPassword": "Senha atual do FOLIO",
+    "settings.changePassword.newPassword": "Nova senha do FOLIO",
+    "settings.changePassword.confirmPassword": "Confirme a senha do FOLIO",
+    "settings.changePassword.enterValue": "Por favor, digite um valor.",
+    "settings.changePassword.confirmPasswordMatchError": "Senha nova e a confirmação não correspondem. Digite novamente sua senha.",
+    "settings.changePassword.wrongPassword": "Senha incorreta. Digite novamente sua senha.",
+    "settings.changePassword.successfullyChanged": "A <strong> senha do FOLIO </strong> foi <strong> alterada </strong> com êxito para <strong> {lastName} </strong> , <strong> {firstName} </strong>",
+    "userDropdown.changePassword.caption": "Mudar senha"
+}
