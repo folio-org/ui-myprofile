@@ -3,11 +3,11 @@ import React, { Component } from 'react';
 /* eslint-disable import/first */
 import createMemoryHistory from 'history/createMemoryHistory';
 import { okapi, config } from 'stripes-config'; // eslint-disable-line import/no-unresolved
-import configureEpics from '../../../../stripes-core/src/configureEpics';
+import configureEpics from '@folio/stripes-core/src/configureEpics';
 import configureLogger from '@folio/stripes-core/src/configureLogger';
-import configureStore from '../../../../stripes-core/src/configureStore';
-import { discoverServices } from '../../../../stripes-core/src/discoverServices';
-import gatherActions from '../../../../stripes-core/src/gatherActions';
+import configureStore from '@folio/stripes-core/src/configureStore';
+import { discoverServices } from '@folio/stripes-core/src/discoverServices';
+import gatherActions from '@folio/stripes-core/src/gatherActions';
 import { setOkapiReady, setCurrentUser } from '@folio/stripes-core/src/okapiActions';
 import { userData } from '../constants';
 
