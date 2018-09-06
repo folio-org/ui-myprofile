@@ -1,5 +1,6 @@
 import { okapi } from 'stripes-config'; // eslint-disable-line import/no-unresolved
 import { Response } from '@bigtest/mirage';
+import { wrongPassword, serverError } from '../constants';
 
 // typical mirage config export
 export default function configure() {
@@ -21,8 +22,17 @@ export default function configure() {
     ssoEnabled: false
   });
 
-  this.post('/authn/update', () => {
-    return new Response(201, []);
+  this.post('/authn/update', (schema, request) => {
+    const formData = JSON.parse(request.requestBody);
+
+    switch (formData.password) {
+      case (wrongPassword):
+        return new Response(401, []);
+      case (serverError):
+        return new Response(500, []);
+      default:
+        return new Response(201, []);
+    }
   });
 
   // mod-users

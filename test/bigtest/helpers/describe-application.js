@@ -78,6 +78,7 @@ export function describeApplication(name, setup, describe = window.describe) {
     });
 
     const doSetup = typeof setup.suite === 'function' ? setup.suite : setup;
+
     doSetup.call(this);
   });
 }

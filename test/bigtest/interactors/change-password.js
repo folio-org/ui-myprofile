@@ -1,5 +1,6 @@
 import {
   action,
+  Interactor,
   interactor,
   isPresent,
   attribute,
@@ -32,6 +33,7 @@ import {
   currentPasswordField = new InputField('[data-test-change-password-current-password-field]');
   newPasswordField = new InputField('[data-test-change-password-new-password-field]');
   confirmPasswordField = new InputField('[data-test-change-password-confirm-password-field]');
+  SuccessMessage = new Interactor('[class^="calloutRow--"]');
 
   hasShowHideButton = isPresent('[data-test-change-password-toggle-mask-btn] button');
 

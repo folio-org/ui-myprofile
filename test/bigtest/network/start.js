@@ -9,12 +9,14 @@ const environment = process.env.NODE_ENV;
 const moduleTypes = ['scenarios', 'factories', 'fixtures', 'models', 'serializers', 'identity-managers'];
 const allModules = moduleTypes.reduce((memo, name) => {
   memo[camelize(name)] = {};
+
   return memo;
 }, {});
 
 // require all files within this directory recursively and build a hash
 // of modules based on it's moduleType (parent directory) to load with Mirage.
 const req = require.context('./', true, /\.js$/);
+
 req.keys().forEach((modulePath) => {
   const moduleParts = modulePath.split('/');
   const moduleType = moduleParts[1];

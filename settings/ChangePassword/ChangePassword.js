@@ -64,7 +64,7 @@ class ChangePassword extends Component {
   onChangePasswordFormSubmit = (values) => {
     const { changePassword } = this.props.mutator;
     const { currentPassword, newPassword } = values;
-    const { user: { username, id: userId } = {} } = this.props.stripes.user;
+    const { username, id: userId } = this.props.stripes.user.user;
 
     return changePassword
       .POST({

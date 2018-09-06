@@ -31,6 +31,7 @@ class MyProfile extends Component {
     const { stripes: { intl: { formatMessage }, okapi: { ssoEnabled } } } = this.props;
     const showPasswordPage = !ssoEnabled;
 
+    /* istanbul ignore if  */
     if (!showPasswordPage) {
       return undefined;
     }
@@ -46,6 +47,7 @@ class MyProfile extends Component {
   }
 
   render() {
+    /* istanbul ignore if  */
     if (!this.pages.length) return null;
 
     return (

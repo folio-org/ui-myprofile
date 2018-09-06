@@ -3,12 +3,13 @@ import React, { Component } from 'react';
 /* eslint-disable import/first */
 import createMemoryHistory from 'history/createMemoryHistory';
 import { okapi, config } from 'stripes-config'; // eslint-disable-line import/no-unresolved
-import configureEpics from '@folio/stripes-core/src/configureEpics';
+import configureEpics from '../../../../stripes-core/src/configureEpics';
 import configureLogger from '@folio/stripes-core/src/configureLogger';
-import configureStore from '@folio/stripes-core/src/configureStore';
-import { discoverServices } from '@folio/stripes-core/src/discoverServices';
-import gatherActions from '@folio/stripes-core/src/gatherActions';
-import { setOkapiReady } from '@folio/stripes-core/src/okapiActions';
+import configureStore from '../../../../stripes-core/src/configureStore';
+import { discoverServices } from '../../../../stripes-core/src/discoverServices';
+import gatherActions from '../../../../stripes-core/src/gatherActions';
+import { setOkapiReady, setCurrentUser } from '@folio/stripes-core/src/okapiActions';
+import { userData } from '../constants';
 
 // load these in our tests
 import 'typeface-source-sans-pro';
@@ -40,6 +41,7 @@ export default class TestHarness extends Component {
 
     // While we have disableAuth on, manually tell our app Okapi is ready
     this.store.dispatch(setOkapiReady());
+    this.store.dispatch(setCurrentUser(userData));
   }
 
   /**
