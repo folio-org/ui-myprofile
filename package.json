@@ -51,23 +51,31 @@
     }
   },
   "scripts": {
+    "start": "stripes serve",
     "lint": "eslint .",
     "test": "echo 'placeholder. no tests implemented'"
   },
   "devDependencies": {
-    "babel-eslint": "^8.0.3",
-    "eslint": "^4.8.0",
-    "@folio/eslint-config-stripes": "^3.0.0"
+    "@folio/eslint-config-stripes": "^3.2.0",
+    "@folio/stripes-cli": "^1.4.0",
+    "@folio/stripes-connect": "^3.1.2",
+    "@folio/stripes-core": "^2.10.7",
+    "@folio/stripes-logger": "^0.0.2",
+    "babel-eslint": "^9.0.0",
+    "eslint": "^5.5.0",
+    "react": "^16.5.0",
+    "react-dom": "^16.5.0",
+    "react-redux": "^5.0.7",
+    "redux": "^4.0.0",
+    "webpack": "^4.10.2"
   },
   "dependencies": {
-    "@folio/stripes-components": "^3.0.0",
-    "@folio/stripes-smart-components": "^1.4.0",
     "@folio/react-intl-safe-html": "^1.0.1",
+    "@folio/stripes-components": "^3.0.0",
     "@folio/stripes-form": "^0.8.0",
-    "react-intl": "^2.3.0",
     "prop-types": "^15.6.0",
-    "redux-form": "^7.0.3",
-    "react-router-dom": "^4.1.1"
+    "react-intl": "^2.3.0",
+    "redux-form": "^7.0.3"
   },
   "peerDependencies": {
     "@folio/stripes-core": "^2.10.7",
