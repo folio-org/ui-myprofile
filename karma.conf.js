@@ -9,20 +9,17 @@ module.exports = (config) => {
       { pattern: testIndex, watched: false },
     ],
     preprocessors,
-    browserDisconnectTimeout: 10e5,
-    browserDisconnectTolerance: 3,
-    browserNoActivityTimeout: 10e5,
-    captureTimeout: 10e5,
   };
 
-  // Set output directory for junit reporter
-  if (config.junitReporter) {
-    configuration.junitReporter = {
-      outputDir: 'artifacts/junit/Karma'
+  // Turn on coverage report thresholds
+  if (configuration.coverageIstanbulReporter) {
+    configuration.coverageIstanbulReporter.thresholds.global = {
+      statements: 95,
+      branches: 85, // should be raised after getting this % up
+      functions: 95,
+      lines: 95
     };
   }
-
-  // Todo: Add coverage report thresholds
 
   config.set(configuration);
 };

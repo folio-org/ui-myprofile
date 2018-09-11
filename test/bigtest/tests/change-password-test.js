@@ -189,11 +189,11 @@ describeApplication('ChangePasswordPage', () => {
     });
 
     it('success message should be shown upon successful submit', () => {
-      expect(ChangePasswordPage.SuccessMessage.isPresent).to.be.true;
+      expect(ChangePasswordPage.successMessage.isPresent).to.be.true;
     });
 
     it('success message should have proper text', () => {
-      expect(ChangePasswordPage.SuccessMessage.text).to.equal(successMessage);
+      expect(ChangePasswordPage.successMessage.text).to.equal(successMessage);
     });
   });
 
@@ -239,7 +239,7 @@ describeApplication('ChangePasswordPage', () => {
       expect(ChangePasswordPage.currentPasswordField.value).to.equal('');
       expect(ChangePasswordPage.newPasswordField.value).to.equal('');
       expect(ChangePasswordPage.confirmPasswordField.value).to.equal('');
-      expect(ChangePasswordPage.SuccessMessage.isPresent).to.be.false;
+      expect(ChangePasswordPage.successMessage.isPresent).to.be.false;
       expect(ChangePasswordPage.confirmPasswordField.errorMessage.isPresent).to.be.false;
     });
   });

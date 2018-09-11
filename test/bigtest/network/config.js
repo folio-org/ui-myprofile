@@ -9,14 +9,7 @@ export default function configure() {
   // okapi endpoints
   this.get('/_/version', () => '0.0.0');
 
-  this.get('_/proxy/tenants/:id/modules', [{
-    id: 'mod-kb-ebsco',
-    name: 'kb-ebsco',
-    provides: [{
-      id: 'eholdings',
-      version: '0.0.0'
-    }]
-  }]);
+  this.get('_/proxy/tenants/:id/modules', []);
 
   this.get('/saml/check', {
     ssoEnabled: false
