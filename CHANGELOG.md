@@ -1,6 +1,7 @@
 # Change history for ui-myprofile
 
-## 0.3.0 (IN PROGRESS)
+## [0.2.1](https://github.com/folio-org/ui-myprofile/tree/v0.2.1) (2018-09-14)
+[Full Changelog](https://github.com/folio-org/ui-myprofile/compare/v0.2.0...v0.2.1)
 
 * Update to stripes-form 0.9.0. Refs STRIPES-555.
 
