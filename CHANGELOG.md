@@ -1,6 +1,6 @@
 # Change history for ui-myprofile
 
-## 1.0.0 IN PROGRESS
+## [1.0.0](https://github.com/folio-org/ui-myprofile/tree/v1.0.0) (2018-09-18)
 
 * Update `stripes-form` dependency to v1.0.0
 
