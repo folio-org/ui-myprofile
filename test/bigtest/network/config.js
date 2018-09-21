@@ -15,6 +15,15 @@ export default function configure() {
     ssoEnabled: false
   });
 
+  this.get('/tenant/rules', (db, request) => {
+    return new Response(200, {
+      'X-Request-URL': request.url
+    }, {
+      rules: [],
+      totalRecords: 0,
+    });
+  });
+
   this.post('/authn/update', (schema, request) => {
     const formData = JSON.parse(request.requestBody);
 
