@@ -1,6 +1,6 @@
 import { okapi } from 'stripes-config'; // eslint-disable-line import/no-unresolved
 import { Response } from '@bigtest/mirage';
-import { wrongPassword, serverError } from '../constants';
+import { wrongPassword, serverError, lastTenPasswordsError, multipleErrors } from '../constants';
 
 // typical mirage config export
 export default function configure() {
@@ -19,6 +19,28 @@ export default function configure() {
     const formData = JSON.parse(request.requestBody);
 
     switch (formData.password) {
+      case (multipleErrors):
+        return new Response(400, {}, {
+          errors: [
+            {
+              type: 'error',
+              code: 'lastTenPasswords',
+            },
+            {
+              type: 'error',
+              code: 'wrongPassword',
+            },
+          ]
+        });
+      case (lastTenPasswordsError):
+        return new Response(400, {}, {
+          errors: [
+            {
+              type: 'error',
+              code: 'lastTenPasswords',
+            },
+          ]
+        });
       case (wrongPassword):
         return new Response(401, []);
       case (serverError):
