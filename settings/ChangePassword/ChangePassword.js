@@ -8,7 +8,7 @@ import TextField from '@folio/stripes-components/lib/TextField';
 import Callout from '@folio/stripes-components/lib/Callout';
 import { Row, Col } from '@folio/stripes-components/lib/LayoutGrid';
 import { stripesShape } from '@folio/stripes-core/src/Stripes'; // eslint-disable-line import/no-unresolved
-import PasswordStrength from '@folio/stripes-smart-components/lib/PasswordStrength';
+import { PasswordStrength } from '@folio/stripes-smart-components';
 
 import ChangePasswordForm from './ChangePasswordForm';
 
@@ -186,7 +186,7 @@ class ChangePassword extends Component {
             <Col xs={12}>
               <div data-test-change-password-new-password-field>
                 <Field
-                  passwordMeterColProps={{ style:this.styles.passwordStrengthMeter }}
+                  passwordMeterColProps={{ style: this.styles.passwordStrengthMeter }}
                   component={PasswordStrength}
                   type={passwordType}
                   id="new-password"
