@@ -13,5 +13,4 @@
     "settings.changePassword.wrongPassword": "Incorrect password. Retype your password.",
     "settings.changePassword.successfullyChanged": "The <strong>FOLIO password</strong> has been successfully <strong>changed</strong> for <strong>{lastName}</strong>, <strong>{firstName}</strong>",
     "userDropdown.changePassword.caption": "Change Password",
-    "settings.changePassword.lastTenPasswords": "Previously used password. Please enter a new password.",
 }
