@@ -104,14 +104,18 @@ class ChangePassword extends Component {
     }
   };
 
-  parseErrors(data) {
-    return data.errors.length > 1 ? (
+  parseErrors({ errors }) {
+    return errors.length > 1 ? (
       <ul>
         {
-          data.errors.map((error) => (<li key={`${error.code}-${error.type}`}>{this.translate(error.code)}</li>))
+          this.getListItems(errors)
         }
       </ul>
-    ) : this.translate(data.errors[0].code);
+    ) : this.translate(errors[0].code);
+  }
+
+  getListItems(data) {
+    return data.map((element) => (<li key={`${element.code}-${element.type}`}>{this.translate(element.code)}</li>));
   }
 
   resetForm = (values, dispatch, { reset }) => {

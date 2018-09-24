@@ -215,7 +215,7 @@ describeApplication('ChangePasswordPage', () => {
       expect(ChangePasswordPage.confirmPasswordField.value).to.equal('newPassword');
     });
 
-    it('Validation error be present upon failed submit', () => {
+    it('validation error be present upon failed submit', () => {
       expect(ChangePasswordPage.currentPasswordField.errorMessage.isPresent).to.exist;
       expect(ChangePasswordPage.currentPasswordField.errorMessage.text).to.equal(
         translation['settings.changePassword.wrongPassword']
@@ -223,7 +223,7 @@ describeApplication('ChangePasswordPage', () => {
     });
   });
 
-  describe('Server error upon form submit', () => {
+  describe('server error upon form submit', () => {
     beforeEach(async () => {
       const currentPassword = ChangePasswordPage.currentPasswordField;
       const newPassword = ChangePasswordPage.newPasswordField;
@@ -262,8 +262,8 @@ describeApplication('ChangePasswordPage', () => {
       expect(ChangePasswordPage.confirmPasswordField.value).to.equal('newPassword');
     });
 
-    it('Validation error be present upon failed submit', () => {
-      expect(ChangePasswordPage.newPasswordField.errorMessage.isPresent).to.exist;
+    it('validation error should be present upon failed submit', () => {
+      expect(ChangePasswordPage.newPasswordField.errorMessage.isPresent).to.be.true;
       expect(ChangePasswordPage.newPasswordField.errorMessage.text).to.equal(
         translation['settings.changePassword.lastTenPasswords']
       );
@@ -288,8 +288,8 @@ describeApplication('ChangePasswordPage', () => {
       expect(ChangePasswordPage.confirmPasswordField.value).to.equal('newPassword');
     });
 
-    it('Validation error be present upon failed submit', () => {
-      expect(ChangePasswordPage.newPasswordField.errorMessage.isPresent).to.exist;
+    it('validation error should be present upon failed submit', () => {
+      expect(ChangePasswordPage.newPasswordField.errorMessage.isPresent).to.be.true;
       expect(ChangePasswordPage.newPasswordField.errorMessage.text).to.equal(
         `${translation['settings.changePassword.lastTenPasswords']}${translation['settings.changePassword.wrongPassword']}`
       );

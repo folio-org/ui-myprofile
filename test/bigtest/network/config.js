@@ -19,7 +19,7 @@ export default function configure() {
     const formData = JSON.parse(request.requestBody);
 
     switch (formData.password) {
-      case (multipleErrors):
+      case multipleErrors:
         return new Response(400, {}, {
           errors: [
             {
@@ -32,7 +32,7 @@ export default function configure() {
             },
           ]
         });
-      case (lastTenPasswordsError):
+      case lastTenPasswordsError:
         return new Response(400, {}, {
           errors: [
             {
@@ -41,9 +41,9 @@ export default function configure() {
             },
           ]
         });
-      case (wrongPassword):
+      case wrongPassword:
         return new Response(401, []);
-      case (serverError):
+      case serverError:
         return new Response(500, []);
       default:
         return new Response(201, []);
