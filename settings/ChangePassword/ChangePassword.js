@@ -90,15 +90,33 @@ class ChangePassword extends Component {
     this.callout.sendCallout({ message: successMessage });
   };
 
-  handleChangePasswordError = err => {
-    const isWrongCurrentPassword = err.status === 401;
+  handleChangePasswordError = async (response) => {
+    if (response.status === 400) {
+      const data = await response.json();
 
-    if (isWrongCurrentPassword) {
+      throw new SubmissionError({
+        newPassword: this.parseErrors(data)
+      });
+    } else if (response.status === 401) {
       throw new SubmissionError({
         currentPassword: this.translate('wrongPassword')
       });
     }
   };
+
+  parseErrors({ errors }) {
+    return errors.length > 1 ? (
+      <ul>
+        {
+          this.getListItems(errors)
+        }
+      </ul>
+    ) : this.translate(errors[0].code);
+  }
+
+  getListItems(data) {
+    return data.map((element) => (<li key={`${element.code}-${element.type}`}>{this.translate(element.code)}</li>));
+  }
 
   resetForm = (values, dispatch, { reset }) => {
     // form need to be reset inside of "onSubmitSuccess" callback in order to properly reset the "submitSucceed" flag
