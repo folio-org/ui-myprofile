@@ -1,5 +1,12 @@
 # Change history for ui-myprofile
 
+## [1.1.0](https://github.com/folio-org/ui-myprofile/tree/v1.1.0) (IN PROGRESS)
+[Full Changelog](https://github.com/folio-org/ui-myprofile/compare/v1.0.0...v1.1.0)
+* Change `handleChangePasswordError` method (UIMPROF-13).
+* Add password strength meter integration (UIMPROF-20).
+* Add validation for new password input field (UIMPROF-12).
+* Change API url for change password (MODLOGIN-53).
+
 ## [1.0.0](https://github.com/folio-org/ui-myprofile/tree/v1.0.0) (2018-09-18)
 
 * Update `stripes-form` dependency to v1.0.0

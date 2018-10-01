@@ -1,27 +1,20 @@
 import { beforeEach, describe, it } from '@bigtest/mocha';
 import { expect } from 'chai';
 
+import passwordValidationTranslation from '@folio/stripes-smart-components/translations/stripes-smart-components/en';
+import translation from '../../../translations/ui-myprofile/en';
 import setupApplication from '../helpers/setup-application';
 import ChangePasswordPage from '../interactors/change-password';
-import translation from '../../../translations/ui-myprofile/en';
 import { wrongPassword, serverError, userData, lastTenPasswordsError, multipleErrors } from '../constants';
 
 // success message from translation, parsed from string representation of JSX, with user data
 const successMessage = (() => {
-  let text = new DOMParser().parseFromString(
-    translation['settings.changePassword.successfullyChanged'],
-    'text/html',
-  ).body.textContent || '';
+  const message = translation['settings.changePassword.successfullyChanged'];
+  const parsedMessage = new DOMParser().parseFromString(message, 'text/html').body.textContent || '';
 
-  Object.keys(userData).forEach((element) => {
-    const key = `{${element}}`;
-
-    if (text.includes(key)) {
-      text = text.replace(key, userData[element]);
-    }
-  });
-
-  return text;
+  return Object.keys(userData).reduce((res, key) => {
+    return res.includes(key) ? res.replace(`{${key}}`, userData[key]) : res;
+  }, parsedMessage);
 })();
 
 describe('ChangePasswordPage', () => {
@@ -58,9 +51,7 @@ describe('ChangePasswordPage', () => {
     });
 
     it('checks toggled button text', () => {
-      expect(ChangePasswordPage.toggleMask.text).to.equal(
-        translation['settings.changePassword.hidePassword']
-      );
+      expect(ChangePasswordPage.toggleMask.text).to.equal(translation['settings.changePassword.hidePassword']);
     });
 
     it('changes the type of the form fields to text', () => {
@@ -75,9 +66,7 @@ describe('ChangePasswordPage', () => {
       });
 
       it('checks untoggled button text', () => {
-        expect(ChangePasswordPage.toggleMask.text).to.equal(
-          translation['settings.changePassword.showPassword']
-        );
+        expect(ChangePasswordPage.toggleMask.text).to.equal(translation['settings.changePassword.showPassword']);
       });
 
       it('changes the type of the form fields from text to password', () => {
@@ -217,7 +206,7 @@ describe('ChangePasswordPage', () => {
       expect(ChangePasswordPage.confirmPasswordField.value).to.equal('newPassword');
     });
 
-    it('validation error be present upon failed submit', () => {
+    it('validation error should be present upon failed submit', () => {
       expect(ChangePasswordPage.currentPasswordField.errorMessage.isPresent).to.exist;
       expect(ChangePasswordPage.currentPasswordField.errorMessage.text).to.equal(
         translation['settings.changePassword.wrongPassword']
@@ -267,7 +256,7 @@ describe('ChangePasswordPage', () => {
     it('validation error should be present upon failed submit', () => {
       expect(ChangePasswordPage.newPasswordField.errorMessage.isPresent).to.be.true;
       expect(ChangePasswordPage.newPasswordField.errorMessage.text).to.equal(
-        translation['settings.changePassword.lastTenPasswords']
+        passwordValidationTranslation['password.lastTenPasswords.invalid']
       );
     });
   });
@@ -293,7 +282,9 @@ describe('ChangePasswordPage', () => {
     it('validation error should be present upon failed submit', () => {
       expect(ChangePasswordPage.newPasswordField.errorMessage.isPresent).to.be.true;
       expect(ChangePasswordPage.newPasswordField.errorMessage.text).to.equal(
-        `${translation['settings.changePassword.lastTenPasswords']}${translation['settings.changePassword.wrongPassword']}`
+        `${passwordValidationTranslation['password.repeatingSymbols.invalid']}${
+          passwordValidationTranslation['password.whiteSpace.invalid']
+        }`
       );
     });
   });

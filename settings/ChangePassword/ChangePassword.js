@@ -5,10 +5,7 @@ import { FormattedMessage } from 'react-intl';
 import SafeHTMLMessage from '@folio/react-intl-safe-html';
 import { TextField, Callout, Button, Row, Col } from '@folio/stripes-components';
 import { stripesShape } from '@folio/stripes-core/src/Stripes'; // eslint-disable-line import/no-unresolved
-import {
-  PasswordStrength,
-  PasswordValidationField,
-} from '@folio/stripes-smart-components';
+import { PasswordStrength, PasswordValidationField } from '@folio/stripes-smart-components';
 
 import ChangePasswordForm from './ChangePasswordForm';
 
@@ -16,7 +13,7 @@ class ChangePassword extends Component {
   static manifest = Object.freeze({
     changePassword: {
       type: 'okapi',
-      path: 'authn/update',
+      path: 'bl-users/settings/myprofile/password',
       fetch: false,
       throwErrors: false,
     },
@@ -40,6 +37,7 @@ class ChangePassword extends Component {
     };
 
     this.translateNamespace = 'ui-myprofile.settings.changePassword';
+    this.translatePasswordValidationNamespace = 'stripes-smart-components';
     this.styles = {
       changePasswordFormWrapper: {
         width: '100%',
@@ -58,10 +56,7 @@ class ChangePassword extends Component {
     this.validators = {
       currentPassword: [this.requiredValidation],
       newPassword: [this.requiredValidation],
-      confirmPassword: [
-        this.requiredValidation,
-        this.confirmPasswordValidation,
-      ],
+      confirmPassword: [this.requiredValidation, this.confirmPasswordValidation],
     };
   }
 
@@ -97,10 +92,7 @@ class ChangePassword extends Component {
 
   handleChangePasswordSuccess = () => {
     const successMessage = (
-      <SafeHTMLMessage
-        id={`${this.translateNamespace}.successfullyChanged`}
-        values={this.getFullUserName()}
-      />
+      <SafeHTMLMessage id={`${this.translateNamespace}.successfullyChanged`} values={this.getFullUserName()} />
     );
 
     this.callout.sendCallout({ message: successMessage });
@@ -122,16 +114,16 @@ class ChangePassword extends Component {
 
   parseErrors({ errors }) {
     return errors.length > 1 ? (
-      <ul>{this.getListItems(errors)}</ul>
+      <ul>{this.getPasswordValidationMessages(errors)}</ul>
     ) : (
-      this.translate(errors[0].code)
+      this.translate(errors[0].code, this.translatePasswordValidationNamespace)
     );
   }
 
-  getListItems(data) {
+  getPasswordValidationMessages(data) {
     return data.map(element => (
       <li key={`${element.code}-${element.type}`}>
-        {this.translate(element.code)}
+        {this.translate(element.code, this.translatePasswordValidationNamespace)}
       </li>
     ));
   }
@@ -148,13 +140,10 @@ class ChangePassword extends Component {
   };
 
   confirmPasswordValidation = (value, { newPassword, confirmPassword }) => {
-    const isConfirmPasswordInvalid =
-      newPassword && confirmPassword && newPassword !== confirmPassword;
+    const isConfirmPasswordInvalid = newPassword && confirmPassword && newPassword !== confirmPassword;
 
     if (isConfirmPasswordInvalid) {
-      const confirmPasswordMatchError = this.translate(
-        'confirmPasswordMatchError'
-      );
+      const confirmPasswordMatchError = this.translate('confirmPasswordMatchError');
 
       return confirmPasswordMatchError;
     }
@@ -162,13 +151,13 @@ class ChangePassword extends Component {
     return undefined;
   };
 
-  translate = id => {
+  translate = (id, namespace = this.translateNamespace) => {
     const { stripes } = this.props;
     const {
       intl: { formatMessage },
     } = stripes;
 
-    return formatMessage({ id: `${this.translateNamespace}.${id}` });
+    return formatMessage({ id: `${namespace}.${id}` });
   };
 
   createCalloutRef = ref => {
@@ -180,15 +169,10 @@ class ChangePassword extends Component {
     const { label } = this.props;
     const passwordType = passwordMasked ? 'password' : 'text';
     const { username } = this.props.stripes.user.user;
-    const passwordToggleLabelId = `${this.translateNamespace}.${
-      passwordMasked ? 'show' : 'hide'
-    }Password`;
+    const passwordToggleLabelId = `${this.translateNamespace}.${passwordMasked ? 'show' : 'hide'}Password`;
 
     return (
-      <div
-        style={this.styles.changePasswordFormWrapper}
-        data-test-change-password-page
-      >
+      <div style={this.styles.changePasswordFormWrapper} data-test-change-password-page>
         <ChangePasswordForm
           title={label}
           saveButtonText={this.translate('save')}
@@ -213,7 +197,7 @@ class ChangePassword extends Component {
           <Row>
             <Col xs={12}>
               <div data-test-change-password-new-password-field>
-                <this.passwordField
+                <Field
                   passwordMeterColProps={{
                     style: this.styles.passwordStrengthMeter,
                   }}
@@ -242,15 +226,8 @@ class ChangePassword extends Component {
               </div>
             </Col>
             <Col>
-              <div
-                data-test-change-password-toggle-mask-btn
-                style={this.styles.toggleMaskButtonWrapper}
-              >
-                <Button
-                  type="button"
-                  buttonStyle="link"
-                  onClick={this.togglePasswordMask}
-                >
+              <div data-test-change-password-toggle-mask-btn style={this.styles.toggleMaskButtonWrapper}>
+                <Button type="button" buttonStyle="link" onClick={this.togglePasswordMask}>
                   <FormattedMessage id={passwordToggleLabelId} />
                 </Button>
               </div>
