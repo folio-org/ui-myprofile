@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Settings } from '@folio/stripes-smart-components';
-import { stripesShape } from '@folio/stripes-core/src/Stripes'; // eslint-disable-line import/no-unresolved
+import { stripesShape } from '@folio/stripes-core/src/Stripes';
 
 import ChangePassword from './ChangePassword';
 
