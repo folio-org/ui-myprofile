@@ -64,7 +64,7 @@
     "@folio/eslint-config-stripes": "^3.2.0",
     "@folio/stripes-cli": "^1.4.0",
     "@folio/stripes-connect": "^3.3.0",
-    "@folio/stripes-core": "^2.10.7",
+    "@folio/stripes-core": "^2.15.1",
     "@folio/stripes-logger": "^1.0.0",
     "babel-eslint": "^9.0.0",
     "babel-polyfill": "^6.26.0",
@@ -78,6 +78,7 @@
     "react-redux": "^5.0.7",
     "react-trigger-change": "^1.0.2",
     "redux": "^4.0.0",
+    "sinon": "^6.3.4",
     "webpack": "^4.10.2"
   },
   "dependencies": {
@@ -92,7 +93,7 @@
     "redux-form": "^7.0.3"
   },
   "peerDependencies": {
-    "@folio/stripes-core": "^2.10.7",
+    "@folio/stripes-core": "^2.15.0",
     "react": "*"
   }
 }

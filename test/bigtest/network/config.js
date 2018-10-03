@@ -1,20 +1,8 @@
-import { okapi } from 'stripes-config'; // eslint-disable-line import/no-unresolved
 import { Response } from '@bigtest/mirage';
 import { wrongPassword, serverError, lastTenPasswordsError, multipleErrors } from '../constants';
 
 // typical mirage config export
 export default function configure() {
-  this.urlPrefix = okapi.url;
-
-  // okapi endpoints
-  this.get('/_/version', () => '0.0.0');
-
-  this.get('_/proxy/tenants/:id/modules', []);
-
-  this.get('/saml/check', {
-    ssoEnabled: false
-  });
-
   this.get('/tenant/rules', (db, request) => {
     return new Response(200, {
       'X-Request-URL': request.url
@@ -71,21 +59,4 @@ export default function configure() {
   this.get('/configurations/entries', {
     configs: []
   });
-
-  // mod-notify
-  this.get('/notify/_self', {
-    notifications: [],
-    totalRecords: 0
-  });
-
-  this.get('/notify', {
-    notifications: [],
-    totalRecords: 0
-  });
-
-  // translation bundle passthrough
-  this.pretender.get(`${__webpack_public_path__}translations/:rand.json`, this.pretender.passthrough); // eslint-disable-line
-
-  // hot-reload passthrough
-  this.pretender.get('/:rand.hot-update.json', this.pretender.passthrough);
 }
