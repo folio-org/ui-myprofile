@@ -3,9 +3,9 @@ import PropTypes from 'prop-types';
 import { Field, SubmissionError } from 'redux-form';
 import { FormattedMessage } from 'react-intl';
 import SafeHTMLMessage from '@folio/react-intl-safe-html';
-import { TextField, Callout, Button, Row, Col } from '@folio/stripes-components';
-import { stripesShape } from '@folio/stripes-core/src/Stripes'; // eslint-disable-line import/no-unresolved
-import { PasswordStrength, PasswordValidationField } from '@folio/stripes-smart-components';
+import { TextField, Callout, Button, Row, Col } from '@folio/stripes/components';
+import { stripesShape } from '@folio/stripes/core';
+import { PasswordStrength, PasswordValidationField } from '@folio/stripes/smart-components';
 
 import ChangePasswordForm from './ChangePasswordForm';
 
