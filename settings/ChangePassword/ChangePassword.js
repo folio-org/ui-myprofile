@@ -8,7 +8,10 @@ import TextField from '@folio/stripes-components/lib/TextField';
 import Callout from '@folio/stripes-components/lib/Callout';
 import { Row, Col } from '@folio/stripes-components/lib/LayoutGrid';
 import { stripesShape } from '@folio/stripes-core/src/Stripes'; // eslint-disable-line import/no-unresolved
-import { PasswordStrength } from '@folio/stripes-smart-components';
+import {
+  PasswordStrength,
+  PasswordValidationField,
+} from '@folio/stripes-smart-components';
 
 import ChangePasswordForm from './ChangePasswordForm';
 
@@ -50,13 +53,24 @@ class ChangePassword extends Component {
       },
       passwordStrengthMeter: {
         marginLeft: '1rem',
-      }
+      },
+    };
+
+    this.passwordField = props.stripes.connect(PasswordValidationField);
+
+    this.validators = {
+      currentPassword: [this.requiredValidation],
+      newPassword: [this.requiredValidation],
+      confirmPassword: [
+        this.requiredValidation,
+        this.confirmPasswordValidation,
+      ],
     };
   }
 
   togglePasswordMask = () => {
     this.setState(({ passwordMasked }) => ({
-      passwordMasked: !passwordMasked
+      passwordMasked: !passwordMasked,
     }));
   };
 
@@ -66,7 +80,7 @@ class ChangePassword extends Component {
     return { firstName, lastName };
   }
 
-  onChangePasswordFormSubmit = (values) => {
+  onChangePasswordFormSubmit = values => {
     const { changePassword } = this.props.mutator;
     const { currentPassword, newPassword } = values;
     const { username, id: userId } = this.props.stripes.user.user;
@@ -95,32 +109,34 @@ class ChangePassword extends Component {
     this.callout.sendCallout({ message: successMessage });
   };
 
-  handleChangePasswordError = async (response) => {
+  handleChangePasswordError = async response => {
     if (response.status === 400) {
       const data = await response.json();
 
       throw new SubmissionError({
-        newPassword: this.parseErrors(data)
+        newPassword: this.parseErrors(data),
       });
     } else if (response.status === 401) {
       throw new SubmissionError({
-        currentPassword: this.translate('wrongPassword')
+        currentPassword: this.translate('wrongPassword'),
       });
     }
   };
 
   parseErrors({ errors }) {
     return errors.length > 1 ? (
-      <ul>
-        {
-          this.getListItems(errors)
-        }
-      </ul>
-    ) : this.translate(errors[0].code);
+      <ul>{this.getListItems(errors)}</ul>
+    ) : (
+      this.translate(errors[0].code)
+    );
   }
 
   getListItems(data) {
-    return data.map((element) => (<li key={`${element.code}-${element.type}`}>{this.translate(element.code)}</li>));
+    return data.map(element => (
+      <li key={`${element.code}-${element.type}`}>
+        {this.translate(element.code)}
+      </li>
+    ));
   }
 
   resetForm = (values, dispatch, { reset }) => {
@@ -128,51 +144,48 @@ class ChangePassword extends Component {
     reset();
   };
 
-  validateForm = values => {
-    const errors = {};
+  requiredValidation = value => {
     const enterValueError = this.translate('enterValue');
 
-    if (!values.currentPassword) {
-      errors.currentPassword = enterValueError;
-    }
+    return value ? undefined : enterValueError;
+  };
 
-    if (!values.newPassword) {
-      errors.newPassword = enterValueError;
-    }
-
-    if (!values.confirmPassword) {
-      errors.confirmPassword = enterValueError;
-    }
-
-    const isConfirmPasswordInvalid = (
-      values.newPassword &&
-      values.confirmPassword &&
-      values.newPassword !== values.confirmPassword
-    );
+  confirmPasswordValidation = (value, { newPassword, confirmPassword }) => {
+    const isConfirmPasswordInvalid =
+      newPassword && confirmPassword && newPassword !== confirmPassword;
 
     if (isConfirmPasswordInvalid) {
-      const confirmPasswordMatchError = this.translate('confirmPasswordMatchError');
+      const confirmPasswordMatchError = this.translate(
+        'confirmPasswordMatchError'
+      );
 
-      errors.confirmPassword = confirmPasswordMatchError;
+      return confirmPasswordMatchError;
     }
 
-    return errors;
+    return undefined;
   };
 
   translate = id => {
     const { stripes } = this.props;
-    const { intl: { formatMessage } } = stripes;
+    const {
+      intl: { formatMessage },
+    } = stripes;
 
     return formatMessage({ id: `${this.translateNamespace}.${id}` });
   };
 
-  createCalloutRef = ref => { this.callout = ref; };
+  createCalloutRef = ref => {
+    this.callout = ref;
+  };
 
   render() {
     const { passwordMasked } = this.state;
     const { label } = this.props;
     const passwordType = passwordMasked ? 'password' : 'text';
-    const passwordToggleLabelId = `${this.translateNamespace}.${passwordMasked ? 'show' : 'hide'}Password`;
+    const { username } = this.props.stripes.user.user;
+    const passwordToggleLabelId = `${this.translateNamespace}.${
+      passwordMasked ? 'show' : 'hide'
+    }Password`;
 
     return (
       <div
@@ -181,7 +194,6 @@ class ChangePassword extends Component {
       >
         <ChangePasswordForm
           title={label}
-          validate={this.validateForm}
           saveButtonText={this.translate('save')}
           onSubmit={this.onChangePasswordFormSubmit}
           onSubmitSuccess={this.resetForm}
@@ -195,6 +207,7 @@ class ChangePassword extends Component {
                   id="current-password"
                   name="currentPassword"
                   label={this.translate('currentPassword')}
+                  validate={this.validators.currentPassword}
                   autoFocus
                 />
               </div>
@@ -203,13 +216,17 @@ class ChangePassword extends Component {
           <Row>
             <Col xs={12}>
               <div data-test-change-password-new-password-field>
-                <Field
-                  passwordMeterColProps={{ style: this.styles.passwordStrengthMeter }}
+                <this.passwordField
+                  passwordMeterColProps={{
+                    style: this.styles.passwordStrengthMeter,
+                  }}
                   component={PasswordStrength}
-                  type={passwordType}
                   id="new-password"
                   name="newPassword"
+                  type={passwordType}
+                  username={username}
                   label={this.translate('newPassword')}
+                  validate={this.validators.newPassword}
                 />
               </div>
             </Col>
@@ -223,6 +240,7 @@ class ChangePassword extends Component {
                   id="confirm-password"
                   name="confirmPassword"
                   label={this.translate('confirmPassword')}
+                  validate={this.validators.confirmPassword}
                 />
               </div>
             </Col>
