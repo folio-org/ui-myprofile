@@ -1,7 +1,7 @@
 import { beforeEach, describe, it } from '@bigtest/mocha';
 import { expect } from 'chai';
 
-import { describeApplication } from '../helpers/describe-application';
+import setupApplication from '../helpers/setup-application';
 import ChangePasswordPage from '../interactors/change-password';
 import translation from '../../../translations/ui-myprofile/en';
 import { wrongPassword, serverError, userData, lastTenPasswordsError, multipleErrors } from '../constants';
@@ -24,7 +24,9 @@ const successMessage = (() => {
   return text;
 })();
 
-describeApplication('ChangePasswordPage', () => {
+describe('ChangePasswordPage', () => {
+  setupApplication();
+
   beforeEach(function () {
     return this.visit('/settings/myprofile/password', () => {
       expect(ChangePasswordPage.isPresent).to.be.true;
