@@ -12,7 +12,7 @@ export default function configure() {
     });
   });
 
-  this.post('/authn/update', (schema, request) => {
+  this.post('/bl-users/settings/myprofile/password', (schema, request) => {
     const formData = JSON.parse(request.requestBody);
 
     switch (formData.password) {
@@ -21,11 +21,11 @@ export default function configure() {
           errors: [
             {
               type: 'error',
-              code: 'lastTenPasswords',
+              code: 'password.repeatingSymbols.invalid',
             },
             {
               type: 'error',
-              code: 'wrongPassword',
+              code: 'password.whiteSpace.invalid',
             },
           ]
         });
@@ -34,7 +34,7 @@ export default function configure() {
           errors: [
             {
               type: 'error',
-              code: 'lastTenPasswords',
+              code: 'password.lastTenPasswords.invalid',
             },
           ]
         });
