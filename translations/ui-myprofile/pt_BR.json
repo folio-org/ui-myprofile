@@ -12,5 +12,6 @@
     "settings.changePassword.confirmPasswordMatchError": "Senha nova e a confirmação não correspondem. Digite novamente sua senha.",
     "settings.changePassword.wrongPassword": "Senha incorreta. Digite novamente sua senha.",
     "settings.changePassword.successfullyChanged": "A <strong> senha do FOLIO </strong> foi <strong> alterada </strong> com êxito para <strong> {lastName} </strong> , <strong> {firstName} </strong>",
-    "userDropdown.changePassword.caption": "Mudar senha"
+    "userDropdown.changePassword.caption": "Mudar senha",
+    "settings.changePassword.lastTenPasswords": "Senha usada anteriormente. Por favor insira uma nova senha."
 }
