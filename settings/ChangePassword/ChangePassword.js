@@ -197,7 +197,7 @@ class ChangePassword extends Component {
           <Row>
             <Col xs={12}>
               <div data-test-change-password-new-password-field>
-                <Field
+                <this.passwordField
                   passwordMeterColProps={{
                     style: this.styles.passwordStrengthMeter,
                   }}
