@@ -33,6 +33,8 @@
         "description": "Some subperms can be deleted later when submodules use modern permission names",
         "subPermissions": [
           "settings.myprofile.enabled",
+          "validation.rules.collection.get",
+          "users.collection.get",
           "users-bl.item.get",
           "users.item.get",
           "login.item.get"
