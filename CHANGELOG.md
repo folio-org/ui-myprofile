@@ -8,6 +8,7 @@
 * Add validation for new password input field (UIMPROF-12).
 * Change API url for change password (MODLOGIN-53).
 * Use `stripes` framework v1.0.0
+* Use documented react-intl patterns instead of stripes.intl (UIMPROF-28).
 
 ## [1.0.0](https://github.com/folio-org/ui-myprofile/tree/v1.0.0) (2018-09-18)
 

@@ -1,7 +1,11 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Field, SubmissionError } from 'redux-form';
+import {
+  Field,
+  SubmissionError,
+} from 'redux-form';
 import { FormattedMessage } from 'react-intl';
+
 import SafeHTMLMessage from '@folio/react-intl-safe-html';
 import {
   PasswordStrength,
@@ -33,7 +37,7 @@ class ChangePassword extends Component {
         POST: PropTypes.func.isRequired,
       }).isRequired,
     }).isRequired,
-    label: PropTypes.string.isRequired,
+    label: PropTypes.node.isRequired,
   };
 
   constructor(props) {
@@ -43,8 +47,6 @@ class ChangePassword extends Component {
       passwordMasked: true,
     };
 
-    this.translateNamespace = 'ui-myprofile.settings.changePassword';
-    this.translatePasswordValidationNamespace = 'stripes-smart-components';
     this.styles = {
       changePasswordFormWrapper: {
         width: '100%',
@@ -99,7 +101,10 @@ class ChangePassword extends Component {
 
   handleChangePasswordSuccess = () => {
     const successMessage = (
-      <SafeHTMLMessage id={`${this.translateNamespace}.successfullyChanged`} values={this.getFullUserName()} />
+      <SafeHTMLMessage
+        id="ui-myprofile.settings.changePassword.successfullyChanged"
+        values={this.getFullUserName()}
+      />
     );
 
     this.callout.sendCallout({ message: successMessage });
@@ -114,23 +119,27 @@ class ChangePassword extends Component {
       });
     } else if (response.status === 401) {
       throw new SubmissionError({
-        currentPassword: this.translate('wrongPassword'),
+        currentPassword: <FormattedMessage id="ui-myprofile.settings.changePassword.wrongPassword" />,
       });
     }
   };
 
   parseErrors({ errors }) {
-    return errors.length > 1 ? (
-      <ul>{this.getPasswordValidationMessages(errors)}</ul>
-    ) : (
-      this.translate(errors[0].code, this.translatePasswordValidationNamespace)
-    );
+    if (errors.length > 1) {
+      return (
+        <ul>
+          {this.getPasswordValidationMessages(errors)}
+        </ul>
+      );
+    }
+
+    return <FormattedMessage id={`stripes-smart-components.${errors[0].code}`} />;
   }
 
   getPasswordValidationMessages(data) {
     return data.map(element => (
       <li key={`${element.code}-${element.type}`}>
-        {this.translate(element.code, this.translatePasswordValidationNamespace)}
+        <FormattedMessage id={`stripes-smart-components.${element.code}`} />
       </li>
     ));
   }
@@ -141,30 +150,19 @@ class ChangePassword extends Component {
   };
 
   requiredValidation = value => {
-    const enterValueError = this.translate('enterValue');
+    if (value) return null;
 
-    return value ? undefined : enterValueError;
+    return <FormattedMessage id="ui-myprofile.settings.changePassword.enterValue" />;
   };
 
   confirmPasswordValidation = (value, { newPassword, confirmPassword }) => {
     const isConfirmPasswordInvalid = newPassword && confirmPassword && newPassword !== confirmPassword;
 
-    if (isConfirmPasswordInvalid) {
-      const confirmPasswordMatchError = this.translate('confirmPasswordMatchError');
-
-      return confirmPasswordMatchError;
+    if (!isConfirmPasswordInvalid) {
+      return null;
     }
 
-    return undefined;
-  };
-
-  translate = (id, namespace = this.translateNamespace) => {
-    const { stripes } = this.props;
-    const {
-      intl: { formatMessage },
-    } = stripes;
-
-    return formatMessage({ id: `${namespace}.${id}` });
+    return <FormattedMessage id="ui-myprofile.settings.changePassword.confirmPasswordMatchError" />;
   };
 
   createCalloutRef = ref => {
@@ -176,13 +174,16 @@ class ChangePassword extends Component {
     const { label } = this.props;
     const passwordType = passwordMasked ? 'password' : 'text';
     const { username } = this.props.stripes.user.user;
-    const passwordToggleLabelId = `${this.translateNamespace}.${passwordMasked ? 'show' : 'hide'}Password`;
+    const passwordToggleLabelId = `ui-myprofile.settings.changePassword.${passwordMasked ? 'show' : 'hide'}Password`;
 
     return (
-      <div style={this.styles.changePasswordFormWrapper} data-test-change-password-page>
+      <div
+        style={this.styles.changePasswordFormWrapper}
+        data-test-change-password-page
+      >
         <ChangePasswordForm
           title={label}
-          saveButtonText={this.translate('save')}
+          saveButtonText={<FormattedMessage id="ui-myprofile.settings.changePassword.save" />}
           onSubmit={this.onChangePasswordFormSubmit}
           onSubmitSuccess={this.resetForm}
         >
@@ -194,7 +195,7 @@ class ChangePassword extends Component {
                   type={passwordType}
                   id="current-password"
                   name="currentPassword"
-                  label={this.translate('currentPassword')}
+                  label={<FormattedMessage id="ui-myprofile.settings.changePassword.currentPassword" />}
                   validate={this.validators.currentPassword}
                   autoFocus
                 />
@@ -213,7 +214,7 @@ class ChangePassword extends Component {
                   name="newPassword"
                   type={passwordType}
                   username={username}
-                  label={this.translate('newPassword')}
+                  label={<FormattedMessage id="ui-myprofile.settings.changePassword.newPassword" />}
                   validate={this.validators.newPassword}
                 />
               </div>
@@ -227,14 +228,21 @@ class ChangePassword extends Component {
                   type={passwordType}
                   id="confirm-password"
                   name="confirmPassword"
-                  label={this.translate('confirmPassword')}
+                  label={<FormattedMessage id="ui-myprofile.settings.changePassword.confirmPassword" />}
                   validate={this.validators.confirmPassword}
                 />
               </div>
             </Col>
             <Col>
-              <div data-test-change-password-toggle-mask-btn style={this.styles.toggleMaskButtonWrapper}>
-                <Button type="button" buttonStyle="link" onClick={this.togglePasswordMask}>
+              <div
+                data-test-change-password-toggle-mask-btn
+                style={this.styles.toggleMaskButtonWrapper}
+              >
+                <Button
+                  type="button"
+                  buttonStyle="link"
+                  onClick={this.togglePasswordMask}
+                >
                   <FormattedMessage id={passwordToggleLabelId} />
                 </Button>
               </div>

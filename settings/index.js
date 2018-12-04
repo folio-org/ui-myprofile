@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import { FormattedMessage } from 'react-intl';
+
 import { Settings } from '@folio/stripes/smart-components';
 import { stripesShape } from '@folio/stripes/core';
 
@@ -28,7 +30,7 @@ class MyProfile extends Component {
   }
 
   registerChangePasswordPage() {
-    const { stripes: { intl: { formatMessage }, okapi: { ssoEnabled } } } = this.props;
+    const { ssoEnabled } = this.props.stripes.okapi;
     const showPasswordPage = !ssoEnabled;
 
     /* istanbul ignore if  */
@@ -38,7 +40,7 @@ class MyProfile extends Component {
 
     const changePasswordPageSettings = {
       route: 'password',
-      label: formatMessage({ id: 'ui-myprofile.settings.changePassword.label' }),
+      label: <FormattedMessage id="ui-myprofile.settings.changePassword.label" />,
       component: ChangePassword,
       perm: 'ui-myprofile.view',
     };
@@ -54,7 +56,7 @@ class MyProfile extends Component {
       <Settings
         {...this.props}
         pages={this.pages}
-        paneTitle={this.props.stripes.intl.formatMessage({ id: 'ui-myprofile.settings.index.paneTitle' })}
+        paneTitle={<FormattedMessage id="ui-myprofile.settings.index.paneTitle" />}
       />
     );
   }

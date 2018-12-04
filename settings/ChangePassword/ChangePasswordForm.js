@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+
 import { Button, Pane } from '@folio/stripes/components';
 import stripesForm from '@folio/stripes/form';
 
@@ -26,8 +27,16 @@ const ChangePasswordForm = (props) => {
   );
 
   return (
-    <form id="change-password-form" onSubmit={handleSubmit}>
-      <Pane defaultWidth="fill" fluidContentWidth paneTitle={title} lastMenu={lastMenu}>
+    <form
+      id="change-password-form"
+      onSubmit={handleSubmit}
+    >
+      <Pane
+        defaultWidth="fill"
+        fluidContentWidth
+        paneTitle={title}
+        lastMenu={lastMenu}
+      >
         {children}
       </Pane>
     </form>
@@ -38,8 +47,8 @@ ChangePasswordForm.propTypes = {
   handleSubmit: PropTypes.func.isRequired,
   pristine: PropTypes.bool,
   submitting: PropTypes.bool,
-  title: PropTypes.string,
-  saveButtonText: PropTypes.string,
+  title: PropTypes.node,
+  saveButtonText: PropTypes.node,
   children: PropTypes.node,
 };
 
