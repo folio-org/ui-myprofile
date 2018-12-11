@@ -1,7 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { Button, Pane } from '@folio/stripes/components';
+import {
+  Button,
+  Pane,
+} from '@folio/stripes/components';
 import stripesForm from '@folio/stripes/form';
 
 const ChangePasswordForm = (props) => {
