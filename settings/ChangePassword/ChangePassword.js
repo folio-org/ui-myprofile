@@ -76,15 +76,27 @@ class ChangePassword extends Component {
   };
 
   getFullUserName() {
-    const { firstName, lastName } = this.props.stripes.user.user;
+    const {
+      firstName,
+      lastName,
+    } = this.props.stripes.user.user;
 
-    return { firstName, lastName };
+    return {
+      firstName,
+      lastName,
+    };
   }
 
   onChangePasswordFormSubmit = values => {
     const { changePassword } = this.props.mutator;
-    const { currentPassword, newPassword } = values;
-    const { username, id: userId } = this.props.stripes.user.user;
+    const {
+      currentPassword,
+      newPassword,
+    } = values;
+    const {
+      username,
+      id: userId,
+    } = this.props.stripes.user.user;
 
     return changePassword
       .POST({
@@ -196,8 +208,8 @@ class ChangePassword extends Component {
                   id="current-password"
                   name="currentPassword"
                   label={<FormattedMessage id="ui-myprofile.settings.changePassword.currentPassword" />}
-                  validate={this.validators.currentPassword}
                   autoFocus
+                  validate={this.validators.currentPassword}
                 />
               </div>
             </Col>

@@ -1,5 +1,11 @@
 import { Response } from '@bigtest/mirage';
-import { wrongPassword, serverError, lastTenPasswordsError, multipleErrors } from '../constants';
+
+import {
+  wrongPassword,
+  serverError,
+  lastTenPasswordsError,
+  multipleErrors,
+} from '../constants';
 
 // typical mirage config export
 export default function configure() {
