@@ -1,8 +1,7 @@
 import { beforeEach, describe, it } from '@bigtest/mocha';
 import { expect } from 'chai';
 
-import passwordValidationTranslation from '@folio/stripes-smart-components/translations/stripes-smart-components/en';
-import translation from '../../../translations/ui-myprofile/en';
+import translation from '../../../translations/ui-myprofile/en.json'; // eslint-disable-line import/extensions
 import setupApplication from '../helpers/setup-application';
 import ChangePasswordPage from '../interactors/change-password';
 import { wrongPassword, serverError, userData, lastTenPasswordsError, multipleErrors } from '../constants';
@@ -255,9 +254,7 @@ describe('ChangePasswordPage', () => {
 
     it('validation error should be present upon failed submit', () => {
       expect(ChangePasswordPage.newPasswordField.errorMessage.isPresent).to.be.true;
-      expect(ChangePasswordPage.newPasswordField.errorMessage.text).to.equal(
-        passwordValidationTranslation['password.lastTenPasswords.invalid']
-      );
+      expect(ChangePasswordPage.newPasswordField.errorMessage.text.includes('used password')).to.be.true;
     });
   });
 
@@ -281,11 +278,8 @@ describe('ChangePasswordPage', () => {
 
     it('validation error should be present upon failed submit', () => {
       expect(ChangePasswordPage.newPasswordField.errorMessage.isPresent).to.be.true;
-      expect(ChangePasswordPage.newPasswordField.errorMessage.text).to.equal(
-        `${passwordValidationTranslation['password.repeatingSymbols.invalid']}${
-          passwordValidationTranslation['password.whiteSpace.invalid']
-        }`
-      );
+      expect(ChangePasswordPage.newPasswordField.errorMessage.text.includes('same character in a row')).to.be.true;
+      expect(ChangePasswordPage.newPasswordField.errorMessage.text.includes('contain whitespaces')).to.be.true;
     });
   });
 });
