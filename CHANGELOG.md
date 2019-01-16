@@ -1,5 +1,10 @@
 # Change history for ui-myprofile
 
+## [1.3.0](https://github.com/folio-org/ui-myprofile/tree/v1.3.0) (2019-01-16)
+[Full Changelog](https://github.com/folio-org/ui-myprofile/compare/v1.2.0...v1.3.0)
+
+* Remove stripes-cli from dependencies
+
 ## [1.2.0](https://github.com/folio-org/ui-myprofile/tree/v1.2.0) (2018-12-11)
 [Full Changelog](https://github.com/folio-org/ui-myprofile/compare/v1.1.0...v1.2.0)
 
