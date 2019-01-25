@@ -1,5 +1,9 @@
 # Change history for ui-myprofile
 
+## 1.4.0 (IN PROGRESS)
+
+* Upgrade to stripes v2.0.0.
+
 ## [1.3.0](https://github.com/folio-org/ui-myprofile/tree/v1.3.0) (2019-01-16)
 [Full Changelog](https://github.com/folio-org/ui-myprofile/compare/v1.2.0...v1.3.0)
 
