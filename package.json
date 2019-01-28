@@ -29,7 +29,7 @@
       },
       {
         "permissionName": "ui-myprofile.view",
-        "displayName": "My profile: Can view settings for users profile",
+        "displayName": "My profile: Can change your local password",
         "description": "Some subperms can be deleted later when submodules use modern permission names",
         "subPermissions": [
           "settings.myprofile.enabled",
