@@ -55,7 +55,8 @@
   "scripts": {
     "start": "stripes serve",
     "lint": "eslint .",
-    "test": "stripes test karma"
+    "test": "stripes test karma",
+    "test-coverage": "stripes test karma --coverage"
   },
   "devDependencies": {
     "@bigtest/convergence": "^0.10.0",
