@@ -1,5 +1,12 @@
 # Change history for ui-myprofile
 
+## [1.5.0](https://github.com/folio-org/ui-myprofile/tree/v1.5.0) (2019-03-14)
+[Full Changelog](https://github.com/folio-org/ui-myprofile/compare/v1.4.0...v1.5.0)
+
+* Change permission name (UIU-831)
+* Update testing configuration (UIMPROF-32)
+* Update translation strings
+
 ## [1.4.0](https://github.com/folio-org/ui-myprofile/tree/v1.4.0) (2019-01-25)
 [Full Changelog](https://github.com/folio-org/ui-myprofile/compare/v1.3.0...v1.4.0)
 
