@@ -1,8 +1,8 @@
 {
-    "meta.title": "El meu perfil",
-    "settings.index.paneTitle": "El meu perfil",
+    "meta.title": "My profile",
+    "settings.index.paneTitle": "My profile",
     "settings.changePassword.label": "Change password",
-    "settings.changePassword.save": "Desa",
+    "settings.changePassword.save": "Save",
     "settings.changePassword.hidePassword": "Hide password",
     "settings.changePassword.showPassword": "Show password",
     "settings.changePassword.currentPassword": "Current FOLIO password",
