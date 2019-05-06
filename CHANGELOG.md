@@ -1,5 +1,10 @@
 # Change history for ui-myprofile
 
+## [1.6.0](https://github.com/folio-org/ui-myprofile/tree/v1.6.0) (2019-05-06)
+[Full Changelog](https://github.com/folio-org/ui-myprofile/compare/v1.5.0...v1.6.0)
+
+* Update translation strings
+
 ## [1.5.0](https://github.com/folio-org/ui-myprofile/tree/v1.5.0) (2019-03-14)
 [Full Changelog](https://github.com/folio-org/ui-myprofile/compare/v1.4.0...v1.5.0)
 
