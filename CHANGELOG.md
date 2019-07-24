@@ -1,5 +1,9 @@
 # Change history for ui-myprofile
 
+## 1.7.0 (IN PROGRESS)
+
+* Use granular permissions. (UITEN-35)
+
 ## [1.6.0](https://github.com/folio-org/ui-myprofile/tree/v1.6.0) (2019-05-06)
 [Full Changelog](https://github.com/folio-org/ui-myprofile/compare/v1.5.0...v1.6.0)
 
