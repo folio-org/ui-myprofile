@@ -17,19 +17,18 @@
     "permissionSets": [
       {
         "permissionName": "module.myprofile.enabled",
-        "displayName": "UI: Users profile module is enabled"
+        "displayName": "UI: My-profile module is enabled"
       },
       {
         "permissionName": "settings.myprofile.enabled",
-        "displayName": "Settings (Users profile): display list of settings pages",
+        "displayName": "Settings (My profile): display list of settings pages",
         "subPermissions": [
           "settings.enabled"
-        ],
-        "visible": true
+        ]
       },
       {
-        "permissionName": "ui-myprofile.view",
-        "displayName": "My profile: Can change your local password",
+        "permissionName": "ui-myprofile.settings.change-password",
+        "displayName": "Settings (My profile): Can change your local password",
         "description": "Some subperms can be deleted later when submodules use modern permission names",
         "subPermissions": [
           "settings.myprofile.enabled",

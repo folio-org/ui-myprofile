@@ -42,7 +42,7 @@ class MyProfile extends Component {
       route: 'password',
       label: <FormattedMessage id="ui-myprofile.settings.changePassword.label" />,
       component: ChangePassword,
-      perm: 'ui-myprofile.view',
+      perm: 'ui-myprofile.settings.change-password',
     };
 
     return changePasswordPageSettings;
