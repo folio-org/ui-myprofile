@@ -3,7 +3,7 @@
 ## [1.7.0](https://github.com/folio-org/ui-myprofile/tree/v1.7.0) (2019-07-24)
 [Full Changelog](https://github.com/folio-org/ui-myprofile/compare/v1.6.0...v1.7.0)
 
-* Use granular permissions for settings pages (UITEN-35)
+* Use granular permissions for settings items (UITEN-35)
 
 ## [1.6.0](https://github.com/folio-org/ui-myprofile/tree/v1.6.0) (2019-05-06)
 [Full Changelog](https://github.com/folio-org/ui-myprofile/compare/v1.5.0...v1.6.0)
