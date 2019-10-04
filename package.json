@@ -86,11 +86,11 @@
     "@folio/react-intl-safe-html": "^1.0.1",
     "prop-types": "^15.6.0",
     "react-intl": "^2.3.0",
-    "react-router-dom": "^4.1.1",
     "redux-form": "^7.0.3"
   },
   "peerDependencies": {
     "@folio/stripes": "^2.0.0",
-    "react": "*"
+    "react": "*",
+    "react-router-dom": "^5.0.1"
   }
 }
