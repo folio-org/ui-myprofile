@@ -4,8 +4,11 @@ import PropTypes from 'prop-types';
 import {
   Button,
   Pane,
+  PaneFooter,
 } from '@folio/stripes/components';
 import stripesForm from '@folio/stripes/form';
+
+import css from './ChangePasswordForm.css';
 
 const ChangePasswordForm = (props) => {
   const {
@@ -17,28 +20,33 @@ const ChangePasswordForm = (props) => {
     children,
   } = props;
 
-  const lastMenu = (
-    <Button
-      id="change-password-submit-btn"
-      type="submit"
-      buttonStyle="primary paneHeaderNewButton"
-      disabled={(pristine || submitting)}
-      marginBottom0
-    >
-      {saveButtonText}
-    </Button>
+  const footer = (
+    <PaneFooter
+      renderEnd={(
+        <Button
+          id="change-password-submit-btn"
+          type="submit"
+          buttonStyle="primary paneHeaderNewButton"
+          disabled={(pristine || submitting)}
+          marginBottom0
+        >
+          {saveButtonText}
+        </Button>
+      )}
+    />
   );
 
   return (
     <form
       id="change-password-form"
+      className={css.changePasswordForm}
       onSubmit={handleSubmit}
     >
       <Pane
         defaultWidth="fill"
         fluidContentWidth
         paneTitle={title}
-        lastMenu={lastMenu}
+        footer={footer}
       >
         {children}
       </Pane>
