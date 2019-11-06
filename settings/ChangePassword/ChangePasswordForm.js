@@ -8,6 +8,8 @@ import {
 } from '@folio/stripes/components';
 import stripesForm from '@folio/stripes/form';
 
+import css from './ChangePasswordForm.css';
+
 const ChangePasswordForm = (props) => {
   const {
     handleSubmit,
@@ -35,19 +37,20 @@ const ChangePasswordForm = (props) => {
   );
 
   return (
-    <Pane
-      defaultWidth="fill"
-      fluidContentWidth
-      paneTitle={title}
-      footer={footer}
+    <form
+      id="change-password-form"
+      className={css.changePasswordForm}
+      onSubmit={handleSubmit}
     >
-      <form
-        id="change-password-form"
-        onSubmit={handleSubmit}
+      <Pane
+        defaultWidth="fill"
+        fluidContentWidth
+        paneTitle={title}
+        footer={footer}
       >
         {children}
-      </form>
-    </Pane>
+      </Pane>
+    </form>
   );
 };
 
