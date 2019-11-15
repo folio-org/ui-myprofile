@@ -11,7 +11,7 @@
     "settings.changePassword.enterValue": "Inserisci un valore",
     "settings.changePassword.confirmPasswordMatchError": "New and confirm password does not match. Retype your password.",
     "settings.changePassword.wrongPassword": "Incorrect password. Retype your password.",
-    "settings.changePassword.successfullyChanged": "The <strong>FOLIO password</strong> has been successfully <strong>changed</strong> for <strong>{lastName}</strong>, <strong>{firstName}</strong>",
+    "settings.changePassword.successfullyChanged": "La <strong> password FOLIO </strong> è stata correttamente <strong> modificata </strong> per <strong> {lastName} </strong> , <strong> {firstName} </strong>",
     "userDropdown.changePassword.caption": "Cambia password",
     "settings.changePassword.lastTenPasswords": "Previously used password. Please enter a new password."
 }
