@@ -11,7 +11,7 @@
     "settings.changePassword.enterValue": "Пожалуйста, введите значение.",
     "settings.changePassword.confirmPasswordMatchError": "Новый и подтвержденный пароли не совпадают. Введите пароль снова.",
     "settings.changePassword.wrongPassword": "Неверный пароль. Введите пароль снова.",
-    "settings.changePassword.successfullyChanged": "The <strong>FOLIO password</strong> has been successfully <strong>changed</strong> for <strong>{lastName}</strong>, <strong>{firstName}</strong>",
+    "settings.changePassword.successfullyChanged": "<strong>Пароль FOLIO</strong> был успешно <strong>изменен</strong> на <strong>{lastName}</strong>, <strong>{firstName</strong>].",
     "userDropdown.changePassword.caption": "Изменить пароль",
-    "settings.changePassword.lastTenPasswords": "Previously used password. Please enter a new password."
+    "settings.changePassword.lastTenPasswords": "Ранее использованный пароль. Пожалуйста, введите новый пароль."
 }
