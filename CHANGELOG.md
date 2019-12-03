@@ -1,5 +1,11 @@
 # Change history for ui-myprofile
 
+## [1.8.0](https://github.com/folio-org/ui-myprofile/tree/v1.8.0) (2019-12-03)
+[Full Changelog](https://github.com/folio-org/ui-myprofile/compare/v1.7.0...v1.8.0)
+
+* Update translations strings
+* Move Save button to the footer (UIMPROF-38)
+
 ## [1.7.0](https://github.com/folio-org/ui-myprofile/tree/v1.7.0) (2019-07-24)
 [Full Changelog](https://github.com/folio-org/ui-myprofile/compare/v1.6.0...v1.7.0)
 
