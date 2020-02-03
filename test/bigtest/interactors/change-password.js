@@ -3,31 +3,11 @@ import {
   Interactor,
   interactor,
   isPresent,
-  attribute,
   clickable,
-  scoped,
-  text,
-  value,
 } from '@bigtest/interactor';
 
-@interactor class ToggleMask {
-  toggleMaskBtn = clickable('button');
-  text = text('button');
-}
-
-@interactor class InputField {
-  type = attribute('input', 'type');
-  value = value('input', 'type');
-  errorMessage = scoped('[class^="feedbackError--"]');
-
-  fillInput = action(function (val) {
-    return this.fill('input', val);
-  });
-
-  blurInput = action(function () {
-    return this.blur('input');
-  });
-}
+import ToggleMask from './toggle-mask';
+import InputField from './input-field';
 
 @interactor class ChangePasswordPage {
   currentPasswordField = new InputField('[data-test-change-password-current-password-field]');

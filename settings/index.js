@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { FormattedMessage } from 'react-intl';
+import { PropTypes } from 'prop-types';
 
 import { Settings } from '@folio/stripes/smart-components';
 import { stripesShape } from '@folio/stripes/core';
@@ -12,6 +13,10 @@ class MyProfile extends Component {
   }
 
   static propTypes = {
+    actAs: PropTypes.string.isRequired,
+    location: PropTypes.object.isRequired,
+    match: PropTypes.object.isRequired,
+    showSettings: PropTypes.bool.isRequired,
     stripes: stripesShape.isRequired,
   };
 
@@ -52,9 +57,21 @@ class MyProfile extends Component {
     /* istanbul ignore if  */
     if (!this.pages.length) return null;
 
+    const {
+      actAs,
+      location,
+      match,
+      showSettings,
+      stripes,
+    } = this.props;
+
     return (
       <Settings
-        {...this.props}
+        actAs={actAs}
+        location={location}
+        match={match}
+        showSettings={showSettings}
+        stripes={stripes}
         pages={this.pages}
         paneTitle={<FormattedMessage id="ui-myprofile.settings.index.paneTitle" />}
       />

@@ -21,15 +21,6 @@ import { PasswordValidationField } from '@folio/stripes/smart-components';
 import ChangePasswordForm from './ChangePasswordForm';
 
 class ChangePassword extends Component {
-  static manifest = Object.freeze({
-    changePassword: {
-      type: 'okapi',
-      path: 'bl-users/settings/myprofile/password',
-      fetch: false,
-      throwErrors: false,
-    },
-  });
-
   static propTypes = {
     stripes: stripesShape,
     mutator: PropTypes.shape({
@@ -39,6 +30,15 @@ class ChangePassword extends Component {
     }).isRequired,
     label: PropTypes.node.isRequired,
   };
+
+  static manifest = Object.freeze({
+    changePassword: {
+      type: 'okapi',
+      path: 'bl-users/settings/myprofile/password',
+      fetch: false,
+      throwErrors: false,
+    },
+  });
 
   constructor(props) {
     super(props);
