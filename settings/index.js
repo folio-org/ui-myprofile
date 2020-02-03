@@ -12,6 +12,14 @@ class MyProfile extends Component {
     return !stripes.okapi.ssoEnabled;
   }
 
+  static propTypes = {
+    actAs: PropTypes.string.isRequired,
+    location: PropTypes.object.isRequired,
+    match: PropTypes.object.isRequired,
+    showSettings: PropTypes.bool.isRequired,
+    stripes: stripesShape.isRequired,
+  };
+
   constructor(props) {
     super(props);
 
@@ -70,13 +78,5 @@ class MyProfile extends Component {
     );
   }
 }
-
-MyProfile.propTypes = {
-  actAs: PropTypes.string.isRequired,
-  location: PropTypes.object.isRequired,
-  match: PropTypes.object.isRequired,
-  showSettings: PropTypes.bool.isRequired,
-  stripes: stripesShape.isRequired,
-};
 
 export default MyProfile;

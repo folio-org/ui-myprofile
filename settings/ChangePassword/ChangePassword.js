@@ -21,6 +21,25 @@ import { PasswordValidationField } from '@folio/stripes/smart-components';
 import ChangePasswordForm from './ChangePasswordForm';
 
 class ChangePassword extends Component {
+  static propTypes = {
+    stripes: stripesShape,
+    mutator: PropTypes.shape({
+      changePassword: PropTypes.shape({
+        POST: PropTypes.func.isRequired,
+      }).isRequired,
+    }).isRequired,
+    label: PropTypes.node.isRequired,
+  };
+
+  static manifest = Object.freeze({
+    changePassword: {
+      type: 'okapi',
+      path: 'bl-users/settings/myprofile/password',
+      fetch: false,
+      throwErrors: false,
+    },
+  });
+
   constructor(props) {
     super(props);
 
@@ -247,25 +266,5 @@ class ChangePassword extends Component {
     );
   }
 }
-
-ChangePassword.propTypes = {
-  stripes: stripesShape,
-  mutator: PropTypes.shape({
-    changePassword: PropTypes.shape({
-      POST: PropTypes.func.isRequired,
-    }).isRequired,
-  }).isRequired,
-  label: PropTypes.node.isRequired,
-};
-
-
-ChangePassword.manifest = Object.freeze({
-  changePassword: {
-    type: 'okapi',
-    path: 'bl-users/settings/myprofile/password',
-    fetch: false,
-    throwErrors: false,
-  },
-});
 
 export default ChangePassword;
