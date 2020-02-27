@@ -1,8 +1,9 @@
 # Change history for ui-myprofile
 
-## [1.9.0](IN PROGRESS)
+## [2.0.0](IN PROGRESS)
 
 * Update eslint to v6.2.1. Refs UIMPROF-41.
+* Migrate to `stripes` `v3.0.0` and move `react-intl` and `react-router` to peerDependencies.
 
 ## [1.8.0](https://github.com/folio-org/ui-myprofile/tree/v1.8.0) (2019-12-03)
 [Full Changelog](https://github.com/folio-org/ui-myprofile/compare/v1.7.0...v1.8.0)
