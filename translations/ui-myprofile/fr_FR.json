@@ -9,9 +9,9 @@
     "settings.changePassword.newPassword": "Nouveau mot de passe FOLIO",
     "settings.changePassword.confirmPassword": "Confirmer le mot de passe FOLIO",
     "settings.changePassword.enterValue": "Merci de saisir une valeur",
-    "settings.changePassword.confirmPasswordMatchError": "New and confirm password does not match. Retype your password.",
+    "settings.changePassword.confirmPasswordMatchError": "La confirmation et le mot de passe ne correspondent pas. Ressaisir votre mot de passe.",
     "settings.changePassword.wrongPassword": "Mot de passe incorrect. Retaper votre mot de passe.",
     "settings.changePassword.successfullyChanged": "The <strong>FOLIO password</strong> has been successfully <strong>changed</strong> for <strong>{lastName}</strong>, <strong>{firstName}</strong>",
     "userDropdown.changePassword.caption": "Changer le mot de passe",
-    "settings.changePassword.lastTenPasswords": "Previously used password. Please enter a new password."
+    "settings.changePassword.lastTenPasswords": "Mot de passe précédemment utilisé. Merci de saisir un nouveau mot de passe."
 }
