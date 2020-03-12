@@ -90,7 +90,7 @@
     "redux-form": "^7.0.3"
   },
   "peerDependencies": {
-    "@folio/stripes": "^2.13.0",
+    "@folio/stripes": "^3.0.0",
     "react": "*",
     "react-intl": "^2.3.0",
     "react-router-dom": "^4.1.1"
