@@ -1,7 +1,7 @@
 {
-    "meta.title": "我的个人资料",
-    "settings.index.paneTitle": "我的个人资料",
-    "settings.changePassword.label": "更改密码",
+    "meta.title": "我的個人資料",
+    "settings.index.paneTitle": "我的個人資料",
+    "settings.changePassword.label": "更改密碼",
     "settings.changePassword.save": "保存",
     "settings.changePassword.hidePassword": "隐藏密码",
     "settings.changePassword.showPassword": "显示密码",
@@ -9,9 +9,9 @@
     "settings.changePassword.newPassword": "新的FOLIO密码",
     "settings.changePassword.confirmPassword": "确认FOLIO密码",
     "settings.changePassword.enterValue": "请输入一个值。",
-    "settings.changePassword.confirmPasswordMatchError": "新密码和确认密码不匹配。重新输入您的密码。",
-    "settings.changePassword.wrongPassword": "密码错误，请重新输入。",
+    "settings.changePassword.confirmPasswordMatchError": "新密碼與確認密碼不一致，請重新輸入密碼。",
+    "settings.changePassword.wrongPassword": "密碼不對，請重新輸入密碼。",
     "settings.changePassword.successfullyChanged": "<strong> FOLIO密码</strong>已成功<strong>改变</strong>为<strong> {lastName} </strong> ， <strong> {firstName} </strong>",
-    "userDropdown.changePassword.caption": "更改密码",
+    "userDropdown.changePassword.caption": "更改密碼",
     "settings.changePassword.lastTenPasswords": "以前用过的密码。请输入新密码。"
 }
