@@ -3,6 +3,7 @@
 ## [3.0.0] IN PROGRESS
 
 * Purge `intlShape` in prep for `react-intl` `v4` migration. Update to `@folio/stripes` `v4.0.0`. Refs STRIPES-672.
+* Prefer `stripes.actsAs` to the deprecated `stripes.type` in `package.json`. Refs STCOR-148.
 
 ## [2.0.0](https://github.com/folio-org/ui-myprofile/tree/v2.0.0) (2020-03-13)
 [Full Changelog](https://github.com/folio-org/ui-myprofile/compare/v1.8.0...v2.0.0)
