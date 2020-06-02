@@ -11,7 +11,9 @@
     "node": ">=6.0.0"
   },
   "stripes": {
-    "type": "settings",
+    "actsAs": [
+      "settings"
+    ],
     "displayName": "ui-myprofile.meta.title",
     "route": "/myprofile",
     "permissionSets": [
