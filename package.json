@@ -67,8 +67,8 @@
     "@bigtest/react": "^0.1.2",
     "@folio/eslint-config-stripes": "^5.1.0",
     "@folio/stripes": "^4.0.0",
-    "@folio/stripes-cli": "^1.11.0",
-    "@folio/stripes-core": "^4.0.0",
+    "@folio/stripes-cli": "^1.16.0",
+    "@folio/stripes-core": "^5.0.0",
     "babel-eslint": "^10.0.3",
     "regenerator-runtime": "^0.13.3",
     "core-js": "^3.6.4",
@@ -79,6 +79,7 @@
     "mocha": "^5.2.0",
     "react": "^16.5.0",
     "react-dom": "^16.5.0",
+    "react-intl": "^4.5.1",
     "react-redux": "^5.0.7",
     "react-router-dom": "^4.1.1",
     "react-trigger-change": "^1.0.2",
@@ -87,7 +88,7 @@
     "webpack": "^4.10.2"
   },
   "dependencies": {
-    "@folio/react-intl-safe-html": "^1.0.1",
+    "@folio/react-intl-safe-html": "^2.0.0",
     "prop-types": "^15.6.0",
     "redux-form": "^7.0.3"
   },
