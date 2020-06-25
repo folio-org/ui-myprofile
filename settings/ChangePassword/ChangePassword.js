@@ -69,6 +69,14 @@ class ChangePassword extends Component {
     };
   }
 
+  componentDidMount() {
+    this._isMounted = true;
+  }
+
+  componentWillUnmount() {
+    this._isMounted = false;
+  }
+
   togglePasswordMask = () => {
     this.setState(({ passwordMasked }) => ({
       passwordMasked: !passwordMasked,
@@ -106,7 +114,9 @@ class ChangePassword extends Component {
         newPassword,
       })
       .then(() => {
-        this.handleChangePasswordSuccess();
+        if (this._isMounted) {
+          this.handleChangePasswordSuccess();
+        }
       })
       .catch(this.handleChangePasswordError);
   };
