@@ -4,7 +4,10 @@ import mirageOptions from '../network';
 
 export default function setupApplication({ scenarios } = {}) {
   setupStripesCore({
-    mirageOptions,
+    mirageOptions: {
+      serverType: 'miragejs',
+      ...mirageOptions
+    },
     scenarios
   });
 }
