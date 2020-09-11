@@ -79,7 +79,7 @@
     "mocha": "^5.2.0",
     "react": "^16.5.0",
     "react-dom": "^16.5.0",
-    "react-intl": "^4.5.1",
+    "react-intl": "^5.8.0",
     "react-redux": "^5.0.7",
     "react-router-dom": "^4.1.1",
     "react-trigger-change": "^1.0.2",
@@ -96,7 +96,7 @@
   "peerDependencies": {
     "@folio/stripes": "^4.0.0",
     "react": "*",
-    "react-intl": "^4.5.1",
+    "react-intl": "^5.8.0",
     "react-router-dom": "^4.1.1"
   }
 }

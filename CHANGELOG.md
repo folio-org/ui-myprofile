@@ -4,6 +4,7 @@
 
 * Avoid calling `setState` from a promise that may resolve after unmount.
 * Refactor from `bigtest/mirage` to `miragejs`.
+* Increment `react-intl` to `v5`. Refs UIMPROF-47.
 
 ## [3.0.0](https://github.com/folio-org/ui-myprofile/tree/v3.0.0) (2020-06-09)
 [Full Changelog](https://github.com/folio-org/ui-myprofile/compare/v2.0.0...v3.0.0)
