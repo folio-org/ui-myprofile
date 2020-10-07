@@ -1,6 +1,7 @@
 # Change history for ui-myprofile
 
-## 4.0.0 (IN PROGRESS)
+## 4.0.0 (https://github.com/folio-org/ui-myprofile/tree/v4.0.0) (2020-10-07)
+[Full Changelog](https://github.com/folio-org/ui-myprofile/compare/v3.0.0...v4.0.0)
 
 * Avoid calling `setState` from a promise that may resolve after unmount.
 * Refactor from `bigtest/mirage` to `miragejs`.
