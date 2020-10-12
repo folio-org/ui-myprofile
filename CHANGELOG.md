@@ -1,5 +1,9 @@
 # Change history for ui-myprofile
 
+## 4.0.1 (IN PROGRESS)
+
+* Add permission descriptions to translations. Refs UIMPROF-49.
+
 ## 4.0.0 (https://github.com/folio-org/ui-myprofile/tree/v4.0.0) (2020-10-07)
 [Full Changelog](https://github.com/folio-org/ui-myprofile/compare/v3.0.0...v4.0.0)
 
