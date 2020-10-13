@@ -13,5 +13,7 @@
     "settings.changePassword.wrongPassword": "Contraseña incorrecta. Vuelva a introducir la contraseña.",
     "settings.changePassword.successfullyChanged": "La <strong>contraseña FOLIO</strong>ha sido<strong>modificada</strong> para <strong>{lastName}</strong>, <strong>{firstName}</strong>",
     "userDropdown.changePassword.caption": "Modificar contraseña",
-    "settings.changePassword.lastTenPasswords": "Contraseña introducida anteriormente. Por favor, introduzca otra contraseña."
+    "settings.changePassword.lastTenPasswords": "Contraseña introducida anteriormente. Por favor, introduzca otra contraseña.",
+    "permission.settings.enabled": "Settings (My profile): display list of settings pages",
+    "permission.settings.change-password": "Settings (My profile): Can change your local password"
 }

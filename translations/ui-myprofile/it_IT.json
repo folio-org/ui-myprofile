@@ -13,5 +13,7 @@
     "settings.changePassword.wrongPassword": "Password errata. Digita nuovamente la password.",
     "settings.changePassword.successfullyChanged": "La <strong> password FOLIO </strong> è stata correttamente <strong> modificata </strong> per <strong> {lastName} </strong> , <strong> {firstName} </strong>",
     "userDropdown.changePassword.caption": "Cambia password",
-    "settings.changePassword.lastTenPasswords": "Password utilizzata in precedenza. Inserisci una nuova password"
+    "settings.changePassword.lastTenPasswords": "Password utilizzata in precedenza. Inserisci una nuova password",
+    "permission.settings.enabled": "Settings (My profile): display list of settings pages",
+    "permission.settings.change-password": "Settings (My profile): Can change your local password"
 }

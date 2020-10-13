@@ -13,5 +13,7 @@
     "settings.changePassword.wrongPassword": "كلمة المرور غير صحيحة. أعد كتابة كلمة المرور الخاصة بك.",
     "settings.changePassword.successfullyChanged": "تم تغيير <strong> كلمة مرور فوليو </strong> بنجاح <strong> </strong>  لـ <strong> {lastName} </strong> و <strong> {firstName} </strong>",
     "userDropdown.changePassword.caption": "تغيير كلمة المرور",
-    "settings.changePassword.lastTenPasswords": "سبق استخدام كلمة المرور هذه. الرجاء إدخال كلمة مرور جديدة."
+    "settings.changePassword.lastTenPasswords": "سبق استخدام كلمة المرور هذه. الرجاء إدخال كلمة مرور جديدة.",
+    "permission.settings.enabled": "الإعدادات (بروفايلي): اعرض قائمة بصفحات الإعدادات",
+    "permission.settings.change-password": "الإعدادات (بروفايلي): إمكانية تغيير كلمة مرورك المحلية"
 }
