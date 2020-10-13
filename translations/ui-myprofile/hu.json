@@ -13,5 +13,7 @@
     "settings.changePassword.wrongPassword": "Hibás jelszó. Írja be újra a jelszavát!",
     "settings.changePassword.successfullyChanged": "A <strong>FOLIO jelszó</strong> sikeresen <strong>módosítva</strong> a <strong>{lastName}</strong>, <strong>{firstName}</strong>",
     "userDropdown.changePassword.caption": "Jelszó módosítása",
-    "settings.changePassword.lastTenPasswords": "Korábban használt jelszó. Adjon meg új jelszót."
+    "settings.changePassword.lastTenPasswords": "Korábban használt jelszó. Adjon meg új jelszót.",
+    "permission.settings.enabled": "Settings (My profile): display list of settings pages",
+    "permission.settings.change-password": "Settings (My profile): Can change your local password"
 }

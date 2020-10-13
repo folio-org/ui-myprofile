@@ -13,5 +13,7 @@
     "settings.changePassword.wrongPassword": "パスワードが正しくありません。パスワードを再入力してください。",
     "settings.changePassword.successfullyChanged": "<strong> {lastName} </strong>   <strong> {firstName} </strong> の<strong> FOLIOパスワード</strong>が正常に<strong>変更</strong>されまました",
     "userDropdown.changePassword.caption": "パスワードを変更する",
-    "settings.changePassword.lastTenPasswords": "以前に使用したパスワードです。新しいパスワードを入力してください。"
+    "settings.changePassword.lastTenPasswords": "以前に使用したパスワードです。新しいパスワードを入力してください。",
+    "permission.settings.enabled": "Settings (My profile): display list of settings pages",
+    "permission.settings.change-password": "Settings (My profile): Can change your local password"
 }
