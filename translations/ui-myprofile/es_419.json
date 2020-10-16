@@ -14,6 +14,6 @@
     "settings.changePassword.successfullyChanged": "The <strong>FOLIO password</strong> has been successfully <strong>changed</strong> for <strong>{lastName}</strong>, <strong>{firstName}</strong>",
     "userDropdown.changePassword.caption": "Change Password",
     "settings.changePassword.lastTenPasswords": "Previously used password. Please enter a new password.",
-    "permission.settings.enabled": "Settings (My profile): display list of settings pages",
-    "permission.settings.change-password": "Settings (My profile): Can change your local password"
+    "permission.settings.enabled": "Ajustes (Mi perfil): presentar la lista de páginas de ajustes",
+    "permission.settings.change-password": "Configuración (Mi perfil): puede cambiar su contraseña local"
 }
