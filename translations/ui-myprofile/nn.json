@@ -2,7 +2,7 @@
     "meta.title": "My profile",
     "settings.index.paneTitle": "My profile",
     "settings.changePassword.label": "Change password",
-    "settings.changePassword.save": "Gem",
+    "settings.changePassword.save": "Save",
     "settings.changePassword.hidePassword": "Hide password",
     "settings.changePassword.showPassword": "Show password",
     "settings.changePassword.currentPassword": "Current FOLIO password",
