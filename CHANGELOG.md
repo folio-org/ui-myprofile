@@ -1,9 +1,10 @@
 # Change history for ui-myprofile
 
-## 4.0.1 (IN PROGRESS)
+## 5.0.0 (IN PROGRESS)
 
 * Add permission descriptions to translations. Refs UIMPROF-49.
 * Update to stripes v6. Refs UIMPROF-52.
+* Add PERSONAL_DATA_DISCLOSURE.md. Refs UIMPROF-52.
 
 ## 4.0.0 (https://github.com/folio-org/ui-myprofile/tree/v4.0.0) (2020-10-07)
 [Full Changelog](https://github.com/folio-org/ui-myprofile/compare/v3.0.0...v4.0.0)
