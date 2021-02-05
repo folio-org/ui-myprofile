@@ -5,6 +5,7 @@
 * Add permission descriptions to translations. Refs UIMPROF-49.
 * Update to stripes v6. Refs UIMPROF-52.
 * Add PERSONAL_DATA_DISCLOSURE.md. Refs UIMPROF-52.
+* Update to stripes-cli v2.
 
 ## 4.0.0 (https://github.com/folio-org/ui-myprofile/tree/v4.0.0) (2020-10-07)
 [Full Changelog](https://github.com/folio-org/ui-myprofile/compare/v3.0.0...v4.0.0)
