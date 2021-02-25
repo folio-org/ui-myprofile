@@ -213,6 +213,7 @@ class ChangePassword extends Component {
             <Col xs={6}>
               <div data-test-change-password-current-password-field>
                 <Field
+                  data-testid="current-password-field"
                   component={TextField}
                   type={passwordType}
                   id="current-password"
@@ -228,6 +229,7 @@ class ChangePassword extends Component {
             <Col xs={12}>
               <div data-test-change-password-new-password-field>
                 <this.passwordField
+                  data-testid="new-password-field"
                   passwordMeterColProps={{
                     style: this.styles.passwordStrengthMeter,
                   }}
@@ -246,6 +248,7 @@ class ChangePassword extends Component {
             <Col xs={6}>
               <div data-test-change-password-confirm-password-field>
                 <Field
+                  data-testid="confirm-password-field"
                   component={TextField}
                   type={passwordType}
                   id="confirm-password"
@@ -264,6 +267,7 @@ class ChangePassword extends Component {
                   type="button"
                   buttonStyle="link"
                   onClick={this.togglePasswordMask}
+                  data-testid="change-password-toggle-mask-btn"
                 >
                   <FormattedMessage id={passwordToggleLabelId} />
                 </Button>
