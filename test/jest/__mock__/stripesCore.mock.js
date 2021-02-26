@@ -1,33 +1,34 @@
 import React from 'react';
 
 jest.mock('@folio/stripes/core', () => {
-  const STRIPES = {
+  const buildStripes = (otherProperties = {}) => ({
     actionNames: [],
-    clone: () => ({ ...STRIPES }),
+    clone: buildStripes,
+    connect: () => {},
     config: {},
     currency: 'USD',
     hasInterface: () => true,
-    hasPerm: jest.fn().mockReturnValue(true),
+    hasPerm: () => {},
     locale: 'en-US',
     logger: {
-      log: () => { },
+      log: () => {},
     },
     okapi: {
       tenant: 'diku',
       url: 'https://folio-testing-okapi.dev.folio.org',
     },
     plugins: {},
-    setBindings: () => { },
-    setCurrency: () => { },
-    setLocale: () => { },
-    setSinglePlugin: () => { },
-    setTimezone: () => { },
-    setToken: () => { },
+    setBindings: () => {},
+    setCurrency: () => {},
+    setLocale: () => {},
+    setSinglePlugin: () => {},
+    setTimezone: () => {},
+    setToken: () => {},
     store: {
-      getState: () => { },
-      dispatch: () => { },
-      subscribe: () => { },
-      replaceReducer: () => { },
+      getState: () => {},
+      dispatch: () => {},
+      subscribe: () => {},
+      replaceReducer: () => {},
     },
     timezone: 'UTC',
     user: {
@@ -38,7 +39,12 @@ jest.mock('@folio/stripes/core', () => {
       },
     },
     withOkapi: true,
-  };
+    ...otherProperties,
+  });
+
+  const STRIPES = buildStripes({
+    hasPerm: jest.fn().mockReturnValue(true),
+  });
 
   const connect = Component => ({ mutator, resources, stripes, ...rest }) => {
     const fakeMutator = mutator || Object.keys(Component.manifest).reduce((acc, mutatorName) => {
@@ -73,5 +79,6 @@ jest.mock('@folio/stripes/core', () => {
   return {
     ...jest.requireActual('@folio/stripes/core'),
     stripesConnect: connect,
+    buildStripes,
   };
 }, { virtual: true });

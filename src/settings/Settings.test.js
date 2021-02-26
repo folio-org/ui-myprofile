@@ -8,8 +8,8 @@ import {
   render,
 } from '@testing-library/react';
 
+import { buildStripes } from '@folio/stripes/core';
 import Settings from './Settings';
-import { buildStripes } from '../../test/jest/helpers/stripes-mock';
 
 const renderSettings = () => {
   const stripes = buildStripes({
@@ -36,7 +36,7 @@ const renderSettings = () => {
 describe('Given Settings', () => {
   afterEach(cleanup);
 
-  it('should rener', () => {
+  it('should render', () => {
     const { getByText } = renderSettings();
 
     expect(getByText('ui-myprofile.settings.index.paneTitle')).toBeDefined();
