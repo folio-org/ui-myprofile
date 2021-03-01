@@ -43,14 +43,12 @@ class MyProfile extends Component {
       return undefined;
     }
 
-    const changePasswordPageSettings = {
+    return {
       route: 'password',
       label: <FormattedMessage id="ui-myprofile.settings.changePassword.label" />,
       component: ChangePassword,
       perm: 'ui-myprofile.settings.change-password',
     };
-
-    return changePasswordPageSettings;
   }
 
   render() {

@@ -9,9 +9,9 @@ import {
 } from '@testing-library/react';
 
 import { buildStripes } from '@folio/stripes/core';
-import Settings from './Settings';
+import MyProfile from './MyProfile';
 
-const renderSettings = () => {
+const renderMyProfile = () => {
   const stripes = buildStripes({
     hasPerm: jest.fn().mockReturnValue(true),
   });
@@ -20,7 +20,7 @@ const renderSettings = () => {
     <MemoryRouter>
       <Route
         component={props => (
-          <Settings
+          <MyProfile
             stripes={stripes}
             showSettings
             actAs="settings"
@@ -33,11 +33,11 @@ const renderSettings = () => {
   );
 };
 
-describe('Given Settings', () => {
+describe('Given MyProfile', () => {
   afterEach(cleanup);
 
   it('should render', () => {
-    const { getByText } = renderSettings();
+    const { getByText } = renderMyProfile();
 
     expect(getByText('ui-myprofile.settings.index.paneTitle')).toBeDefined();
   });
