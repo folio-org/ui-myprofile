@@ -10,5 +10,9 @@ module.exports = {
     "import/no-extraneous-dependencies": "off",
     "newline-before-return" : 2,
     "newline-after-var" : 2,
-  }
+  },
+  env: {
+    "jest/globals": true
+  },
+  plugins: ["jest"],
 };
