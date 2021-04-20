@@ -1,5 +1,8 @@
 # Change history for ui-myprofile
 
+### 5.1.0 (INPROGRESS)
+* Compile Translation Files into AST Format. Refs UIMPROF-57.
+
 ## 5.0.0 (https://github.com/folio-org/ui-myprofile/tree/v5.0.0) (2021-03-01)
 [Full Changelog](https://github.com/folio-org/ui-myprofile/compare/v4.0.0...v5.0.0)
 
