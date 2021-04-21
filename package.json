@@ -57,7 +57,8 @@
     "start": "stripes serve",
     "lint": "eslint .",
     "test": "jest",
-    "test-coverage": "jest --coverage"
+    "test-coverage": "jest --coverage",
+    "formatjs-compile": "formatjs compile-folder --ast --format simple ./translations/ui-myprofile ./translations/ui-myprofile/compiled"
   },
   "devDependencies": {
     "@babel/plugin-proposal-class-properties": "^7.13.0",
@@ -67,6 +68,7 @@
     "@folio/stripes": "^6.0.0",
     "@folio/stripes-cli": "^2.0.0",
     "@folio/stripes-core": "^7.0.0",
+    "@formatjs/cli": "^4.2.7",
     "@testing-library/jest-dom": "^5.11.9",
     "@testing-library/react": "^11.2.5",
     "babel-eslint": "^10.0.3",
