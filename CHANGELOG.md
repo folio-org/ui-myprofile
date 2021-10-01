@@ -1,6 +1,6 @@
 # Change history for ui-myprofile
 
-### 6.0.0 (INPROGRESS)
+### 6.0.0 (https://github.com/folio-org/ui-myprofile/tree/v6.0.0) (2021-10-01)
 * Compile Translation Files into AST Format. Refs UIMPROF-57.
 * Increment stripes to v7 and react v17. Refs UIMPROF-60.
 
