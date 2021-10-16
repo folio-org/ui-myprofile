@@ -1,6 +1,10 @@
 # Change history for ui-myprofile
 
-### 6.0.0 (https://github.com/folio-org/ui-myprofile/tree/v6.0.0) (2021-10-01)
+## IN PROGRESS
+
+* Upgrade `@folio/react-intl-safe-html` for compatibility with `@folio/stripes` `v7`. Refs UIMPROF-63.
+
+## 6.0.0 (https://github.com/folio-org/ui-myprofile/tree/v6.0.0) (2021-10-01)
 * Compile Translation Files into AST Format. Refs UIMPROF-57.
 * Increment stripes to v7 and react v17. Refs UIMPROF-60.
 
