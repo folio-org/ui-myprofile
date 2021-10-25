@@ -58,6 +58,7 @@
     "lint": "eslint .",
     "test": "jest",
     "test-coverage": "jest --coverage",
+    "build-mod-descriptor": "stripes mod descriptor --full --strict | jq '.[]' > module-descriptor.json ",
     "formatjs-compile": "formatjs compile-folder --ast --format simple ./translations/ui-myprofile ./translations/ui-myprofile/compiled"
   },
   "devDependencies": {
