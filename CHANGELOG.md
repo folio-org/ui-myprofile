@@ -1,11 +1,13 @@
 # Change history for ui-myprofile
 
-## IN PROGRESS
+## 7.0.0 (https://github.com/folio-org/ui-myprofile/tree/v7.0.0) (2022-03-01)
+[Full Changelog](https://github.com/folio-org/ui-myprofile/compare/v6.0.0...v7.0.0)
 
 * Upgrade `@folio/react-intl-safe-html` for compatibility with `@folio/stripes` `v7`. Refs UIMPROF-63.
 * Fix Jest tests run problems. Refs UIMPROF-65.
 
 ## 6.0.0 (https://github.com/folio-org/ui-myprofile/tree/v6.0.0) (2021-10-01)
+[Full Changelog](https://github.com/folio-org/ui-myprofile/compare/v5.0.0...v6.0.0)
 * Compile Translation Files into AST Format. Refs UIMPROF-57.
 * Increment stripes to v7 and react v17. Refs UIMPROF-60.
 
