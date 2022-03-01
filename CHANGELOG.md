@@ -3,6 +3,7 @@
 ## IN PROGRESS
 
 * Upgrade `@folio/react-intl-safe-html` for compatibility with `@folio/stripes` `v7`. Refs UIMPROF-63.
+* Fix Jest tests run problems. Refs UIMPROF-65.
 
 ## 6.0.0 (https://github.com/folio-org/ui-myprofile/tree/v6.0.0) (2021-10-01)
 * Compile Translation Files into AST Format. Refs UIMPROF-57.
