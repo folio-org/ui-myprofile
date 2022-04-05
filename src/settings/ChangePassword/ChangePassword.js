@@ -6,7 +6,6 @@ import {
 } from 'redux-form';
 import { FormattedMessage } from 'react-intl';
 
-import SafeHTMLMessage from '@folio/react-intl-safe-html';
 import {
   PasswordStrength,
   TextField,
@@ -123,7 +122,7 @@ class ChangePassword extends Component {
 
   handleChangePasswordSuccess = () => {
     const successMessage = (
-      <SafeHTMLMessage
+      <FormattedMessage
         id="ui-myprofile.settings.changePassword.successfullyChanged"
         values={this.getFullUserName()}
       />
