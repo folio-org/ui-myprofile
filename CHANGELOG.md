@@ -3,6 +3,7 @@
 ## IN PROGRESS
 
 * Refactor away from `react-intl-safe-html`. Refs UIMPROF-58.
+* Replace `babel-eslint` with `@babel/eslint-parser`. Refs UIMPROF-68.
 
 ## 7.0.0 (https://github.com/folio-org/ui-myprofile/tree/v7.0.0) (2022-03-01)
 [Full Changelog](https://github.com/folio-org/ui-myprofile/compare/v6.0.0...v7.0.0)
