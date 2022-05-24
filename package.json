@@ -69,8 +69,8 @@
     "@folio/eslint-config-stripes": "^6.1.0",
     "@folio/stripes": "^7.1.0",
     "@folio/stripes-cli": "^2.4.0",
-    "@folio/stripes-connect": "^7.0.0",
     "@folio/stripes-components": "^10.0.0",
+    "@folio/stripes-connect": "^7.0.0",
     "@folio/stripes-core": "^8.0.0",
     "@folio/stripes-logger": "^1.0.0",
     "@formatjs/cli": "^4.2.7",
@@ -99,6 +99,7 @@
     "redux-observable": "^1.2.0",
     "regenerator-runtime": "^0.13.3",
     "rxjs": "^6.6.3",
+    "typescript": "^3.7.0-beta",
     "webpack": "^4.10.2"
   },
   "dependencies": {
