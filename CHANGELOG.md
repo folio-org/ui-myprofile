@@ -5,6 +5,7 @@
 * Refactor away from `react-intl-safe-html`. Refs UIMPROF-58.
 * Replace `babel-eslint` with `@babel/eslint-parser`. Refs UIMPROF-68.
 * FE: update outdated dependencies. Refs FOLIO-3477.
+* update NodeJS to v16 in GitHub Actions. Refs UIMPROF-71.
 * FE: update outdated dependencies. Ref UIMPROF-69
 
 ## 7.0.0 (https://github.com/folio-org/ui-myprofile/tree/v7.0.0) (2022-03-01)
