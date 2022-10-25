@@ -1,5 +1,10 @@
 # Change history for ui-myprofile
 
+## 7.2.0 (https://github.com/folio-org/ui-myprofile/tree/v7.2.0) (2022-10-25)
+[Full Changelog](https://github.com/folio-org/ui-myprofile/compare/v7.1.0...v7.2.0)
+
+* Translations updates
+
 ## 7.1.0 (https://github.com/folio-org/ui-myprofile/tree/v7.1.0) (2022-06-20)
 [Full Changelog](https://github.com/folio-org/ui-myprofile/compare/v7.0.0...v7.1.0)
 
