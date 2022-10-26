@@ -14,6 +14,6 @@
     "settings.changePassword.successfullyChanged": "La <strong> password FOLIO </strong> è stata correttamente <strong> modificata </strong> per <strong> {lastName} </strong> , <strong> {firstName} </strong>",
     "userDropdown.changePassword.caption": "Cambia password",
     "settings.changePassword.lastTenPasswords": "Password utilizzata in precedenza. Inserisci una nuova password",
-    "permission.settings.enabled": "Settings (My profile): display list of settings pages",
-    "permission.settings.change-password": "Impostazioni (Il mio profilo): può modificare la password locale"
+    "permission.settings.enabled": "Impostazioni (Il mio profilo): visualizzare l'elenco delle pagine delle impostazioni",
+    "permission.settings.change-password": "Impostazioni (Il mio profilo): modificare la password locale"
 }
