@@ -13,7 +13,7 @@
     "settings.changePassword.wrongPassword": "Nesprávné heslo. Znovu zadejte heslo.",
     "settings.changePassword.successfullyChanged": "<strong>Heslo FOLIO</strong> bylo úspěšně <strong>změněno</strong> pro <strong>{lastName}</strong>, <strong>{firstName}</strong>.",
     "userDropdown.changePassword.caption": "Změna hesla",
-    "settings.changePassword.lastTenPasswords": "Dříve používané heslo. Zadejte prosím nové heslo.",
+    "settings.changePassword.lastTenPasswords": "Již dříve používané heslo. Zadejte prosím nové heslo.",
     "permission.settings.enabled": "Nastavení (Můj profil): zobrazení seznamu stránek nastavení",
     "permission.settings.change-password": "Nastavení (Můj profil): Může změnit své místní heslo"
 }
