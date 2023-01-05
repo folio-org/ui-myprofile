@@ -13,11 +13,12 @@ import css from './ChangePasswordForm.css';
 const ChangePasswordForm = (props) => {
   const {
     handleSubmit,
-    pristine,
     submitting,
     title,
     saveButtonText,
     children,
+    valid,
+    anyTouched,
   } = props;
 
   const footer = (
@@ -27,7 +28,7 @@ const ChangePasswordForm = (props) => {
           id="change-password-submit-btn"
           type="submit"
           buttonStyle="primary paneHeaderNewButton"
-          disabled={(pristine || submitting)}
+          disabled={!valid || !anyTouched || submitting}
           marginBottom0
         >
           {saveButtonText}
@@ -56,11 +57,12 @@ const ChangePasswordForm = (props) => {
 
 ChangePasswordForm.propTypes = {
   handleSubmit: PropTypes.func.isRequired,
-  pristine: PropTypes.bool,
   submitting: PropTypes.bool,
   title: PropTypes.node,
   saveButtonText: PropTypes.node,
   children: PropTypes.node,
+  valid: PropTypes.bool,
+  anyTouched: PropTypes.bool,
 };
 
 export default stripesForm({
