@@ -1,5 +1,8 @@
 # Change history for ui-myprofile
 
+## 7.3.0 (IN PROGRESS)
+* Save button remains enabled despite validation errors on My profile form. Refs UIMPROF-76.
+
 ## 7.2.0 (https://github.com/folio-org/ui-myprofile/tree/v7.2.0) (2022-10-25)
 [Full Changelog](https://github.com/folio-org/ui-myprofile/compare/v7.1.0...v7.2.0)
 
