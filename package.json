@@ -70,7 +70,7 @@
     "@folio/stripes": "^8.0.0",
     "@folio/stripes-cli": "^2.4.0",
     "@folio/stripes-components": "^11.0.0",
-    "@folio/stripes-connect": "^7.1.0",
+    "@folio/stripes-connect": "^8.1.0",
     "@folio/stripes-core": "^9.0.0",
     "@folio/stripes-logger": "^1.0.0",
     "@formatjs/cli": "^4.2.7",
@@ -91,7 +91,7 @@
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-intl": "^5.8.0",
-    "react-redux": "^7.2.2",
+    "react-redux": "^8.0.5",
     "react-router": "^5.2.0",
     "react-router-dom": "^5.0.0",
     "react-trigger-change": "^1.0.2",
@@ -110,6 +110,7 @@
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-intl": "^5.8.0",
+    "react-redux": "^8.0.5",
     "react-router-dom": "^5.0.0"
   }
 }
