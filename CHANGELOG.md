@@ -1,6 +1,8 @@
 # Change history for ui-myprofile
 
-## 8.0.0 (IN PROGRESS)
+## 8.0.0 (https://github.com/folio-org/ui-myprofile/tree/v8.0.0) (2023-02-20)
+[Full Changelog](https://github.com/folio-org/ui-myprofile/compare/v7.2.0...v8.0.0)
+
 * Save button remains enabled despite validation errors on My profile form. Refs UIMPROF-76.
 * bump stripes to 8.0.0 for Orchid/2023-R1. Refs UIMPROF-77.
 * Upgrade `react-redux` to `v8`. Refs UIMPROF-78.
