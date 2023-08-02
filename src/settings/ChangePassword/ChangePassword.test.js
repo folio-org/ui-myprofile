@@ -7,7 +7,7 @@ import {
   cleanup,
   render,
   fireEvent,
-} from '@testing-library/react';
+} from '@folio/jest-config-stripes/testing-library/react';
 
 import { stripesConnect } from '@folio/stripes/core';
 
@@ -198,7 +198,7 @@ describe('Given ChangePassword', () => {
   describe('submitting the form', () => {
     let component;
 
-    beforeEach(() => {
+    beforeEach(async () => {
       changePasswordPostSpy.mockResolvedValue();
       component = renderChangePassword();
 
@@ -211,6 +211,9 @@ describe('Given ChangePassword', () => {
       fireEvent.change(newPasswordField, { target: { value: 'new' } });
       fireEvent.change(confirmPasswordField, { target: { value: 'new' } });
       fireEvent.click(submitButton);
+
+      // wait for response
+      await new Promise(resolve => setTimeout(resolve, 1000));
     });
 
     it('all fields should be reset upon successful submit', () => {
