@@ -1,9 +1,10 @@
 # Change history for ui-myprofile
 
-## In Progress
+## 9.0.0 In Progress
 
 * *BREAKING* Upgrade React to v18. Refs UIMPROF-83.
 * Leverage jest-config-stripes for all jest and testing-library packages. UIMPROF-84.
+* Add PULL_REQUEST_TEMPLATE.md file to the repository. UIMPROF-81.
 
 ## 8.0.0 (https://github.com/folio-org/ui-myprofile/tree/v8.0.0) (2023-02-20)
 [Full Changelog](https://github.com/folio-org/ui-myprofile/compare/v7.2.0...v8.0.0)
