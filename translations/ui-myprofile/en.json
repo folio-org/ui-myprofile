@@ -1,5 +1,7 @@
 {
   "meta.title": "My profile",
+  "label.settings": "My profile settings",
+
   "settings.index.paneTitle": "My profile",
   "settings.changePassword.label": "Change password",
   "settings.changePassword.save": "Save",

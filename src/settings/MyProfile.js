@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-import { FormattedMessage } from 'react-intl';
+import { FormattedMessage, injectIntl } from 'react-intl';
 import { PropTypes } from 'prop-types';
 
 import { Settings } from '@folio/stripes/smart-components';
-import { stripesShape } from '@folio/stripes/core';
+import { stripesShape, TitleManager  } from '@folio/stripes/core';
 
 import ChangePassword from './ChangePassword';
 
@@ -18,6 +18,7 @@ class MyProfile extends Component {
     match: PropTypes.object.isRequired,
     showSettings: PropTypes.bool.isRequired,
     stripes: stripesShape.isRequired,
+    intl: PropTypes.object.isRequired,
   };
 
   constructor(props) {
@@ -61,20 +62,23 @@ class MyProfile extends Component {
       match,
       showSettings,
       stripes,
+      intl: { formatMessage },
     } = this.props;
 
     return (
-      <Settings
-        actAs={actAs}
-        location={location}
-        match={match}
-        showSettings={showSettings}
-        stripes={stripes}
-        pages={this.pages}
-        paneTitle={<FormattedMessage id="ui-myprofile.settings.index.paneTitle" />}
-      />
+      <TitleManager page={formatMessage({ id: 'ui-myprofile.label.settings' })}>
+        <Settings
+          actAs={actAs}
+          location={location}
+          match={match}
+          showSettings={showSettings}
+          stripes={stripes}
+          pages={this.pages}
+          paneTitle={<FormattedMessage id="ui-myprofile.settings.index.paneTitle" />}
+        />
+      </TitleManager>
     );
   }
 }
 
-export default MyProfile;
+export default injectIntl(MyProfile);
