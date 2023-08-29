@@ -42,7 +42,6 @@ const buildStripes = (otherProperties = {}) => ({
 });
 
 jest.mock('@folio/stripes/core', () => {
-
   const STRIPES = buildStripes({
     hasPerm: jest.fn().mockReturnValue(true),
   });

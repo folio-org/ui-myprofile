@@ -193,7 +193,7 @@ class ChangePassword extends Component {
 
   render() {
     const { passwordMasked } = this.state;
-    const { 
+    const {
       label,
       intl: { formatMessage },
     } = this.props;
