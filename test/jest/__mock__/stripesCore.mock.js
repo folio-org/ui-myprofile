@@ -42,9 +42,7 @@ const buildStripes = (otherProperties = {}) => ({
 });
 
 jest.mock('@folio/stripes/core', () => {
-  const STRIPES = buildStripes({
-    hasPerm: jest.fn().mockReturnValue(true),
-  });
+  const STRIPES = buildStripes();
 
   const connect = Component => ({ mutator, resources, stripes, ...rest }) => {
     const fakeMutator = mutator || Object.keys(Component.manifest).reduce((acc, mutatorName) => {

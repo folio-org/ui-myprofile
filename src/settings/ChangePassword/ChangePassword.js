@@ -14,11 +14,12 @@ import {
   Row,
   Col,
 } from '@folio/stripes/components';
-import { stripesShape, TitleManager } from '@folio/stripes/core';
+import { stripesConnect, stripesShape, TitleManager } from '@folio/stripes/core';
 import { PasswordValidationField } from '@folio/stripes/smart-components';
 
 import ChangePasswordForm from './ChangePasswordForm';
 
+@stripesConnect
 class ChangePassword extends Component {
   static propTypes = {
     stripes: stripesShape,
