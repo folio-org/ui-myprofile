@@ -4,7 +4,7 @@ import {
   Field,
   SubmissionError,
 } from 'redux-form';
-import { FormattedMessage } from 'react-intl';
+import { FormattedMessage, injectIntl } from 'react-intl';
 
 import {
   PasswordStrength,
@@ -14,11 +14,12 @@ import {
   Row,
   Col,
 } from '@folio/stripes/components';
-import { stripesShape } from '@folio/stripes/core';
+import { stripesConnect, stripesShape, TitleManager } from '@folio/stripes/core';
 import { PasswordValidationField } from '@folio/stripes/smart-components';
 
 import ChangePasswordForm from './ChangePasswordForm';
 
+@stripesConnect
 class ChangePassword extends Component {
   static propTypes = {
     stripes: stripesShape,
@@ -28,6 +29,7 @@ class ChangePassword extends Component {
       }).isRequired,
     }).isRequired,
     label: PropTypes.node.isRequired,
+    intl: PropTypes.object.isRequired,
   };
 
   static manifest = Object.freeze({
@@ -192,92 +194,100 @@ class ChangePassword extends Component {
 
   render() {
     const { passwordMasked } = this.state;
-    const { label } = this.props;
+    const {
+      label,
+      intl: { formatMessage },
+    } = this.props;
     const passwordType = passwordMasked ? 'password' : 'text';
     const { username } = this.props.stripes.user.user;
     const passwordToggleLabelId = `ui-myprofile.settings.changePassword.${passwordMasked ? 'show' : 'hide'}Password`;
 
     return (
-      <div
-        style={this.styles.changePasswordFormWrapper}
-        data-test-change-password-page
+      <TitleManager
+        page={formatMessage({ id: 'ui-myprofile.label.settings' })}
+        record={formatMessage({ id: 'ui-myprofile.settings.changePassword.label' })}
       >
-        <ChangePasswordForm
-          title={label}
-          saveButtonText={<FormattedMessage id="ui-myprofile.settings.changePassword.save" />}
-          onSubmit={this.onChangePasswordFormSubmit}
-          onSubmitSuccess={this.resetForm}
+        <div
+          style={this.styles.changePasswordFormWrapper}
+          data-test-change-password-page
         >
-          <Row>
-            <Col xs={6}>
-              <div data-test-change-password-current-password-field>
-                <Field
-                  data-testid="current-password-field"
-                  component={TextField}
-                  type={passwordType}
-                  id="current-password"
-                  name="currentPassword"
-                  label={<FormattedMessage id="ui-myprofile.settings.changePassword.currentPassword" />}
-                  autoFocus
-                  validate={this.validators.currentPassword}
-                />
-              </div>
-            </Col>
-          </Row>
-          <Row>
-            <Col xs={12}>
-              <div data-test-change-password-new-password-field>
-                <this.passwordField
-                  data-testid="new-password-field"
-                  passwordMeterColProps={{
-                    style: this.styles.passwordStrengthMeter,
-                  }}
-                  component={PasswordStrength}
-                  id="new-password"
-                  name="newPassword"
-                  type={passwordType}
-                  username={username}
-                  label={<FormattedMessage id="ui-myprofile.settings.changePassword.newPassword" />}
-                  validate={this.validators.newPassword}
-                />
-              </div>
-            </Col>
-          </Row>
-          <Row>
-            <Col xs={6}>
-              <div data-test-change-password-confirm-password-field>
-                <Field
-                  data-testid="confirm-password-field"
-                  component={TextField}
-                  type={passwordType}
-                  id="confirm-password"
-                  name="confirmPassword"
-                  label={<FormattedMessage id="ui-myprofile.settings.changePassword.confirmPassword" />}
-                  validate={this.validators.confirmPassword}
-                />
-              </div>
-            </Col>
-            <Col>
-              <div
-                data-test-change-password-toggle-mask-btn
-                style={this.styles.toggleMaskButtonWrapper}
-              >
-                <Button
-                  type="button"
-                  buttonStyle="link"
-                  onClick={this.togglePasswordMask}
-                  data-testid="change-password-toggle-mask-btn"
+          <ChangePasswordForm
+            title={label}
+            saveButtonText={<FormattedMessage id="ui-myprofile.settings.changePassword.save" />}
+            onSubmit={this.onChangePasswordFormSubmit}
+            onSubmitSuccess={this.resetForm}
+          >
+            <Row>
+              <Col xs={6}>
+                <div data-test-change-password-current-password-field>
+                  <Field
+                    data-testid="current-password-field"
+                    component={TextField}
+                    type={passwordType}
+                    id="current-password"
+                    name="currentPassword"
+                    label={<FormattedMessage id="ui-myprofile.settings.changePassword.currentPassword" />}
+                    autoFocus
+                    validate={this.validators.currentPassword}
+                  />
+                </div>
+              </Col>
+            </Row>
+            <Row>
+              <Col xs={12}>
+                <div data-test-change-password-new-password-field>
+                  <this.passwordField
+                    data-testid="new-password-field"
+                    passwordMeterColProps={{
+                      style: this.styles.passwordStrengthMeter,
+                    }}
+                    component={PasswordStrength}
+                    id="new-password"
+                    name="newPassword"
+                    type={passwordType}
+                    username={username}
+                    label={<FormattedMessage id="ui-myprofile.settings.changePassword.newPassword" />}
+                    validate={this.validators.newPassword}
+                  />
+                </div>
+              </Col>
+            </Row>
+            <Row>
+              <Col xs={6}>
+                <div data-test-change-password-confirm-password-field>
+                  <Field
+                    data-testid="confirm-password-field"
+                    component={TextField}
+                    type={passwordType}
+                    id="confirm-password"
+                    name="confirmPassword"
+                    label={<FormattedMessage id="ui-myprofile.settings.changePassword.confirmPassword" />}
+                    validate={this.validators.confirmPassword}
+                  />
+                </div>
+              </Col>
+              <Col>
+                <div
+                  data-test-change-password-toggle-mask-btn
+                  style={this.styles.toggleMaskButtonWrapper}
                 >
-                  <FormattedMessage id={passwordToggleLabelId} />
-                </Button>
-              </div>
-            </Col>
-          </Row>
-        </ChangePasswordForm>
-        <Callout ref={this.createCalloutRef} />
-      </div>
+                  <Button
+                    type="button"
+                    buttonStyle="link"
+                    onClick={this.togglePasswordMask}
+                    data-testid="change-password-toggle-mask-btn"
+                  >
+                    <FormattedMessage id={passwordToggleLabelId} />
+                  </Button>
+                </div>
+              </Col>
+            </Row>
+          </ChangePasswordForm>
+          <Callout ref={this.createCalloutRef} />
+        </div>
+      </TitleManager>
     );
   }
 }
 
-export default ChangePassword;
+export default injectIntl(ChangePassword);

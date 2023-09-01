@@ -9,8 +9,6 @@ import {
   fireEvent,
 } from '@folio/jest-config-stripes/testing-library/react';
 
-import { stripesConnect } from '@folio/stripes/core';
-
 import ChangePassword from './ChangePassword';
 import { CalloutContextProvider } from '../../../test/jest/helpers/callout-context-provider';
 
@@ -25,7 +23,7 @@ const reducer = combineReducers(reducers);
 let store = createStore(reducer);
 
 const renderChangePassword = (props = {}) => {
-  const ChangePasswordWithStripes = stripesConnect(ChangePassword);
+  const ChangePasswordWithStripes = ChangePassword;
 
   return render(
     <CalloutContextProvider>

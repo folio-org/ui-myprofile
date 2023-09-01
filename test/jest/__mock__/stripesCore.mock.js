@@ -1,50 +1,48 @@
 import React from 'react';
 
-jest.mock('@folio/stripes/core', () => {
-  const buildStripes = (otherProperties = {}) => ({
-    actionNames: [],
-    clone: buildStripes,
-    connect: () => {},
-    config: {},
-    currency: 'USD',
-    hasInterface: () => true,
-    hasPerm: () => {},
-    locale: 'en-US',
-    logger: {
-      log: () => {},
-    },
-    okapi: {
-      tenant: 'diku',
-      url: 'https://folio-testing-okapi.dev.folio.org',
-    },
-    plugins: {},
-    setBindings: () => {},
-    setCurrency: () => {},
-    setLocale: () => {},
-    setSinglePlugin: () => {},
-    setTimezone: () => {},
-    setToken: () => {},
-    store: {
-      getState: () => {},
-      dispatch: () => {},
-      subscribe: () => {},
-      replaceReducer: () => {},
-    },
-    timezone: 'UTC',
+const buildStripes = (otherProperties = {}) => ({
+  actionNames: [],
+  clone: buildStripes,
+  connect: () => {},
+  config: {},
+  currency: 'USD',
+  hasInterface: () => true,
+  hasPerm: () => {},
+  locale: 'en-US',
+  logger: {
+    log: () => {},
+  },
+  okapi: {
+    tenant: 'diku',
+    url: 'https://folio-testing-okapi.dev.folio.org',
+  },
+  plugins: {},
+  setBindings: () => {},
+  setCurrency: () => {},
+  setLocale: () => {},
+  setSinglePlugin: () => {},
+  setTimezone: () => {},
+  setToken: () => {},
+  store: {
+    getState: () => {},
+    dispatch: () => {},
+    subscribe: () => {},
+    replaceReducer: () => {},
+  },
+  timezone: 'UTC',
+  user: {
+    perms: {},
     user: {
-      perms: {},
-      user: {
-        id: 'b1add99d-530b-5912-94f3-4091b4d87e2c',
-        username: 'diku_admin',
-      },
+      id: 'b1add99d-530b-5912-94f3-4091b4d87e2c',
+      username: 'diku_admin',
     },
-    withOkapi: true,
-    ...otherProperties,
-  });
+  },
+  withOkapi: true,
+  ...otherProperties,
+});
 
-  const STRIPES = buildStripes({
-    hasPerm: jest.fn().mockReturnValue(true),
-  });
+jest.mock('@folio/stripes/core', () => {
+  const STRIPES = buildStripes();
 
   const connect = Component => ({ mutator, resources, stripes, ...rest }) => {
     const fakeMutator = mutator || Object.keys(Component.manifest).reduce((acc, mutatorName) => {
@@ -74,11 +72,25 @@ jest.mock('@folio/stripes/core', () => {
     return <Component {...rest} mutator={fakeMutator} resources={fakeResources} stripes={fakeStripes} />;
   };
 
+  // eslint-disable-next-line react/prop-types
+  const withStripes = (Component) => ({ stripes, ...rest }) => {
+    const fakeStripes = stripes || STRIPES;
+
+    return <Component {...rest} stripes={fakeStripes} />;
+  };
+
   STRIPES.connect = connect;
+
+  // eslint-disable-next-line react/prop-types
+  const TitleManager = (props) => <>{props.children}</>;
 
   return {
     ...jest.requireActual('@folio/stripes/core'),
     stripesConnect: connect,
     buildStripes,
+    withStripes,
+    TitleManager,
   };
 }, { virtual: true });
+
+export default buildStripes;
