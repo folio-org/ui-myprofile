@@ -15,5 +15,6 @@
     "userDropdown.changePassword.caption": "Cambia password",
     "settings.changePassword.lastTenPasswords": "Password utilizzata in precedenza. Inserisci una nuova password",
     "permission.settings.enabled": "Impostazioni (Il mio profilo): visualizzare l'elenco delle pagine delle impostazioni",
-    "permission.settings.change-password": "Impostazioni (Il mio profilo): modificare la password locale"
+    "permission.settings.change-password": "Impostazioni (Il mio profilo): modificare la password locale",
+    "label.settings": "My profile settings"
 }

@@ -15,5 +15,6 @@
     "userDropdown.changePassword.caption": "Modificar contraseña",
     "settings.changePassword.lastTenPasswords": "Contraseña introducida anteriormente. Por favor, introduzca otra contraseña.",
     "permission.settings.enabled": "Ajustes (Mi perfil): presentar la lista de páginas de ajustes",
-    "permission.settings.change-password": "Configuración (Mi perfil): puede cambiar su contraseña local"
+    "permission.settings.change-password": "Configuración (Mi perfil): puede cambiar su contraseña local",
+    "label.settings": "My profile settings"
 }
