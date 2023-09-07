@@ -15,5 +15,6 @@
     "userDropdown.changePassword.caption": "비밀번호 변경",
     "settings.changePassword.lastTenPasswords": "이전에 사용한 비밀번호입니다. 새 비밀번호를 입력하세요.",
     "permission.settings.enabled": "Settings (My profile): display list of settings pages",
-    "permission.settings.change-password": "Settings (My profile): Can change your local password"
+    "permission.settings.change-password": "Settings (My profile): Can change your local password",
+    "label.settings": "My profile settings"
 }

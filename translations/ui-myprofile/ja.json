@@ -15,5 +15,6 @@
     "userDropdown.changePassword.caption": "パスワードを変更する",
     "settings.changePassword.lastTenPasswords": "以前に使用したパスワードです。新しいパスワードを入力してください。",
     "permission.settings.enabled": "Settings (My profile): display list of settings pages",
-    "permission.settings.change-password": "Settings (My profile): Can change your local password"
+    "permission.settings.change-password": "Settings (My profile): Can change your local password",
+    "label.settings": "My profile settings"
 }

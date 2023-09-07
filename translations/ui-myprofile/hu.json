@@ -15,5 +15,6 @@
     "userDropdown.changePassword.caption": "Jelszó módosítása",
     "settings.changePassword.lastTenPasswords": "Korábban használt jelszó. Adjon meg új jelszót.",
     "permission.settings.enabled": "Settings (My profile): display list of settings pages",
-    "permission.settings.change-password": "Settings (My profile): Can change your local password"
+    "permission.settings.change-password": "Settings (My profile): Can change your local password",
+    "label.settings": "My profile settings"
 }

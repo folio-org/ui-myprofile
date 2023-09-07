@@ -15,5 +15,6 @@
     "userDropdown.changePassword.caption": "تغيير كلمة المرور",
     "settings.changePassword.lastTenPasswords": "سبق استخدام كلمة المرور هذه. الرجاء إدخال كلمة مرور جديدة.",
     "permission.settings.enabled": "الإعدادات (بروفايلي): اعرض قائمة بصفحات الإعدادات",
-    "permission.settings.change-password": "الإعدادات (بروفايلي): إمكانية تغيير كلمة مرورك المحلية"
+    "permission.settings.change-password": "الإعدادات (بروفايلي): إمكانية تغيير كلمة مرورك المحلية",
+    "label.settings": "My profile settings"
 }
