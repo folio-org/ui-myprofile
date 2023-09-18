@@ -16,5 +16,5 @@
     "settings.changePassword.lastTenPasswords": "Již dříve používané heslo. Zadejte prosím nové heslo.",
     "permission.settings.enabled": "Nastavení (Můj profil): zobrazení seznamu stránek nastavení",
     "permission.settings.change-password": "Nastavení (Můj profil): Může změnit své místní heslo",
-    "label.settings": "My profile settings"
+    "label.settings": "Můj profil - nastavení"
 }
