@@ -16,5 +16,5 @@
     "settings.changePassword.lastTenPasswords": "以前用过的密码。请输入新密码。",
     "permission.settings.enabled": "设置（我的个人资料）：显示设置页面列表",
     "permission.settings.change-password": "设置（我的个人资料）：可以更改您的本地密码",
-    "label.settings": "My profile settings"
+    "label.settings": "我的个人资料设置"
 }
