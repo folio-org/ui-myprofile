@@ -3,7 +3,7 @@ import { FormattedMessage, injectIntl } from 'react-intl';
 import { PropTypes } from 'prop-types';
 
 import { Settings } from '@folio/stripes/smart-components';
-import { stripesShape, TitleManager  } from '@folio/stripes/core';
+import { stripesShape, TitleManager } from '@folio/stripes/core';
 
 import ChangePassword from './ChangePassword';
 

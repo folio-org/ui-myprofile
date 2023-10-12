@@ -12,7 +12,7 @@ module.exports = {
     'newline-after-var': 2,
   },
   env: {
-    'jest/globals': true
+    'jest': true
   },
   plugins: ['jest'],
 };
