@@ -2,6 +2,12 @@
 
 ## 10.0.0 In Progress
 
+## 9.1.0 (https://github.com/folio-org/ui-myprofile/tree/v9.1.0) (2024-03-18)
+[Full Changelog](https://github.com/folio-org/ui-myprofile/compare/v9.0.0...v9.1.0)
+
+* Several translations have been introduced/updated.
+
+
 ## 9.0.0 (https://github.com/folio-org/ui-myprofile/tree/v9.0.0) (2023-10-12)
 [Full Changelog](https://github.com/folio-org/ui-myprofile/compare/v8.0.0...v9.0.0)
 
