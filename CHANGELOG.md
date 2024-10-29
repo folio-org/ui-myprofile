@@ -1,7 +1,10 @@
 # Change history for ui-myprofile
 
-## 9.2.0 In Progress
+## 9.2.0 (https://github.com/folio-org/ui-myprofile/tree/v9.2.0) (2024-10-29)
+[Full Changelog](https://github.com/folio-org/ui-myprofile/compare/v9.1.0...v9.2.0)
+
 * Upgrade version for `actions/upload-artifact` from v2 to v4. Refs UIMPROF-93.
+* Several translations have been introduced/updated.
 
 ## 9.1.0 (https://github.com/folio-org/ui-myprofile/tree/v9.1.0) (2024-03-18)
 [Full Changelog](https://github.com/folio-org/ui-myprofile/compare/v9.0.0...v9.1.0)
