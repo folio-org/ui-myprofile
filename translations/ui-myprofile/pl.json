@@ -14,7 +14,7 @@
     "settings.changePassword.successfullyChanged": "<strong> Hasło FOLIO </strong> zostało pomyślnie <strong> zmienione </strong> dla <strong> {lastName} </strong> , <strong> {firstName} </strong>",
     "userDropdown.changePassword.caption": "Zmień hasło",
     "settings.changePassword.lastTenPasswords": "Poprzednio używane hasło. Wprowadź nowe hasło.",
-    "permission.settings.enabled": "Ustawienia (Mój profil): wyświetl listę stron ustawień",
-    "permission.settings.change-password": "Ustawienia (Mój profil): Może zmienić twoje lokalne hasło",
+    "permission.settings.enabled": "Ustawienia (Mój profil): wyświetlanie listy stron ustawień",
+    "permission.settings.change-password": "Ustawienia (Mój profil): można zmieniać twoje lokalne hasło",
     "label.settings": "My profile settings"
 }
