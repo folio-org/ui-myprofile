@@ -14,7 +14,7 @@
     "settings.changePassword.successfullyChanged": "已成功<strong>更改</strong> <strong>{lastName}</strong>、<strong>{firstName}</strong> <strong>的 FOLIO 密码</strong>",
     "userDropdown.changePassword.caption": "更改密碼",
     "settings.changePassword.lastTenPasswords": "此密碼已使用過，請輸入新的密碼。",
-    "permission.settings.enabled": "設定（我的個人檔案）：顯示設定清單",
-    "permission.settings.change-password": "設定（我的個人檔案）：更改密碼",
+    "permission.settings.enabled": "設定 ( 我的個人檔案 ) : 顯示設定清單",
+    "permission.settings.change-password": "設定 ( 我的個人檔案 ) : 更改密碼",
     "label.settings": "我的個人檔案設定"
 }
