@@ -6,6 +6,7 @@ import { Settings } from '@folio/stripes/smart-components';
 import { stripesShape, TitleManager } from '@folio/stripes/core';
 
 import ChangePassword from './ChangePassword';
+import AppListSettingsView from './ApplListSettings';
 
 class MyProfile extends Component {
   static isLocalLogin(stripes) {
@@ -28,7 +29,14 @@ class MyProfile extends Component {
   }
 
   createSettingsPages() {
-    return []
+    return [
+      {
+        route: 'appList',
+        label: 'Application list',
+        component: AppListSettingsView,
+        perm: 'ui-myprofile.settings.change-password',
+      }
+    ]
       .concat(
         this.registerChangePasswordPage()
       )
