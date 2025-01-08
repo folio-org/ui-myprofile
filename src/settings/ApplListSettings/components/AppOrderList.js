@@ -1,4 +1,4 @@
-import React, { memo, useState, useCallback } from 'react';
+import React, { useMemo, useState, useCallback } from 'react';
 import {
   DndContext,
   closestCenter,
@@ -22,31 +22,47 @@ const packageName = {
   PACKAGE_SCOPE_REGEX: /^@[a-z\d][\w-.]{0,214}\//,
 };
 
+const getProvisionedApps = (stripes, uiModules, formatMessage) => {
+  const apps = uiModules.map((entry) => {
+    const name = entry.module.replace(packageName.PACKAGE_SCOPE_REGEX, '');
+    const perm = `module.${name}.enabled`;
 
-function AppOrderList() {
-  const [items, setItems] = useState([
-    'App1',
-    'App2',
-    'App3',
-    'App4',
-    'App5',
-    'App6',
-    'App7',
-    'App8',
-    'App9',
-    'App10',
-    'App11',
-    'App12',
-    'App13',
-    'App14',
-    'App15',
-    'App16',
-    'App17',
-    'App18',
-    'App19',
-    'App20',
-    'App21',
-  ]);
+    if (!stripes.hasPerm(perm)) {
+      return null;
+    }
+
+    const id = `clickable-${name}-module`;
+
+
+    return {
+      id,
+      // href,
+      // active,
+      name,
+      ...entry,
+    };
+  }).filter(app => app);
+
+  /**
+   * Add Settings to apps array manually
+   * until Settings becomes a standalone app
+   */
+
+  if (stripes.hasPerm('settings.enabled')) {
+    const nameString = formatMessage({ id: 'stripes-core.settings' });
+
+    apps.push({
+      name: nameString,
+      displayName: nameString,
+    });
+  }
+
+  return apps;
+};
+
+function AppOrderList({
+  appListArray = []
+}) {
   const sensors = useSensors(
     useSensor(PointerSensor),
     useSensor(KeyboardSensor, {
@@ -57,41 +73,26 @@ function AppOrderList() {
   const modules = useModules();
   const { formatMessage } = useIntl();
 
-  const filteredApps = memo(() => {
-    const apps = () => modules.app.map((entry) => {
-      const name = entry.module.replace(packageName.PACKAGE_SCOPE_REGEX, '');
-      const perm = `module.${name}.enabled`;
+  const appListing = useMemo(() => {
+    const apps = getProvisionedApps(stripes, modules.app, formatMessage);
 
-      if (!stripes.hasPerm(perm)) {
-        return null;
+    const orderedApps = appListArray.length === 0 ? apps : appListArray;
+
+    const appList = orderedApps.map((listing) => {
+      const { name } = listing;
+      const appIndex = apps.findIndex((app) => name === app.name);
+
+      if (appIndex !== -1) {
+        return { name: apps[appIndex].name, displayName: apps[appIndex].displayName}
       }
 
-      const id = `clickable-${name}-module`;
+      return false;
+    });
 
+    return appList;
+  }, [formatMessage, stripes, modules.app, appListArray]);
 
-      return {
-        id,
-        // href,
-        // active,
-        name,
-        ...entry,
-      };
-    }).filter(app => app);
-
-    /**
-     * Add Settings to apps array manually
-     * until Settings becomes a standalone app
-     */
-
-    if (stripes.hasPerm('settings.enabled')) {
-      apps.push({
-        name: formatMessage({ id: 'stripes-core.settings' }),
-      });
-    }
-
-    return apps;
-  }, [modules.app]);
-
+  const [items, setItems] = useState(appListing);
 
   const handleDragEnd = useCallback((event) => {
     const { active, over } = event;
@@ -104,7 +105,7 @@ function AppOrderList() {
         return arrayMove(listItems, oldIndex, newIndex);
       });
     }
-  });
+  }, []);
 
   return (
     <DndContext
@@ -116,7 +117,16 @@ function AppOrderList() {
         items={items}
       >
         <ol style={{ display: 'flex', flexDirection: 'column', flexWrap: 'wrap', maxHeight: '100%', listStylePosition: 'inside' }}>
-          {filteredApps.map(({ name }) => <AppListItem key={name} id={name}>{name}</AppListItem>)}
+          {
+          items.map((app, i) => (
+            <AppListItem
+              key={app.name}
+              id={app}
+              index={i}
+            >
+              {app.displayName}
+            </AppListItem>))
+          }
         </ol>
       </SortableContext>
     </DndContext>
