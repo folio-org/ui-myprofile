@@ -16,10 +16,11 @@ import {
   restrictToWindowEdges
 } from '@dnd-kit/modifiers';
 import { useIntl } from 'react-intl';
+import { AppIcon } from '@folio/stripes/core';
 
 import { useDOMKeyboardCoordinates } from './MultiColumnKeyboardCoordinateGetter';
 
-import { AppIcon } from '@folio/stripes/core';
+
 
 import DraggableAppListItem from './DraggableAppListItem';
 import listCss from './AppOrderList.css';
