@@ -44,10 +44,11 @@
         "permissionName": "ui-myprofile.settings.change-nav-order",
         "displayName": "Settings (My profile): Can change application order in main navigation",
         "subPermissions": [
-          "settings.inventory.enabled",
+          "settings.myprofile.enabled",
           "mod-settings.entries.collection.get",
           "mod-settings.entries.item.post",
           "mod-settings.entries.item.put",
+          "mod-settings.entries.item.delete",
           "mod-settings.owner.read.stripes-core.prefs.manage",
           "mod-settings.owner.write.stripes-core.prefs.manage"
         ],
