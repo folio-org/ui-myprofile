@@ -22,7 +22,14 @@
   "settings.changePassword.successfullyChanged": "The <strong>FOLIO password</strong> has been successfully <strong>changed</strong> for <strong>{lastName}</strong>, <strong>{firstName}</strong>",
   "settings.changePassword.lastTenPasswords": "Previously used password. Please enter a new password.",
   "userDropdown.changePassword.caption": "Change Password",
-
+  "settings.appNavOrder.label": "Application display order",
+  "settings.appNavOrder.visibleInstruction": "Drag & drop to change the display order of FOLIO applications.",
+  "settings.appNavOrder.saveError": "There was a problem saving app list order.",
+  "settings.appNavOrder.resetError": "There was a problem resetting the app order.",
+  "settings.appNavOrder.resetSuccess": "Application display order reset to default.",
+  "settings.appNavOrder.saveSuccess": "Application display order has been successfully updated.",
+  "settings.appNavOrder.save": "Save",
+  "settings.appNavOrder.reset": "Reset to defaults",
   "permission.settings.enabled": "Settings (My profile): display list of settings pages",
   "permission.settings.change-password": "Settings (My profile): Can change your local password"
 }

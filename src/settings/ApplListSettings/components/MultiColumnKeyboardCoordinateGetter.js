@@ -1,62 +1,9 @@
 import { useRef } from 'react';
 import {
-  closestCorners,
-  getScrollableAncestors,
-  getFirstCollision,
   KeyboardCode,
 } from '@dnd-kit/core';
-import { subtract } from '@dnd-kit/utilities';
 
 import listCss from './AppOrderList.css';
-
-const directions = [
-  KeyboardCode.Down,
-  KeyboardCode.Up,
-];
-
-function hasSortableData(entry) {
-  if (!entry) {
-    return false;
-  }
-
-  const data = entry.data.current;
-
-  if (
-    data &&
-    'sortable' in data &&
-    typeof data.sortable === 'object' &&
-    'containerId' in data.sortable &&
-    'items' in data.sortable &&
-    'index' in data.sortable
-  ) {
-    return true;
-  }
-
-  return false;
-}
-
-
-function isSameContainer(a, b) {
-  if (!hasSortableData(a) || !hasSortableData(b)) {
-    return false;
-  }
-
-  return (
-    a.data.current.sortable.containerId === b.data.current.sortable.containerId
-  );
-}
-
-function isAfter(a, b) {
-  if (!hasSortableData(a) || !hasSortableData(b)) {
-    return false;
-  }
-
-  if (!isSameContainer(a, b)) {
-    return false;
-  }
-
-  return a.data.current.sortable.index < b.data.current.sortable.index;
-}
 
 function xySort(a, b) {
   if (a.value.left === b.value.left) {
@@ -113,8 +60,6 @@ export const useDOMKeyboardCoordinates = ({ id }) => {
         if (nextItem) {
           nextRect = nextItem.value;
 
-          console.log(`moving ${active.id} to ${nextItem.name}`);
-
           return {
             x: nextRect.left,
             y: nextRect.top,
@@ -126,8 +71,6 @@ export const useDOMKeyboardCoordinates = ({ id }) => {
 
         if (nextItem) {
           nextRect = nextItem.value;
-
-          console.log(`moving ${active.id} to ${nextItem.name}`);
 
           return {
             x: nextRect.left,
