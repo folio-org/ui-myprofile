@@ -1,7 +1,7 @@
 import React from 'react';
 import { useSortable } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
-
+import { useIntl } from 'react-intl';
 import { Icon } from '@folio/stripes/components';
 import listCss from './AppOrderList.css';
 

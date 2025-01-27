@@ -32,7 +32,7 @@ class MyProfile extends Component {
     return [
       {
         route: 'appList',
-        label: 'Application display order',
+        label: <FormattedMessage id="ui-myprofile.settings.appNavOrder.label" />,
         component: AppListSettingsView,
         perm: 'ui-myprofile.settings.change-nav-order',
       }

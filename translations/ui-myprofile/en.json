@@ -29,7 +29,8 @@
   "settings.appNavOrder.resetSuccess": "Application display order reset to default.",
   "settings.appNavOrder.saveSuccess": "Application display order has been successfully updated.",
   "settings.appNavOrder.save": "Save",
-  "settings.appNavOrder.reset": "Reset to defaults",
+  "settings.appNavOrder.reset": "Reset to default",
+  "settings.appNavOrder.newItem": "New",
   "permission.settings.enabled": "Settings (My profile): display list of settings pages",
   "permission.settings.change-password": "Settings (My profile): Can change your local password"
 }

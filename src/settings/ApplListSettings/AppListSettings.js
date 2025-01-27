@@ -23,9 +23,9 @@ const AppOrderListView = () => {
     try {
       updateList(items);
     } catch (err) {
-      callout.sendCallout({ type: 'error', message: 'There was a problem saving app list order' });
+      callout.sendCallout({ type: 'error', message: formatMessage({ id: 'ui-myprofile.settings.appNavOrder.saveError' }) });
     } finally {
-      callout.sendCallout({ message: 'Application display order has been successfully updated.' });
+      callout.sendCallout({ message: formatMessage({ id: 'ui-myprofile.settings.appNavOrder.saveSuccess' }) });
     }
   }, [items, callout, updateList]);
 
@@ -33,8 +33,9 @@ const AppOrderListView = () => {
     try {
       reset();
       setItems(appNavOrder);
+      callout.sendCallout({ message: formatMessage({ id: 'ui-myprofile.settings.appNavOrder.resetSuccess' }) });
     } catch (err) {
-      callout.sendCallout({ type: 'error', message: 'There was a problem resetting the app order' });
+      callout.sendCallout({ type: 'error', message: formatMessage({ id: 'ui-myprofile.settings.appNavOrder.resetError' }) });
     }
   });
 
@@ -42,7 +43,11 @@ const AppOrderListView = () => {
     const disabled = isEqual(items, appNavOrder);
 
     return (
-      <PaneFooter renderEnd={<Button disabled={disabled} buttonStyle="primary" onClick={handleSave}>Save</Button>} />
+      <PaneFooter renderEnd={
+        <Button disabled={disabled} buttonStyle="primary" onClick={handleSave}>
+          {formatMessage({ id: 'ui-myprofile.settings.appNavOrder.save' })}
+        </Button>}
+      />
     );
   };
 
@@ -54,12 +59,12 @@ const AppOrderListView = () => {
         <Pane
           defaultWidth="fill"
           id="appListOrderPane"
-          paneTitle="Application display order"
+          paneTitle={formatMessage({ id: 'ui-myprofile.settings.appNavOrder.label' })}
           footer={renderFooter()}
-          lastMenu={<Button onClick={handleReset} marginBottom0>Reset to default</Button>}
+          lastMenu={<Button onClick={handleReset} marginBottom0>{formatMessage({ id: 'ui-myprofile.settings.appNavOrder.reset' })}</Button>}
         >
           <div className={listCss.appPageLayout}>
-            <p><strong>Drag & drop to change the display order of FOLIO applications.</strong></p>
+            <p><strong>{formatMessage({ id: 'ui-myprofile.settings.appNavOrder.visibleInstruction' })}</strong></p>
             <div className={listCss.appListContainer} role="application">
               <AppOrderList apps={apps} items={items} setItems={setItems} itemToString={(item) => item.name} />
             </div>
