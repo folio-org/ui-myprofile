@@ -2,6 +2,12 @@
   "meta.title": "My profile",
   "label.settings": "My profile settings",
 
+  "draggableList.instructions": "Reorderable list. Press space or enter to to toggle the active item. Use the up and down arrow keys to update the position of the active item.",
+  "draggableList.announcements.dragStart": "Picked up {active} in {position} of {total} items",
+  "draggableList.announcements.dragEnd": "Dropped {active} at {position}",
+  "draggableList.announcements.dragOver": "Moved {active} to {position}",
+  "draggableList.announcements.dragCancel": "{active} dropped",
+
   "settings.index.paneTitle": "My profile",
   "settings.changePassword.label": "Change password",
   "settings.changePassword.save": "Save",

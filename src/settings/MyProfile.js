@@ -32,9 +32,9 @@ class MyProfile extends Component {
     return [
       {
         route: 'appList',
-        label: 'Application list',
+        label: 'Application display order',
         component: AppListSettingsView,
-        perm: 'ui-myprofile.settings.change-password',
+        perm: 'ui-myprofile.settings.change-nav-order',
       }
     ]
       .concat(
