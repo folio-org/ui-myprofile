@@ -1,5 +1,7 @@
 import React, { useCallback, useState, useEffect, useRef, useMemo } from 'react';
 import uniqueId from 'lodash/uniqueId';
+import isEqual from 'lodash/isEqual';
+
 import {
   DndContext,
   closestCenter,
@@ -25,11 +27,13 @@ import { useDOMKeyboardCoordinates } from './MultiColumnKeyboardCoordinateGetter
 import DraggableAppListItem from './DraggableAppListItem';
 import listCss from './AppOrderList.css';
 
+/* eslint-disable react/prop-types */
+
 function AppOrderList({
   apps,
   items,
   setItems,
-  itemToString = () => {},
+  itemToString = (item) => item.name,
   id: idProp,
 }) {
   const { formatMessage, locale } = useIntl();
@@ -51,7 +55,7 @@ function AppOrderList({
           { active, position: getPosition(active), total: itemCount }
         );
       },
-      onDragOver({ active, over}) {
+      onDragOver({ active, over }) { // eslint-disable-line consistent-return
         if (over) {
           return formatMessage(
             { id: 'ui-myprofile.draggableList.announcements.dragOver' },
@@ -59,7 +63,7 @@ function AppOrderList({
           );
         }
       },
-      onDragEnd({ active, over }) {
+      onDragEnd({ active, over }) { // eslint-disable-line consistent-return
         if (over) {
           return formatMessage(
             { id: 'ui-myprofile.draggableList.announcements.dragEmd' },
@@ -76,7 +80,7 @@ function AppOrderList({
     };
 
     return messages;
-  }, [formatMessage, locale, draggable])
+  }, [formatMessage, locale, draggable]); // eslint-disable-line react-hooks/exhaustive-deps
 
 
   const { getter } = useDOMKeyboardCoordinates({ id });
@@ -87,7 +91,7 @@ function AppOrderList({
     })
   );
 
-  const getAppIconProps = useCallback((name) => {
+  const getAppIconProps = useCallback((name) => { // eslint-disable-line consistent-return
     const appIndex = apps.findIndex((a) => a.name === name);
 
     if (appIndex !== -1) {
@@ -107,7 +111,7 @@ function AppOrderList({
     }
 
     return '';
-  });
+  }, [apps]);
 
   const handleDragEnd = useCallback((event) => {
     const { active, over } = event;
@@ -128,7 +132,7 @@ function AppOrderList({
         return res;
       });
     }
-  }, [setItems, items]);
+  }, [setItems, items, itemToString]);
 
 
 
@@ -142,7 +146,7 @@ function AppOrderList({
       screenReaderInstructions={formatMessage({ id: 'ui-myprofile.draggableList.instructions' })}
     >
       <SortableContext
-        items={draggable}
+        items={items.map(itemToString)}
       >
         <ol className={listCss.draggableList} id={id}>
           {

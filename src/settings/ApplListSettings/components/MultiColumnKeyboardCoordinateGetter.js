@@ -5,7 +5,10 @@ import {
 
 import listCss from './AppOrderList.css';
 
-function xySort(a, b) {
+
+// sort for DOM-rects for coordinates to place them in the order of the rendered list
+// to reflect the current state of the list.
+export function xySort(a, b) {
   if (a.value.left === b.value.left) {
     return a.value.top - b.value.top;
   } else {
@@ -14,7 +17,7 @@ function xySort(a, b) {
 }
 
 const collectDOMRects = (id) => {
-  const elements = document.querySelectorAll(`#${id} .${listCss.listItemContent}`);
+  const elements = document.querySelectorAll(`#${id} div[class^=listItemContent]`);
   const rects = [];
 
   for (let i = 0; i < elements.length; i++) {
@@ -38,7 +41,7 @@ export const useDOMKeyboardCoordinates = ({ id }) => {
       }
     }
   ) => {
-    // dndkit doesn't include the most up-to-date state of dom rects,
+    // dndkit doesn't include the most up-to-date state of DOM rects,
     // so we build our own from the dom and sort them by coordinates - this
     // mainly helps with the shift from the bottom of one column to the top of the next column
     // and vice-versa

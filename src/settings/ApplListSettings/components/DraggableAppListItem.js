@@ -5,7 +5,8 @@ import { useIntl } from 'react-intl';
 import { Icon } from '@folio/stripes/components';
 import listCss from './AppOrderList.css';
 
-export default ({ id, children, index, isNew }) => {
+export default ({ id, children, index, isNew }) => { // eslint-disable-line react/prop-types
+  const { formatMessage } = useIntl();
   const {
     active,
     attributes,
@@ -28,7 +29,7 @@ export default ({ id, children, index, isNew }) => {
           {children}
         </div>
         <div>
-          {isNew && <strong>New!</strong> }
+          {isNew && <strong>{formatMessage({ id: 'ui-myprofile.settings.appNavOrder.newItem' })}</strong> }
           <Icon iconClassName={listCss.dragIcon} icon="drag-drop" style={{ opacity: '50' }} />
         </div>
       </div>
