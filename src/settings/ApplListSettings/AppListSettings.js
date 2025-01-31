@@ -4,9 +4,9 @@ import { Pane, PaneFooter, Button, LoadingPane } from '@folio/stripes/components
 import { useAppOrderContext, useCallout } from '@folio/stripes/core';
 import { useIntl } from 'react-intl';
 import listCss from './components/AppOrderList.css';
-import AppOrderList from './components/AppOrderList';
+import { AppOrderList } from './components/AppOrderList';
 
-const AppOrderListView = () => {
+const AppListSettings = () => {
   const { formatMessage } = useIntl();
   const callout = useCallout();
 
@@ -61,7 +61,7 @@ const AppOrderListView = () => {
           id="appListOrderPane"
           paneTitle={formatMessage({ id: 'ui-myprofile.settings.appNavOrder.label' })}
           footer={renderFooter()}
-          lastMenu={<Button onClick={handleReset} marginBottom0>{formatMessage({ id: 'ui-myprofile.settings.appNavOrder.reset' })}</Button>}
+          lastMenu={<Button onClick={handleReset} disabled={appNavOrder.length === 0} marginBottom0>{formatMessage({ id: 'ui-myprofile.settings.appNavOrder.reset' })}</Button>}
         >
           <div className={listCss.appPageLayout}>
             <p><strong>{formatMessage({ id: 'ui-myprofile.settings.appNavOrder.visibleInstruction' })}</strong></p>
@@ -75,4 +75,4 @@ const AppOrderListView = () => {
   );
 };
 
-export default AppOrderListView;
+export default AppListSettings;

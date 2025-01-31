@@ -27,15 +27,75 @@ import { useDOMKeyboardCoordinates } from './MultiColumnKeyboardCoordinateGetter
 import DraggableAppListItem from './DraggableAppListItem';
 import listCss from './AppOrderList.css';
 
+
+export const getAnnouncementMessages = (draggable, formatMessage) => {
+  const getPosition = (dndId) => draggable.indexOf(dndId) + 1; // prefer position over index
+  const itemCount = draggable.length;
+
+  const messages = {
+    onDragStart({ active }) {
+      return formatMessage(
+        { id: 'ui-myprofile.draggableList.announcements.dragStart' },
+        { active, position: getPosition(active), total: itemCount }
+      );
+    },
+    onDragOver({ active, over }) { // eslint-disable-line consistent-return
+      if (over) {
+        return formatMessage(
+          { id: 'ui-myprofile.draggableList.announcements.dragOver' },
+          { active, position: getPosition(over) }
+        );
+      }
+    },
+    onDragEnd({ active, over }) { // eslint-disable-line consistent-return
+      if (over) {
+        return formatMessage(
+          { id: 'ui-myprofile.draggableList.announcements.dragEnd' },
+          { active, position: getPosition(over) }
+        );
+      }
+    },
+    onDragCancel({ active }) {
+      return formatMessage(
+        { id: 'ui-myprofile.draggableList.announcements.dragCancel' },
+        { active }
+      );
+    },
+  };
+
+  return messages;
+};
+
+export const dragEndHandler = (event, items, setItems, itemToString, setDraggable) => {
+  const { active, over } = event;
+
+  if (over && over?.id !== active?.id) {
+    setDraggable((listItems) => {
+      const oldIndex = listItems.indexOf(active.id);
+      const newIndex = listItems.indexOf(over.id);
+
+      const res = arrayMove(listItems, oldIndex, newIndex);
+
+      setItems(res.map((dn) => {
+        const itemIndex = items.findIndex(item => dn === itemToString(item));
+
+        return items[itemIndex];
+      }));
+
+      return res;
+    });
+  }
+};
+
 /* eslint-disable react/prop-types */
 
-function AppOrderList({
+export const AppOrderList = ({
   apps,
   items,
   setItems,
   itemToString = (item) => item.name,
   id: idProp,
-}) {
+}) => {
   const { formatMessage, locale } = useIntl();
   const id = useRef(idProp || uniqueId('draglist-')).current;
   const [draggable, setDraggable] = useState(items.map(itemToString));
@@ -44,44 +104,10 @@ function AppOrderList({
     setDraggable(items.map(itemToString));
   }, [items, itemToString]);
 
-  const announcements = useMemo(() => {
-    const getPosition = (dndId) => draggable.indexOf(dndId) + 1; // prefer position over index
-    const itemCount = draggable.length;
-
-    const messages = {
-      onDragStart({ active }) {
-        return formatMessage(
-          { id: 'ui-myprofile.draggableList.announcements.dragStart' },
-          { active, position: getPosition(active), total: itemCount }
-        );
-      },
-      onDragOver({ active, over }) { // eslint-disable-line consistent-return
-        if (over) {
-          return formatMessage(
-            { id: 'ui-myprofile.draggableList.announcements.dragOver' },
-            { active, position: getPosition(over) }
-          );
-        }
-      },
-      onDragEnd({ active, over }) { // eslint-disable-line consistent-return
-        if (over) {
-          return formatMessage(
-            { id: 'ui-myprofile.draggableList.announcements.dragEmd' },
-            { active, position: getPosition(over) }
-          );
-        }
-      },
-      onDragCancel({ active }) {
-        return formatMessage(
-          { id: 'ui-myprofile.draggableList.announcements.dragCancel' },
-          { active }
-        );
-      },
-    };
-
-    return messages;
-  }, [formatMessage, locale, draggable]); // eslint-disable-line react-hooks/exhaustive-deps
-
+  const announcements = useMemo(
+    () => getAnnouncementMessages(draggable, formatMessage),
+    [formatMessage, locale, draggable] // eslint-disable-line react-hooks/exhaustive-deps
+  );
 
   const { getter } = useDOMKeyboardCoordinates({ id });
   const sensors = useSensors(
@@ -114,26 +140,8 @@ function AppOrderList({
   }, [apps]);
 
   const handleDragEnd = useCallback((event) => {
-    const { active, over } = event;
-
-    if (over && over?.id !== active?.id) {
-      setDraggable((listItems) => {
-        const oldIndex = listItems.indexOf(active.id);
-        const newIndex = listItems.indexOf(over.id);
-
-        const res = arrayMove(listItems, oldIndex, newIndex);
-
-        setItems(res.map((dn) => {
-          const itemIndex = items.findIndex(item => dn === itemToString(item));
-
-          return items[itemIndex];
-        }));
-
-        return res;
-      });
-    }
+    dragEndHandler(event, items, setItems, itemToString, setDraggable);
   }, [setItems, items, itemToString]);
-
 
 
   return (
@@ -172,6 +180,4 @@ function AppOrderList({
       </SortableContext>
     </DndContext>
   );
-}
-
-export default AppOrderList;
+};

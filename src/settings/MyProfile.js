@@ -6,7 +6,7 @@ import { Settings } from '@folio/stripes/smart-components';
 import { stripesShape, TitleManager } from '@folio/stripes/core';
 
 import ChangePassword from './ChangePassword';
-import AppListSettingsView from './ApplListSettings';
+import AppListSettings from './ApplListSettings';
 
 class MyProfile extends Component {
   static isLocalLogin(stripes) {
@@ -33,7 +33,7 @@ class MyProfile extends Component {
       {
         route: 'appList',
         label: <FormattedMessage id="ui-myprofile.settings.appNavOrder.label" />,
-        component: AppListSettingsView,
+        component: AppListSettings,
         perm: 'ui-myprofile.settings.change-nav-order',
       }
     ]
