@@ -112,16 +112,18 @@ jest.mock('@folio/stripes/core', () => ({
 }));
 
 
-jest.mock('./components/AppOrderList', () => ({ setItems }) => {
-  return (
-    <button
-      type="button"
-      onClick={() => setItems(mockNewAppOrder)}
-    >
-      testUpdatePrefs
-    </button>
-  );
-});
+jest.mock('./components/AppOrderList', () => ({
+  AppOrderList: ({ setItems }) => {
+    return (
+      <button
+        type="button"
+        onClick={() => setItems(mockNewAppOrder)}
+      >
+        testUpdatePrefs
+      </button>
+    );
+  }
+}));
 
 const renderAppListSettings = () => {
   return (
