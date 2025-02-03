@@ -3,6 +3,7 @@ import {
   cleanup,
   render,
 } from '@folio/jest-config-stripes/testing-library/react';
+import { useIntl } from 'react-intl';
 import { AppOrderList, dragEndHandler, getAnnouncementMessages } from './AppOrderList';
 
 const testSingleApp = [{
@@ -71,26 +72,38 @@ describe('AppOrderList', () => {
       expect(state).toEqual(expected);
     });
   });
+});
 
-  describe('getAnnouncements', () => {
+describe('getAnnouncements', () => {
+  const AnnouncementsComponent = ({ handler }) => {
+    const { formatMessage } = useIntl();
     const draggable = ['this', 'next', 'last'];
-    const annoucements = getAnnouncementMessages(draggable, (msg) => msg.id);
-    const args = { active: true, over: true };
 
-    it('returns the proper message for DragStart', () => {
-      expect(annoucements.onDragStart(args)).toEqual('ui-myprofile.draggableList.announcements.dragStart');
-    });
+    const messages = getAnnouncementMessages(draggable, formatMessage);
+    const args = { active: 'next', over: 'last' };
 
-    it('returns the proper message for DragOver', () => {
-      expect(annoucements.onDragOver(args)).toEqual('ui-myprofile.draggableList.announcements.dragOver');
-    });
+    return <span>{messages[handler](args)}</span>;
+  };
 
-    it('returns the proper message for DragEnd', () => {
-      expect(annoucements.onDragEnd(args)).toEqual('ui-myprofile.draggableList.announcements.dragEnd');
-    });
+  let result;
 
-    it('returns the proper message for DragCancel', () => {
-      expect(annoucements.onDragCancel(args)).toEqual('ui-myprofile.draggableList.announcements.dragCancel');
-    });
+  it('returns the proper message for DragStart', () => {
+    result = render(<AnnouncementsComponent handler="onDragStart" />);
+    expect(result.getByText('ui-myprofile.draggableList.announcements.dragStart')).toBeInTheDocument();
+  });
+
+  it('returns the proper message for onDragCancel', () => {
+    result = render(<AnnouncementsComponent handler="onDragCancel" />);
+    expect(result.getByText('ui-myprofile.draggableList.announcements.dragCancel')).toBeInTheDocument();
+  });
+
+  it('returns the proper message for onDragOver', () => {
+    result = render(<AnnouncementsComponent handler="onDragOver" />);
+    expect(result.getByText('ui-myprofile.draggableList.announcements.dragOver')).toBeInTheDocument();
+  });
+
+  it('returns the proper message for onDragEnd', () => {
+    result = render(<AnnouncementsComponent handler="onDragEnd" />);
+    expect(result.getByText('ui-myprofile.draggableList.announcements.dragEnd')).toBeInTheDocument();
   });
 });
