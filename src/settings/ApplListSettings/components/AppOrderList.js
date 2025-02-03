@@ -36,14 +36,14 @@ export const getAnnouncementMessages = (draggable, formatMessage) => {
     onDragStart({ active }) {
       return formatMessage(
         { id: 'ui-myprofile.draggableList.announcements.dragStart' },
-        { active, position: getPosition(active), total: itemCount }
+        { active: active.id, position: getPosition(active.id), total: itemCount }
       );
     },
     onDragOver({ active, over }) { // eslint-disable-line consistent-return
       if (over) {
         return formatMessage(
           { id: 'ui-myprofile.draggableList.announcements.dragOver' },
-          { active, position: getPosition(over) }
+          { active: active.id, position: getPosition(over.id) }
         );
       }
     },
@@ -51,14 +51,14 @@ export const getAnnouncementMessages = (draggable, formatMessage) => {
       if (over) {
         return formatMessage(
           { id: 'ui-myprofile.draggableList.announcements.dragEnd' },
-          { active, position: getPosition(over) }
+          { active: active.id, position: getPosition(over.id) }
         );
       }
     },
     onDragCancel({ active }) {
       return formatMessage(
         { id: 'ui-myprofile.draggableList.announcements.dragCancel' },
-        { active }
+        { active: active.id }
       );
     },
   };
@@ -150,8 +150,12 @@ export const AppOrderList = ({
       collisionDetection={closestCenter}
       onDragEnd={handleDragEnd}
       modifiers={[restrictToWindowEdges]}
-      accessibility={announcements}
-      screenReaderInstructions={formatMessage({ id: 'ui-myprofile.draggableList.instructions' })}
+      accessibility={{
+        announcements,
+        screenReaderInstructions: {
+          draggable: formatMessage({ id: 'ui-myprofile.draggableList.instructions' })
+        }
+      }}
     >
       <SortableContext
         items={items.map(itemToString)}
