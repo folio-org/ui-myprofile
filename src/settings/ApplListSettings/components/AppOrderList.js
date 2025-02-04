@@ -1,6 +1,5 @@
 import React, { useCallback, useState, useEffect, useRef, useMemo } from 'react';
 import uniqueId from 'lodash/uniqueId';
-import isEqual from 'lodash/isEqual';
 
 import {
   DndContext,

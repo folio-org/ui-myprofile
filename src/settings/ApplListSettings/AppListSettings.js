@@ -27,7 +27,7 @@ const AppListSettings = () => {
     } finally {
       callout.sendCallout({ message: formatMessage({ id: 'ui-myprofile.settings.appNavOrder.saveSuccess' }) });
     }
-  }, [items, callout, updateList]);
+  }, [items, callout, updateList, formatMessage]);
 
   const handleReset = useCallback(() => {
     try {
@@ -37,7 +37,7 @@ const AppListSettings = () => {
     } catch (err) {
       callout.sendCallout({ type: 'error', message: formatMessage({ id: 'ui-myprofile.settings.appNavOrder.resetError' }) });
     }
-  });
+  }, [formatMessage, appNavOrder, reset, callout]);
 
   const renderFooter = () => {
     const disabled = isEqual(items, appNavOrder);

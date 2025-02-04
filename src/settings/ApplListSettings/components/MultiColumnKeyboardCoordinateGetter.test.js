@@ -1,4 +1,4 @@
-import { renderHook, screen} from '@folio/jest-config-stripes/testing-library/react';
+import { renderHook } from '@folio/jest-config-stripes/testing-library/react';
 import { useDOMKeyboardCoordinates, xySort } from './MultiColumnKeyboardCoordinateGetter';
 
 const getBoundingClientRectSpy = jest.fn(() => {

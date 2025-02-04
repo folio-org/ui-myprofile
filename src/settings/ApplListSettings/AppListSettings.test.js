@@ -1,12 +1,10 @@
 import React from 'react';
-import { MemoryRouter } from 'react-router-dom';
-import { useAppOrderContext } from '@folio/stripes/core';
-import AppListSettings from './AppListSettings';
 import {
   cleanup,
   render,
   fireEvent,
 } from '@folio/jest-config-stripes/testing-library/react';
+import AppListSettings from './AppListSettings';
 import { CalloutContextProvider } from '../../../test/jest/helpers/callout-context-provider';
 
 const testOrderedNoPref = [

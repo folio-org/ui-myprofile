@@ -3,8 +3,6 @@ import {
   KeyboardCode,
 } from '@dnd-kit/core';
 
-import listCss from './AppOrderList.css';
-
 
 // sort for DOM-rects for coordinates to place them in the order of the rendered list
 // to reflect the current state of the list.

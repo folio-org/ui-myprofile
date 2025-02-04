@@ -51,7 +51,7 @@ describe('AppOrderList', () => {
   // dragEndHandler will move the dragged 'active' object to the array position of the
   // 'over' object.
   describe('dragEndHandler', () => {
-    const expected = [{ name: 'next' }, { name: 'this'}, { name: 'last' }];
+    const expected = [{ name: 'next' }, { name: 'this' }, { name: 'last' }];
 
     // let items = [{ name: 'this' }, { name: 'next' }, { name: 'last' }];
     const draggable = ['this', 'next', 'last'];
