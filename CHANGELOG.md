@@ -1,5 +1,10 @@
 # Change history for ui-myprofile
 
+## [10.0.0] In progress
+
+* *BREAKING* Migrate stripes dependencies to their Sunflower versions. Refs UIMPROF-101.
+* *BREAKING* Migrate react-intl to v7. Refs UIMPROF-102.
+
 ## 9.2.0 (https://github.com/folio-org/ui-myprofile/tree/v9.2.0) (2024-10-29)
 [Full Changelog](https://github.com/folio-org/ui-myprofile/compare/v9.1.0...v9.2.0)
 
