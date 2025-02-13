@@ -5,6 +5,7 @@ import { useIntl } from 'react-intl';
 import { Icon } from '@folio/stripes/components';
 import listCss from './AppOrderList.css';
 
+// Item template for the draggable nav-reorder list.
 export default ({ id, children, index, isNew }) => { // eslint-disable-line react/prop-types
   const { formatMessage } = useIntl();
   const {

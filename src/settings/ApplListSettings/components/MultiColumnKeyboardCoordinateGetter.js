@@ -14,6 +14,9 @@ export function xySort(a, b) {
   }
 }
 
+// Used for collecting the currently rendered elements at runtime to reflect
+// the actual state of the drag-and-drop list while items are potentially being
+// stepped through/shifted around.
 const collectDOMRects = (id) => {
   const elements = document.querySelectorAll(`#${id} div[class^=listItemContent]`);
   const rects = [];
@@ -54,6 +57,8 @@ export const useDOMKeyboardCoordinates = ({ id }) => {
 
     let nextRect;
 
+    // We only use the up and down arrow keys for keyboard stepping logic.
+    // Next/previous just increment and decrement the index of the collected coordinates.
     switch (event.code) {
       case KeyboardCode.Down:
         nextItem = draggableArray[currentIndex + 1];

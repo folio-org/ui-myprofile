@@ -21,12 +21,13 @@ import { AppIcon } from '@folio/stripes/core';
 
 import { useDOMKeyboardCoordinates } from './MultiColumnKeyboardCoordinateGetter';
 
-
-
 import DraggableAppListItem from './DraggableAppListItem';
 import listCss from './AppOrderList.css';
 
-
+// DnD Kit accepts translations/overrides for its screen-reader announcements. It only
+// brings along English by default, so it's up to us to provide other languages - which is fine and
+// wise on their behalf. This function returns an object of event handler messages that get
+// triggered when the user interacts with the drag-n-drop list.
 export const getAnnouncementMessages = (draggable, formatMessage) => {
   const getPosition = (dndId) => draggable.indexOf(dndId) + 1; // prefer position over index
   const itemCount = draggable.length;
@@ -65,6 +66,10 @@ export const getAnnouncementMessages = (draggable, formatMessage) => {
   return messages;
 };
 
+// The 'onChange' handler for the drag-n-drop list. The items are kept in an array of
+// unique strings. When passing through dnd-kit logic, strings are present as the 'id'
+// of the active (dragged) object. The 'over' object represents the item that the active
+// element was dragged onto.
 export const dragEndHandler = (event, items, setItems, itemToString, setDraggable) => {
   const { active, over } = event;
 
@@ -108,6 +113,8 @@ export const AppOrderList = ({
     [formatMessage, locale, draggable] // eslint-disable-line react-hooks/exhaustive-deps
   );
 
+  // We use our own KeyboardCoordinate getter to allow the user to step up/down the list and
+  // seamlessly into neighboring columns using the arrow keys.
   const { getter } = useDOMKeyboardCoordinates({ id });
   const sensors = useSensors(
     useSensor(PointerSensor),

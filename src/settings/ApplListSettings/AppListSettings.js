@@ -6,6 +6,10 @@ import { useIntl } from 'react-intl';
 import listCss from './components/AppOrderList.css';
 import { AppOrderList } from './components/AppOrderList';
 
+// This view functions as the form logic wrapper for the main navigation reordering.
+// It holds the state for the re-order list and implements functions for saving and
+// resetting the preference via provided utilities from the `AppOrderContext` from stripes-core.
+// We feed this state and form callbacks into the AppOrderList - where the drag/drop functionality resides.
 const AppListSettings = () => {
   const { formatMessage } = useIntl();
   const callout = useCallout();
@@ -19,6 +23,7 @@ const AppListSettings = () => {
     setItems(appNavOrder);
   }, [appNavOrder]);
 
+  // Save the preference using `updateList` function from the AppOrderContext
   const handleSave = useCallback(() => {
     try {
       updateList(items);
@@ -29,6 +34,7 @@ const AppListSettings = () => {
     }
   }, [items, callout, updateList, formatMessage]);
 
+  // Reset the list using the `reset` function from the AppOrderContext
   const handleReset = useCallback(() => {
     try {
       reset();
