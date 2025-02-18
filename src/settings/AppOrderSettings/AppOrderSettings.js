@@ -27,10 +27,9 @@ const AppListSettings = () => {
   const handleSave = useCallback(() => {
     try {
       updateList(items);
+      callout.sendCallout({ message: formatMessage({ id: 'ui-myprofile.settings.appNavOrder.saveSuccess' }) });
     } catch (err) {
       callout.sendCallout({ type: 'error', message: formatMessage({ id: 'ui-myprofile.settings.appNavOrder.saveError' }) });
-    } finally {
-      callout.sendCallout({ message: formatMessage({ id: 'ui-myprofile.settings.appNavOrder.saveSuccess' }) });
     }
   }, [items, callout, updateList, formatMessage]);
 

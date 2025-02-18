@@ -21,7 +21,7 @@ import { AppIcon } from '@folio/stripes/core';
 
 import { useDOMKeyboardCoordinates } from './MultiColumnKeyboardCoordinateGetter';
 
-import DraggableAppListItem from './DraggableAppListItem';
+import DraggableAppListItem from './DraggableAppOrderItem';
 import listCss from './AppOrderList.css';
 
 // DnD Kit accepts translations/overrides for its screen-reader announcements. It only
@@ -39,21 +39,23 @@ export const getAnnouncementMessages = (draggable, formatMessage) => {
         { active: active.id, position: getPosition(active.id), total: itemCount }
       );
     },
-    onDragOver({ active, over }) { // eslint-disable-line consistent-return
+    onDragOver({ active, over }) {
       if (over) {
         return formatMessage(
           { id: 'ui-myprofile.draggableList.announcements.dragOver' },
           { active: active.id, position: getPosition(over.id) }
         );
       }
+      return '';
     },
-    onDragEnd({ active, over }) { // eslint-disable-line consistent-return
+    onDragEnd({ active, over }) {
       if (over) {
         return formatMessage(
           { id: 'ui-myprofile.draggableList.announcements.dragEnd' },
           { active: active.id, position: getPosition(over.id) }
         );
       }
+      return '';
     },
     onDragCancel({ active }) {
       return formatMessage(
@@ -123,7 +125,7 @@ export const AppOrderList = ({
     })
   );
 
-  const getAppIconProps = useCallback((name) => { // eslint-disable-line consistent-return
+  const getAppIconProps = useCallback((name) => {
     const appIndex = apps.findIndex((a) => a.name === name);
 
     if (appIndex !== -1) {
@@ -133,6 +135,7 @@ export const AppOrderList = ({
         icon: apps[appIndex].iconData
       };
     }
+    return {};
   }, [apps]);
 
   const getAppDisplayName = useCallback((name) => {
