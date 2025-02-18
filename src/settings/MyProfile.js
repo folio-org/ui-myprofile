@@ -6,6 +6,7 @@ import { Settings } from '@folio/stripes/smart-components';
 import { stripesShape, TitleManager } from '@folio/stripes/core';
 
 import ChangePassword from './ChangePassword';
+import AppListSettings from './AppOrderSettings';
 
 class MyProfile extends Component {
   static isLocalLogin(stripes) {
@@ -28,7 +29,14 @@ class MyProfile extends Component {
   }
 
   createSettingsPages() {
-    return []
+    return [
+      {
+        route: 'app-order',
+        label: <FormattedMessage id="ui-myprofile.settings.appNavOrder.label" />,
+        component: AppListSettings,
+        perm: 'ui-myprofile.settings.main-nav-order.manage',
+      }
+    ]
       .concat(
         this.registerChangePasswordPage()
       )

@@ -39,6 +39,20 @@
           "users.item.get"
         ],
         "visible": true
+      },
+      {
+        "permissionName": "ui-myprofile.settings.main-nav-order.manage",
+        "displayName": "Settings (My profile): Can change application order in main navigation",
+        "subPermissions": [
+          "settings.myprofile.enabled",
+          "mod-settings.entries.collection.get",
+          "mod-settings.entries.item.post",
+          "mod-settings.entries.item.put",
+          "mod-settings.entries.item.delete",
+          "mod-settings.owner.read.stripes-core.prefs.manage",
+          "mod-settings.owner.write.stripes-core.prefs.manage"
+        ],
+        "visible": true
       }
     ],
     "links": {
@@ -78,6 +92,7 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-intl": "^7.1.5",
+    "react-query": "^3.13.0",
     "react-redux": "^8.0.5",
     "react-router": "^5.2.0",
     "react-router-dom": "^5.0.0",
@@ -88,6 +103,9 @@
     "rxjs": "^6.6.3"
   },
   "dependencies": {
+    "@dnd-kit/core": "^6.2.0",
+    "@dnd-kit/sortable": "^9.0.0",
+    "@dnd-kit/modifiers": "^9.0.0",
     "prop-types": "^15.6.0",
     "redux-form": "^8.3.7"
   },
@@ -96,6 +114,7 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-intl": "^7.1.5",
+    "react-query": "^3.13.0",
     "react-redux": "^8.0.5",
     "react-router-dom": "^5.0.0"
   }

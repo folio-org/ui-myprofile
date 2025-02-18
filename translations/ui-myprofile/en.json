@@ -2,6 +2,12 @@
   "meta.title": "My profile",
   "label.settings": "My profile settings",
 
+  "draggableList.instructions": "Reorderable list. Press space or enter to activate an item for reordering. Use the up and down arrow keys to change the position of the active item.",
+  "draggableList.announcements.dragStart": "Picked up {active} in position {position} of {total} items",
+  "draggableList.announcements.dragEnd": "Dropped {active} at position {position}",
+  "draggableList.announcements.dragOver": "Moved {active} to position {position}",
+  "draggableList.announcements.dragCancel": "{active} dropped",
+
   "settings.index.paneTitle": "My profile",
   "settings.changePassword.label": "Change password",
   "settings.changePassword.save": "Save",
@@ -16,7 +22,15 @@
   "settings.changePassword.successfullyChanged": "The <strong>FOLIO password</strong> has been successfully <strong>changed</strong> for <strong>{lastName}</strong>, <strong>{firstName}</strong>",
   "settings.changePassword.lastTenPasswords": "Previously used password. Please enter a new password.",
   "userDropdown.changePassword.caption": "Change Password",
-
+  "settings.appNavOrder.label": "Application display order",
+  "settings.appNavOrder.visibleInstruction": "Drag & drop to change the display order of FOLIO applications.",
+  "settings.appNavOrder.saveError": "There was a problem saving app list order.",
+  "settings.appNavOrder.resetError": "There was a problem resetting the app order.",
+  "settings.appNavOrder.resetSuccess": "Application display order reset to default.",
+  "settings.appNavOrder.saveSuccess": "Application display order has been successfully updated.",
+  "settings.appNavOrder.save": "Save",
+  "settings.appNavOrder.reset": "Reset to default",
+  "settings.appNavOrder.newItem": "New",
   "permission.settings.enabled": "Settings (My profile): display list of settings pages",
   "permission.settings.change-password": "Settings (My profile): Can change your local password"
 }
