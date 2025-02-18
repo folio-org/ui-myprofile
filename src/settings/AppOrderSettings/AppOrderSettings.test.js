@@ -4,7 +4,7 @@ import {
   render,
   fireEvent,
 } from '@folio/jest-config-stripes/testing-library/react';
-import AppListSettings from './AppListSettings';
+import AppListSettings from './AppOrderSettings';
 import { CalloutContextProvider } from '../../../test/jest/helpers/callout-context-provider';
 
 const testOrderedNoPref = [
