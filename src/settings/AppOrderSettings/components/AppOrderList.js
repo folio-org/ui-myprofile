@@ -46,6 +46,7 @@ export const getAnnouncementMessages = (draggable, formatMessage) => {
           { active: active.id, position: getPosition(over.id) }
         );
       }
+
       return '';
     },
     onDragEnd({ active, over }) {
@@ -55,6 +56,7 @@ export const getAnnouncementMessages = (draggable, formatMessage) => {
           { active: active.id, position: getPosition(over.id) }
         );
       }
+
       return '';
     },
     onDragCancel({ active }) {
@@ -135,6 +137,7 @@ export const AppOrderList = ({
         icon: apps[appIndex].iconData
       };
     }
+
     return {};
   }, [apps]);
 
