@@ -16,5 +16,19 @@
     "settings.changePassword.lastTenPasswords": "Senha usada anteriormente. Por favor insira uma nova senha.",
     "permission.settings.enabled": "Configurações (Meu perfil): exibe a lista de páginas de configurações",
     "permission.settings.change-password": "Configurações (Meu perfil): Pode alterar sua senha local",
-    "label.settings": "Configurações do meu perfil"
+    "label.settings": "Configurações do meu perfil",
+    "draggableList.instructions": "Lista reordenável. Pressione espaço ou enter para ativar um item para reordenação. Use as teclas de seta para cima e para baixo para alterar a posição do item ativo.",
+    "draggableList.announcements.dragStart": "Pegou {active} na posição {position} de {total} itens",
+    "draggableList.announcements.dragEnd": "Caiu {active} na posição {position}",
+    "draggableList.announcements.dragOver": "Movido {active} para a posição {position}",
+    "draggableList.announcements.dragCancel": "{active} caiu",
+    "settings.appNavOrder.label": "Ordem de exibição do aplicativo",
+    "settings.appNavOrder.visibleInstruction": "Arraste e solte para alterar a ordem de exibição dos aplicativos FOLIO.",
+    "settings.appNavOrder.saveError": "Ocorreu um problema ao salvar a ordem da lista de aplicativos.",
+    "settings.appNavOrder.resetError": "Ocorreu um problema ao redefinir a ordem do aplicativo.",
+    "settings.appNavOrder.resetSuccess": "A ordem de exibição do aplicativo foi redefinida para o padrão.",
+    "settings.appNavOrder.saveSuccess": "A ordem de exibição do aplicativo foi atualizada com sucesso.",
+    "settings.appNavOrder.save": "Salvar",
+    "settings.appNavOrder.reset": "Redefinir para o padrão",
+    "settings.appNavOrder.newItem": "Novo"
 }

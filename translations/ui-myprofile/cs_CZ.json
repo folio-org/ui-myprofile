@@ -16,5 +16,19 @@
     "settings.changePassword.lastTenPasswords": "Již dříve používané heslo. Zadejte prosím nové heslo.",
     "permission.settings.enabled": "Nastavení (Můj profil): zobrazení seznamu stránek nastavení",
     "permission.settings.change-password": "Nastavení (Můj profil): Může změnit své místní heslo",
-    "label.settings": "Můj profil - nastavení"
+    "label.settings": "Můj profil - nastavení",
+    "draggableList.instructions": "Reorderable list. Press space or enter to activate an item for reordering. Use the up and down arrow keys to change the position of the active item.",
+    "draggableList.announcements.dragStart": "Picked up {active} in position {position} of {total} items",
+    "draggableList.announcements.dragEnd": "Dropped {active} at position {position}",
+    "draggableList.announcements.dragOver": "Moved {active} to position {position}",
+    "draggableList.announcements.dragCancel": "{active} dropped",
+    "settings.appNavOrder.label": "Application display order",
+    "settings.appNavOrder.visibleInstruction": "Drag & drop to change the display order of FOLIO applications.",
+    "settings.appNavOrder.saveError": "There was a problem saving app list order.",
+    "settings.appNavOrder.resetError": "There was a problem resetting the app order.",
+    "settings.appNavOrder.resetSuccess": "Application display order reset to default.",
+    "settings.appNavOrder.saveSuccess": "Application display order has been successfully updated.",
+    "settings.appNavOrder.save": "Save",
+    "settings.appNavOrder.reset": "Reset to default",
+    "settings.appNavOrder.newItem": "New"
 }
