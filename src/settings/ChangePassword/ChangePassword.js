@@ -19,7 +19,6 @@ import { PasswordValidationField } from '@folio/stripes/smart-components';
 
 import ChangePasswordForm from './ChangePasswordForm';
 
-@stripesConnect
 class ChangePassword extends Component {
   static propTypes = {
     stripes: stripesShape,
@@ -290,4 +289,4 @@ class ChangePassword extends Component {
   }
 }
 
-export default injectIntl(ChangePassword);
+export default injectIntl(stripesConnect(ChangePassword));
