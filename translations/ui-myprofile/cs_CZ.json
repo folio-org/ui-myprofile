@@ -17,7 +17,7 @@
     "permission.settings.enabled": "Nastavení (Můj profil): zobrazení seznamu stránek nastavení",
     "permission.settings.change-password": "Nastavení (Můj profil): Může změnit své místní heslo",
     "label.settings": "Můj profil - nastavení",
-    "draggableList.instructions": "Reorderable list. Press space or enter to activate an item for reordering. Use the up and down arrow keys to change the position of the active item.",
+    "draggableList.instructions": "Seznam s možností změny pořadí. Stisknutím mezerníku nebo enteru aktivujete položku pro změnu pořadí. Pomocí kláves se šipkami nahoru a dolů můžete měnit pozici aktivní položky.",
     "draggableList.announcements.dragStart": "Vyzvednuto {active} na pozici {position} z {total} položek",
     "draggableList.announcements.dragEnd": "Přesunuto {active} na pozici {position}",
     "draggableList.announcements.dragOver": "Přesunuto {active} na pozici {position}",
