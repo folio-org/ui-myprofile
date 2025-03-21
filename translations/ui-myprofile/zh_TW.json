@@ -28,7 +28,7 @@
     "settings.appNavOrder.resetError": "There was a problem resetting the app order.",
     "settings.appNavOrder.resetSuccess": "Application display order reset to default.",
     "settings.appNavOrder.saveSuccess": "Application display order has been successfully updated.",
-    "settings.appNavOrder.save": "Save",
-    "settings.appNavOrder.reset": "Reset to default",
+    "settings.appNavOrder.save": "儲存",
+    "settings.appNavOrder.reset": "重設為預設值",
     "settings.appNavOrder.newItem": "New"
 }
