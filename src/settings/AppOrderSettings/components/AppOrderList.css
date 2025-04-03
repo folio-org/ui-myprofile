@@ -30,10 +30,11 @@
   /*  list item styling when it contains an active drag handle
       to appear to be 'picked up'
   */
-  &:has(:active)   {
+  &:has(button[aria-label=drag-drop]:active)   {
     margin-left: .5rem;
     cursor: grabbing;
     box-shadow: -5px 10px 18px -1px rgba(78, 79, 76, 0.39);
+    z-index: 3;
   }
 
   .listItemLabel {
