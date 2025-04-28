@@ -3,7 +3,7 @@ import React from 'react';
 const buildStripes = (otherProperties = {}) => ({
   actionNames: [],
   clone: buildStripes,
-  connect: () => {},
+  connect: Comp => Comp,
   config: {},
   currency: 'USD',
   hasInterface: () => true,
@@ -19,7 +19,7 @@ const buildStripes = (otherProperties = {}) => ({
   plugins: {},
   setBindings: () => {},
   setCurrency: () => {},
-  setLocale: () => {},
+  setLocale: jest.fn(),
   setSinglePlugin: () => {},
   setTimezone: () => {},
   setToken: () => {},
@@ -84,12 +84,26 @@ jest.mock('@folio/stripes/core', () => {
   // eslint-disable-next-line react/prop-types
   const TitleManager = (props) => <>{props.children}</>;
 
+  const userOwnLocaleConfig = {
+    SCOPE: 'user-locale-scope',
+    KEY: 'user-locale-key',
+  };
+
+  const tenantLocaleConfig = {
+    SCOPE: 'tenant-locale-scope',
+    KEY: 'tenant-locale-key',
+  };
+
   return {
     ...jest.requireActual('@folio/stripes/core'),
     stripesConnect: connect,
     buildStripes,
     withStripes,
     TitleManager,
+    userOwnLocaleConfig,
+    tenantLocaleConfig,
+    useStripes: jest.fn(() => STRIPES),
+    getFullLocale: jest.fn(),
   };
 }, { virtual: true });
 

@@ -42,7 +42,6 @@ export const localesList = (intl, tenantLocale) => {
     const label = `${intl.formatDisplayName(l, { type: 'language' })} / ${lIntl.formatDisplayName(l, { type: 'language' })}`;
 
     if (l === tenantLocale) {
-      // console.log('name', `${label} - (select to follow tenant's locale)`)
       return {
         value: l,
         label: `${label} (${intl.formatMessage({ id: 'ui-myprofile.settings.languageLocalization.tenantDefault' })})`,

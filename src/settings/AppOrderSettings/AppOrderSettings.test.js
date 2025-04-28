@@ -5,7 +5,7 @@ import {
   fireEvent,
 } from '@folio/jest-config-stripes/testing-library/react';
 import AppListSettings from './AppOrderSettings';
-import { CalloutContextProvider } from '../../../test/jest/helpers/callout-context-provider';
+import Harness from '../../../test/jest/helpers/Harness';
 
 const testOrderedNoPref = [
   {
@@ -125,9 +125,9 @@ jest.mock('./components/AppOrderList', () => ({
 
 const renderAppListSettings = () => {
   return (
-    <CalloutContextProvider>
+    <Harness>
       <AppListSettings />
-    </CalloutContextProvider>
+    </Harness>
   );
 };
 

@@ -5,6 +5,7 @@ import {
 } from '@folio/jest-config-stripes/testing-library/react';
 import { useIntl } from 'react-intl';
 import { AppOrderList, dragEndHandler, getAnnouncementMessages } from './AppOrderList';
+import Harness from '../../../../test/jest/helpers/Harness';
 
 const testSingleApp = [{
   active: false,
@@ -25,7 +26,9 @@ const singleTestItem = [{ name: 'settings' }];
 
 const AppListRenderer = (props) => {
   return (
-    <AppOrderList {...props} />
+    <Harness>
+      <AppOrderList {...props} />
+    </Harness>
   );
 };
 
@@ -75,7 +78,7 @@ describe('AppOrderList', () => {
 });
 
 describe('getAnnouncements', () => {
-  const AnnouncementsComponent = ({ handler }) => {
+  const Component = ({ handler }) => {
     const { formatMessage } = useIntl();
     const draggable = ['this', 'next', 'last'];
 
@@ -84,6 +87,12 @@ describe('getAnnouncements', () => {
 
     return <span>{messages[handler](args)}</span>;
   };
+
+  const AnnouncementsComponent = (props) => (
+    <Harness>
+      <Component {...props} />
+    </Harness>
+  );
 
   let result;
 
