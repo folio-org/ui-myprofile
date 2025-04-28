@@ -1,5 +1,9 @@
 # Change history for ui-myprofile
 
+## 11.0.0 IN PROGRESS
+
+* *BREAKING* Add `Language & Localization` setting. Refs UIMPROF-107.
+
 ## 10.0.0 (https://github.com/folio-org/ui-myprofile/tree/v10.0.0) (2025-03-14)
 [Full Changelog](https://github.com/folio-org/ui-myprofile/compare/v9.2.0...v10.0.0)
 
