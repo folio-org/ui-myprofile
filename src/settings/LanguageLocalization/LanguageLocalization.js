@@ -28,7 +28,7 @@ const LanguageLocalization = () => {
   const intl = useIntl();
   const stripes = useStripes();
 
-  const [initialSettings, setInitialSettings] = useState();
+  const [userSettings, setUserSettings] = useState();
 
   const {
     settings: tenantSettings,
@@ -60,7 +60,7 @@ const LanguageLocalization = () => {
     // user locale takes precedence over tenant locale
     return {
       ...tenantSettings,
-      ...initialSettings,
+      ...userSettings,
       ...payload,
     };
   };
@@ -85,7 +85,7 @@ const LanguageLocalization = () => {
     const userLocale = initialUserSettings?.[fieldNames.LOCALE];
     const tenantLocale = tenantSettings[fieldNames.LOCALE];
 
-    setInitialSettings(initialUserSettings);
+    setUserSettings(initialUserSettings);
 
     return {
       [fieldNames.LOCALE]: userLocale || tenantLocale || document.documentElement.getAttribute('lang'),

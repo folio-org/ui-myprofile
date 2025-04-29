@@ -1,5 +1,12 @@
-import { useTenantPreferences, usePreferences } from '@folio/stripes/core';
-import { useQuery, useMutation } from 'react-query';
+import {
+  useQuery,
+  useMutation,
+} from 'react-query';
+
+import {
+  useTenantPreferences,
+  usePreferences,
+} from '@folio/stripes/core';
 
 const DEFAULT_SETTINGS = {};
 
