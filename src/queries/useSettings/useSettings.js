@@ -6,11 +6,15 @@ import {
 import {
   useTenantPreferences,
   usePreferences,
+  useStripes,
 } from '@folio/stripes/core';
 
 const DEFAULT_SETTINGS = {};
 
 export const useSettings = ({ scope, key, userId }) => {
+  const stripes = useStripes();
+  const tenantId = stripes.okapi.tenant;
+
   const {
     setTenantPreference,
     getTenantPreference,
@@ -24,7 +28,7 @@ export const useSettings = ({ scope, key, userId }) => {
   } = usePreferences();
 
   const { data, isLoading, refetch } = useQuery(
-    ['settings', userId, scope, key],
+    ['settings', userId, tenantId, scope, key],
     () => {
       if (userId) {
         return getPreference({ scope, key, userId });

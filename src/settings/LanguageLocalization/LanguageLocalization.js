@@ -1,4 +1,4 @@
-import { 
+import {
   useMemo,
   useRef,
 } from 'react';
@@ -58,6 +58,7 @@ const LanguageLocalization = () => {
     const tenantLocale = tenantSettings[fieldNames.LOCALE];
 
     let locale = settings[fieldNames.LOCALE];
+
     let numberingSystem = settings.numberingSystem;
 
     if (userLocale === tenantLocale) {
