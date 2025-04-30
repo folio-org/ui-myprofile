@@ -115,7 +115,7 @@ jest.mock('@folio/stripes/core', () => {
     userOwnLocaleConfig,
     tenantLocaleConfig,
     useStripes: jest.fn(() => STRIPES),
-    getFullLocale: jest.fn(),
+    getFullLocale: jest.fn((languageRegion, numberingSystem) => [languageRegion, numberingSystem].filter(Boolean).join('-u-nu-')),
     useTenantPreferences,
     usePreferences,
   };
