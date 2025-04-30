@@ -1,7 +1,9 @@
-import { useMemo, useState } from 'react';
+import { 
+  useMemo,
+  useRef,
+} from 'react';
 import { Field } from 'react-final-form';
 import { useIntl } from 'react-intl';
-import isEmpty from 'lodash/isEmpty';
 
 import {
   CommandList,
@@ -28,7 +30,7 @@ const LanguageLocalization = () => {
   const intl = useIntl();
   const stripes = useStripes();
 
-  const [userSettings, setUserSettings] = useState();
+  const initialSettings = useRef();
 
   const {
     settings: tenantSettings,
@@ -44,40 +46,28 @@ const LanguageLocalization = () => {
     return localesList(intl, tenantSettings[fieldNames.LOCALE]);
   }, [intl, tenantSettings]);
 
-  const formatPayload = (payload) => {
-    const userLocale = payload[fieldNames.LOCALE];
-    const tenantLocale = tenantSettings[fieldNames.LOCALE];
-
-    // reset settings when a user selects the locale that matches the tenant's locale.
-    // This means the user wants to stop following user's locale and wants to follow the tenant's one.
-    if (userLocale === tenantLocale) {
-      return {};
-    }
-
-    // 1. Settings from Tenant -> Language and localization
-    // 2. Settings from Developer -> User locale
-    // 3. Settings from My profile -> Language & localization
-    // user locale takes precedence over tenant locale
+  const formatPayload = (newSettings) => {
     return {
-      ...tenantSettings,
-      ...userSettings,
-      ...payload,
+      ...initialSettings.current,
+      ...newSettings,
     };
   };
 
-  const afterSave = (setting) => {
-    const newUserLocale = setting.value[fieldNames.LOCALE];
-    const numberingSystem = setting.value.numberingSystem;
+  const afterSave = ({ value: settings }) => {
+    const userLocale = settings[fieldNames.LOCALE];
+    const tenantLocale = tenantSettings[fieldNames.LOCALE];
 
-    // we make it empty when a user selects the locale that matches the tenant's locale.
-    // This means the user wants to stop following user's locale and wants to follow the tenant's one.
-    if (isEmpty(setting.value)) {
-      stripes.setLocale(tenantSettings[fieldNames.LOCALE]);
-    } else {
-      const fullLocale = getFullLocale(newUserLocale, numberingSystem);
+    let locale = settings[fieldNames.LOCALE];
+    let numberingSystem = settings.numberingSystem;
 
-      stripes.setLocale(fullLocale);
+    if (userLocale === tenantLocale) {
+      locale = tenantLocale;
+      numberingSystem = tenantSettings.numberingSystem;
     }
+
+    const fullLocale = getFullLocale(locale, numberingSystem);
+
+    stripes.setLocale(fullLocale);
   };
 
   const getInitialValues = ([data]) => {
@@ -85,10 +75,10 @@ const LanguageLocalization = () => {
     const userLocale = initialUserSettings?.[fieldNames.LOCALE];
     const tenantLocale = tenantSettings[fieldNames.LOCALE];
 
-    setUserSettings(initialUserSettings);
+    initialSettings.current = initialUserSettings;
 
     return {
-      [fieldNames.LOCALE]: userLocale || tenantLocale || document.documentElement.getAttribute('lang'),
+      [fieldNames.LOCALE]: userLocale || tenantLocale,
     };
   };
 
