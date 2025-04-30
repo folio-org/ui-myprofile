@@ -4,7 +4,6 @@ import arrayMutators from 'final-form-arrays';
 
 import {
   useStripes,
-  getFullLocale,
 } from '@folio/stripes/core';
 import { ConfigManager } from '@folio/stripes/smart-components';
 import { render } from '@folio/jest-config-stripes/testing-library/react';
@@ -29,6 +28,7 @@ const tenantSettings = {
 const userSettings = {
   locale: 'en-GB',
   currency: 'TRY',
+  numberingSystem: 'arab',
 };
 
 const mockSetLocale = jest.fn();
@@ -77,8 +77,8 @@ describe('LanguageLocalization', () => {
     }), {});
   });
 
-  describe('when there is a locale from user settings', () => {
-    it('should apply it for initialValues', async () => {
+  describe('when there is a locale in user settings', () => {
+    it('should display the user locale', async () => {
       renderLanguageLocalization();
 
       const initialValues = await act(() => ConfigManager.mock.calls[0][0].getInitialValues([{
@@ -97,7 +97,7 @@ describe('LanguageLocalization', () => {
   });
 
   describe('when there is no locale in user settings, but it is present in tenant settings', () => {
-    it('should apply tenant locale for initialValues', async () => {
+    it('should display the tenant locale', async () => {
       renderLanguageLocalization();
 
       const initialValues = await act(() => ConfigManager.mock.calls[0][0].getInitialValues([{
@@ -110,70 +110,46 @@ describe('LanguageLocalization', () => {
     });
   });
 
-  describe('when there are user and tenant settings', () => {
-    it('should use user settings, if something is missing, then from tenant settings', async () => {
-      const newUserSettings = {
-        locale: 'en-SE',
-      };
+  it('should save both initial and new settings', async () => {
+    const newUserSettings = {
+      locale: 'en-SE',
+    };
 
-      renderLanguageLocalization();
+    renderLanguageLocalization();
 
-      await act(() => ConfigManager.mock.calls[0][0].getInitialValues([{
-        value: userSettings,
-      }]));
+    await act(() => ConfigManager.mock.calls[0][0].getInitialValues([{
+      value: userSettings,
+    }]));
 
-      const payload = ConfigManager.mock.calls.at(-1)[0].onBeforeSave(newUserSettings);
+    const payload = ConfigManager.mock.calls.at(-1)[0].onBeforeSave(newUserSettings);
 
-      expect(payload).toEqual({
-        ...tenantSettings,
-        ...userSettings,
-        ...newUserSettings,
-      });
+    expect(payload).toEqual({
+      ...userSettings,
+      ...newUserSettings,
     });
   });
 
   describe('when user selects the locale that matches tenant locale', () => {
-    it('should reset payload', async () => {
-      renderLanguageLocalization();
-
-      await act(() => ConfigManager.mock.calls[0][0].getInitialValues([{
-        value: {
-          locale: 'en-GB',
-        },
-      }]));
-
-      const payload = ConfigManager.mock.calls.at(-1)[0].onBeforeSave({
-        locale: 'en-US',
-      });
-
-      expect(payload).toEqual({});
-    });
-  });
-
-  describe('when empty settings are saved', () => {
-    it('should apply tenant locale', () => {
+    it('should apply tenant locale', async () => {
       renderLanguageLocalization();
 
       ConfigManager.mock.calls[0][0].onAfterSave({
-        value: {},
+        value: tenantSettings,
       });
 
-      expect(mockSetLocale).toHaveBeenCalledWith(tenantSettings.locale);
+      expect(mockSetLocale).toHaveBeenCalledWith('en-US-u-nu-latn');
     });
   });
 
-  describe('when not empty settings are saved', () => {
-    it('should apply full locale', () => {
+  describe('when user selects the locale that does not match the tenant locale', () => {
+    it('should apply user locale', () => {
       renderLanguageLocalization();
 
       ConfigManager.mock.calls[0][0].onAfterSave({
-        value: {
-          locale: 'en-GB',
-          numberingSystem: 'arab',
-        },
+        value: userSettings,
       });
 
-      expect(getFullLocale).toHaveBeenCalledWith('en-GB', 'arab');
+      expect(mockSetLocale).toHaveBeenCalledWith('en-GB-u-nu-arab');
     });
   });
 });
