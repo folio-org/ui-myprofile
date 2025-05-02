@@ -16,10 +16,10 @@ import {
   useStripes,
   userOwnLocaleConfig,
   getFullLocale,
+  useSettings,
 } from '@folio/stripes/core';
 import { ConfigManager } from '@folio/stripes/smart-components';
 
-import { useSettings } from '../../queries';
 import { localesList } from './utils';
 
 const fieldNames = {

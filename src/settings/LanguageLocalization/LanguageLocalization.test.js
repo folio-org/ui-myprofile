@@ -3,20 +3,15 @@ import { Form } from 'react-final-form';
 import arrayMutators from 'final-form-arrays';
 
 import {
+  useSettings,
   useStripes,
 } from '@folio/stripes/core';
 import { ConfigManager } from '@folio/stripes/smart-components';
 import { render } from '@folio/jest-config-stripes/testing-library/react';
 
-import { useSettings } from '../../queries';
 import LanguageLocalization from './LanguageLocalization';
 import Harness from '../../../test/jest/helpers/Harness';
 import buildStripes from '../../../test/jest/__mock__/stripesCore.mock';
-
-jest.mock('../../queries', () => ({
-  ...jest.requireActual('../../queries'),
-  useSettings: jest.fn(),
-}));
 
 const tenantSettings = {
   locale: 'en-US',

@@ -94,16 +94,11 @@ jest.mock('@folio/stripes/core', () => {
     KEY: 'tenant-locale-key',
   };
 
-  const usePreferences = jest.fn(() => ({
-    getPreference: jest.fn(),
-    setPreference: jest.fn(),
-    removePreference: jest.fn(),
-  }));
-
-  const useTenantPreferences = jest.fn(() => ({
-    getTenantPreference: jest.fn(),
-    setTenantPreference: jest.fn(),
-    removeTenantPreference: jest.fn(),
+  const useSettings = jest.fn(() => ({
+    settings: {},
+    isLoading: false,
+    updateSetting: jest.fn(),
+    removeSetting: jest.fn(),
   }));
 
   return {
@@ -116,8 +111,7 @@ jest.mock('@folio/stripes/core', () => {
     tenantLocaleConfig,
     useStripes: jest.fn(() => STRIPES),
     getFullLocale: jest.fn((languageRegion, numberingSystem) => [languageRegion, numberingSystem].filter(Boolean).join('-u-nu-')),
-    useTenantPreferences,
-    usePreferences,
+    useSettings,
   };
 }, { virtual: true });
 
