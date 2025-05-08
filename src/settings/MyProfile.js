@@ -7,6 +7,7 @@ import { stripesShape, TitleManager } from '@folio/stripes/core';
 
 import ChangePassword from './ChangePassword';
 import AppListSettings from './AppOrderSettings';
+import LanguageLocalization from './LanguageLocalization';
 
 class MyProfile extends Component {
   static isLocalLogin(stripes) {
@@ -40,6 +41,11 @@ class MyProfile extends Component {
       .concat(
         this.registerChangePasswordPage()
       )
+      .concat({
+        route: 'language-localization',
+        label: <FormattedMessage id="ui-myprofile.settings.languageLocalization.label" />,
+        component: LanguageLocalization,
+      })
       .filter((page) => page);
   }
 

@@ -1,6 +1,6 @@
 {
   "name": "@folio/myprofile",
-  "version": "10.0.0",
+  "version": "11.0.0",
   "description": "My profile",
   "repository": "folio-org/ui-myprofile",
   "publishConfig": {
@@ -14,6 +14,9 @@
     "actsAs": [
       "settings"
     ],
+    "okapiInterfaces": {
+      "settings": "1.0"
+    },
     "displayName": "ui-myprofile.meta.title",
     "route": "/myprofile",
     "permissionSets": [
@@ -25,7 +28,13 @@
         "permissionName": "settings.myprofile.enabled",
         "displayName": "Settings (My profile): display list of settings pages",
         "subPermissions": [
-          "settings.enabled"
+          "settings.enabled",
+          "mod-settings.entries.collection.get",
+          "mod-settings.entries.item.post",
+          "mod-settings.entries.item.put",
+          "mod-settings.owner.read.stripes-core.prefs.manage",
+          "mod-settings.owner.write.stripes-core.prefs.manage",
+          "mod-settings.global.read.stripes-core.prefs.manage"
         ]
       },
       {
@@ -82,6 +91,7 @@
     "@folio/stripes-connect": "^10.0.0",
     "@folio/stripes-core": "^11.0.0",
     "@folio/stripes-logger": "^1.0.0",
+    "@folio/stripes-smart-components": "^10.0.0",
     "core-js": "^3.6.4",
     "eslint": "^7.32.0",
     "eslint-import-resolver-webpack": "^0.13.2",

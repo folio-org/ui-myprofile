@@ -11,6 +11,7 @@ import {
 
 import ChangePassword from './ChangePassword';
 import { CalloutContextProvider } from '../../../test/jest/helpers/callout-context-provider';
+import Harness from '../../../test/jest/helpers/Harness';
 
 const changePasswordPostSpy = jest.fn();
 
@@ -26,21 +27,23 @@ const renderChangePassword = (props = {}) => {
   const ChangePasswordWithStripes = ChangePassword;
 
   return render(
-    <CalloutContextProvider>
-      <Provider store={store}>
-        <MemoryRouter>
-          <ChangePasswordWithStripes
-            mutator={{
-              changePassword: {
-                POST: changePasswordPostSpy,
-              },
-            }}
-            label={<span>Test label</span>}
-            {...props}
-          />
-        </MemoryRouter>
-      </Provider>
-    </CalloutContextProvider>
+    <Harness>
+      <CalloutContextProvider>
+        <Provider store={store}>
+          <MemoryRouter>
+            <ChangePasswordWithStripes
+              mutator={{
+                changePassword: {
+                  POST: changePasswordPostSpy,
+                },
+              }}
+              label={<span>Test label</span>}
+              {...props}
+            />
+          </MemoryRouter>
+        </Provider>
+      </CalloutContextProvider>
+    </Harness>
   );
 };
 

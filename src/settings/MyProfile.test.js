@@ -10,6 +10,7 @@ import {
 
 import { buildStripes } from '@folio/stripes/core';
 import MyProfile from './MyProfile';
+import Harness from '../../test/jest/helpers/Harness';
 
 const renderMyProfile = () => {
   const stripes = buildStripes({
@@ -17,19 +18,21 @@ const renderMyProfile = () => {
   });
 
   return render(
-    <MemoryRouter>
-      <Route
-        component={props => (
-          <MyProfile
-            stripes={stripes}
-            showSettings
-            actAs="settings"
-            {...props}
-          />
-        )}
-        path="*"
-      />
-    </MemoryRouter>
+    <Harness>
+      <MemoryRouter>
+        <Route
+          component={props => (
+            <MyProfile
+              stripes={stripes}
+              showSettings
+              actAs="settings"
+              {...props}
+            />
+          )}
+          path="*"
+        />
+      </MemoryRouter>
+    </Harness>
   );
 };
 
