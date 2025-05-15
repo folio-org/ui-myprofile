@@ -47,21 +47,23 @@ const LanguageLocalization = () => {
   }, [intl, tenantSettings]);
 
   const formatPayload = (newSettings) => {
+    const userLocale = newSettings[fieldNames.LOCALE];
+    const tenantLocale = tenantSettings[fieldNames.LOCALE];
+
     return {
       ...initialSettings.current,
       ...newSettings,
+      isEnabled: userLocale !== tenantLocale,
     };
   };
 
-  const afterSave = ({ value: settings }) => {
-    const userLocale = settings[fieldNames.LOCALE];
+  const afterSave = ({ value: userSettings }) => {
     const tenantLocale = tenantSettings[fieldNames.LOCALE];
 
-    let locale = settings[fieldNames.LOCALE];
+    let locale = userSettings[fieldNames.LOCALE];
+    let numberingSystem = userSettings.numberingSystem;
 
-    let numberingSystem = settings.numberingSystem;
-
-    if (userLocale === tenantLocale) {
+    if (!userSettings.isEnabled) {
       locale = tenantLocale;
       numberingSystem = tenantSettings.numberingSystem;
     }
@@ -78,8 +80,14 @@ const LanguageLocalization = () => {
 
     initialSettings.current = initialUserSettings;
 
+    let locale = userLocale;
+
+    if (!initialUserSettings?.isEnabled) {
+      locale = tenantLocale;
+    }
+
     return {
-      [fieldNames.LOCALE]: userLocale || tenantLocale,
+      [fieldNames.LOCALE]: locale,
     };
   };
 
