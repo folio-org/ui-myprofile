@@ -24,6 +24,7 @@ const userSettings = {
   locale: 'en-GB',
   currency: 'TRY',
   numberingSystem: 'arab',
+  isEnabled: false,
 };
 
 const mockSetLocale = jest.fn();
@@ -72,7 +73,7 @@ describe('LanguageLocalization', () => {
     }), {});
   });
 
-  describe('when there is a locale in user settings', () => {
+  describe('when there is a locale in user settings and `isEnabled` is true', () => {
     it('should display the user locale', async () => {
       renderLanguageLocalization();
 
@@ -82,6 +83,7 @@ describe('LanguageLocalization', () => {
           numberingSystem: 'arab',
           currency: 'TRY',
           timezone: 'Europe/Dublin',
+          isEnabled: true,
         },
       }]));
 
@@ -121,6 +123,7 @@ describe('LanguageLocalization', () => {
     expect(payload).toEqual({
       ...userSettings,
       ...newUserSettings,
+      isEnabled: true,
     });
   });
 
@@ -136,12 +139,15 @@ describe('LanguageLocalization', () => {
     });
   });
 
-  describe('when user selects the locale that does not match the tenant locale', () => {
+  describe('when user selects the locale that does not match the tenant locale and `isEnabled` is true', () => {
     it('should apply user locale', () => {
       renderLanguageLocalization();
 
       ConfigManager.mock.calls[0][0].onAfterSave({
-        value: userSettings,
+        value: {
+          ...userSettings,
+          isEnabled: true,
+        },
       });
 
       expect(mockSetLocale).toHaveBeenCalledWith('en-GB-u-nu-arab');
