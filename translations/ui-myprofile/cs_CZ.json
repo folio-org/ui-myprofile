@@ -30,5 +30,8 @@
     "settings.appNavOrder.saveSuccess": "Pořadí zobrazení aplikace bylo úspěšně aktualizováno.",
     "settings.appNavOrder.save": "Uložit",
     "settings.appNavOrder.reset": "Obnovení výchozího nastavení",
-    "settings.appNavOrder.newItem": "Nový"
+    "settings.appNavOrder.newItem": "Nový",
+    "settings.languageLocalization.label": "Jazyk a lokalizace",
+    "settings.languageLocalization.fieldLocale.label": "Uživatelské prostředí (pro zobrazení jazyka, formátu data atd.)",
+    "settings.languageLocalization.tenantDefault": "Výchozí nastavení nájemce"
 }

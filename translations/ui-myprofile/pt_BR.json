@@ -30,5 +30,8 @@
     "settings.appNavOrder.saveSuccess": "A ordem de exibição do aplicativo foi atualizada com sucesso.",
     "settings.appNavOrder.save": "Salvar",
     "settings.appNavOrder.reset": "Redefinir para o padrão",
-    "settings.appNavOrder.newItem": "Novo"
+    "settings.appNavOrder.newItem": "Novo",
+    "settings.languageLocalization.label": "Idioma e localização",
+    "settings.languageLocalization.fieldLocale.label": "Informações locais (para exibição do idioma, formato da data, etc.)",
+    "settings.languageLocalization.tenantDefault": "Padrão do tenant"
 }
