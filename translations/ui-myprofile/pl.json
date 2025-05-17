@@ -30,5 +30,8 @@
     "settings.appNavOrder.saveSuccess": "Kolejność wyświetlania aplikacji została pomyślnie zaktualizowana.",
     "settings.appNavOrder.save": "Zapisz",
     "settings.appNavOrder.reset": "Przywróć domyślne",
-    "settings.appNavOrder.newItem": "Nowy"
+    "settings.appNavOrder.newItem": "Nowy",
+    "settings.languageLocalization.label": "Język i lokalizacja",
+    "settings.languageLocalization.fieldLocale.label": "Lokalne (dla wyświetlanego języka, formatu daty itp.)",
+    "settings.languageLocalization.tenantDefault": "Tenant default"
 }

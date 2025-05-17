@@ -30,5 +30,8 @@
     "settings.appNavOrder.saveSuccess": "Application display order has been successfully updated.",
     "settings.appNavOrder.save": "儲存",
     "settings.appNavOrder.reset": "重設為預設值",
-    "settings.appNavOrder.newItem": "New"
+    "settings.appNavOrder.newItem": "New",
+    "settings.languageLocalization.label": "Language & localization",
+    "settings.languageLocalization.fieldLocale.label": "Locale (for language display, date format etc.)",
+    "settings.languageLocalization.tenantDefault": "Tenant default"
 }
