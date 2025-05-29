@@ -31,7 +31,7 @@
     "settings.appNavOrder.save": "Opslaan",
     "settings.appNavOrder.reset": "Terugzetten naar standaard",
     "settings.appNavOrder.newItem": "Nieuw",
-    "settings.languageLocalization.label": "Language & localization",
-    "settings.languageLocalization.fieldLocale.label": "Locale (for language display, date format etc.)",
-    "settings.languageLocalization.tenantDefault": "Tenant default"
+    "settings.languageLocalization.label": "Taal & lokalisatie",
+    "settings.languageLocalization.fieldLocale.label": "Locale (voor taalweergave, datumnotatie enz.)",
+    "settings.languageLocalization.tenantDefault": "Tenant in gebreke"
 }
