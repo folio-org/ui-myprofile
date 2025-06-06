@@ -31,7 +31,7 @@
     "settings.appNavOrder.save": "保存",
     "settings.appNavOrder.reset": "重置为默认值",
     "settings.appNavOrder.newItem": "新建",
-    "settings.languageLocalization.label": "Language & localization",
-    "settings.languageLocalization.fieldLocale.label": "Locale (for language display, date format etc.)",
+    "settings.languageLocalization.label": "语言和本地化",
+    "settings.languageLocalization.fieldLocale.label": "区域设置（用于语言显示，日期格式等）",
     "settings.languageLocalization.tenantDefault": "租户默认"
 }
