@@ -8,7 +8,12 @@ import {
   userOwnLocaleConfig,
 } from '@folio/stripes/core';
 import { ConfigManager } from '@folio/stripes/smart-components';
-import { render } from '@folio/jest-config-stripes/testing-library/react';
+import {
+  fireEvent,
+  render,
+  screen,
+  waitFor,
+} from '@folio/jest-config-stripes/testing-library/react';
 
 import LanguageLocalization from './LanguageLocalization';
 import Harness from '../../../test/jest/helpers/Harness';
@@ -48,6 +53,8 @@ const renderLanguageLocalization = (props = {}) => render(
 );
 
 describe('LanguageLocalization', () => {
+  const mockUpdateSetting = jest.fn();
+
   beforeEach(() => {
     jest.clearAllMocks();
 
@@ -56,12 +63,14 @@ describe('LanguageLocalization', () => {
         return {
           settings: userSettings,
           isLoading: false,
+          updateSetting: mockUpdateSetting,
         };
       }
 
       return {
         settings: tenantSettings,
         isLoading: false,
+        updateSetting: mockUpdateSetting,
       };
     });
 
@@ -158,6 +167,23 @@ describe('LanguageLocalization', () => {
       });
 
       expect(mockSetLocale).toHaveBeenCalledWith('en-GB-u-nu-latn');
+    });
+  });
+
+  describe('when user clicks on "Reset to default" button', () => {
+    it('should apply clear user preferences and apply tenant locale', async () => {
+      renderLanguageLocalization();
+
+      const resetToDefaultButton = screen.getByRole('button', { name: 'ui-myprofile.settings.languageLocalization.resetToDefault' });
+
+      fireEvent.click(resetToDefaultButton);
+
+      expect(mockUpdateSetting).toHaveBeenCalledWith({
+        scope: userOwnLocaleConfig.SCOPE,
+        key: userOwnLocaleConfig.KEY,
+        locale: null,
+      });
+      waitFor(() => expect(mockSetLocale).toHaveBeenCalledWith('en-US-u-nu-latn'));
     });
   });
 });
