@@ -21,7 +21,7 @@
     "draggableList.announcements.dragStart": "Піднято {active} на позицію {position} всього {total} елементів",
     "draggableList.announcements.dragEnd": "Опущено {active} на позицію {position}",
     "draggableList.announcements.dragOver": "Переміщено {active} на позицію {position}",
-    "draggableList.announcements.dragCancel": "{active} dropped",
+    "draggableList.announcements.dragCancel": "{active} перетягнутих і відпущених",
     "settings.appNavOrder.label": "Порядок відображення додатків",
     "settings.appNavOrder.visibleInstruction": "Перетягніть та відпустіть, щоб змінити порядок відображення додатків FOLIO.",
     "settings.appNavOrder.saveError": "Виникла проблема зі збереженням порядку в списку додатків.",
