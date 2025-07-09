@@ -62,15 +62,14 @@ const LanguageLocalization = () => {
 
   const formatPayload = (newSettings) => {
     return {
-      [fieldNames.LOCALE]: initialSettings.current,
+      ...initialSettings.current,
       ...newSettings,
     };
   };
 
   const afterSave = ({ value: settings }) => {
     const locale = settings[fieldNames.LOCALE];
-    // user can't select numbering system in My Profile, so we can just use tenant settings
-    const numberingSystem = tenantSettings.numberingSystem;
+    const numberingSystem = settings.numberingSystem;
     const fullLocale = getFullLocale(locale, numberingSystem);
 
     stripes.setLocale(fullLocale);
@@ -79,7 +78,7 @@ const LanguageLocalization = () => {
   const getInitialValues = () => {
     const userLocale = userSettings?.[fieldNames.LOCALE];
 
-    initialSettings.current = userLocale;
+    initialSettings.current = userSettings;
 
     return {
       [fieldNames.LOCALE]: userLocale || tenantLocale,
@@ -91,8 +90,7 @@ const LanguageLocalization = () => {
     const fullLocale = getFullLocale(tenantLocale, numberingSystem);
 
     await updateUserSetting({
-      scope: userOwnLocaleConfig.SCOPE,
-      key: userOwnLocaleConfig.KEY,
+      ...initialSettings.current,
       [fieldNames.LOCALE]: null,
     });
 

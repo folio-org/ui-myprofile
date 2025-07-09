@@ -28,6 +28,8 @@ const tenantSettings = {
 
 const userSettings = {
   locale: 'en-GB',
+  currency: 'TRY',
+  numberingSystem: 'arab',
 };
 
 const mockSetLocale = jest.fn();
@@ -58,8 +60,8 @@ describe('LanguageLocalization', () => {
   beforeEach(() => {
     jest.clearAllMocks();
 
-    useSettings.mockImplementation(({ scope }) => {
-      if (scope === userOwnLocaleConfig.SCOPE) {
+    useSettings.mockImplementation(({ key }) => {
+      if (key === userOwnLocaleConfig.KEY) {
         return {
           settings: userSettings,
           isLoading: false,
@@ -166,7 +168,7 @@ describe('LanguageLocalization', () => {
         value: userSettings,
       });
 
-      expect(mockSetLocale).toHaveBeenCalledWith('en-GB-u-nu-latn');
+      expect(mockSetLocale).toHaveBeenCalledWith('en-GB-u-nu-arab');
     });
   });
 
@@ -174,16 +176,17 @@ describe('LanguageLocalization', () => {
     it('should apply clear user preferences and apply tenant locale', async () => {
       renderLanguageLocalization();
 
+      await act(() => ConfigManager.mock.calls[0][0].getInitialValues());
+
       const resetToDefaultButton = screen.getByRole('button', { name: 'ui-myprofile.settings.languageLocalization.resetToDefault' });
 
       fireEvent.click(resetToDefaultButton);
 
       expect(mockUpdateSetting).toHaveBeenCalledWith({
-        scope: userOwnLocaleConfig.SCOPE,
-        key: userOwnLocaleConfig.KEY,
+        ...userSettings,
         locale: null,
       });
-      waitFor(() => expect(mockSetLocale).toHaveBeenCalledWith('en-US-u-nu-latn'));
+      await waitFor(() => expect(mockSetLocale).toHaveBeenCalledWith('en-US-u-nu-latn'));
     });
   });
 });
