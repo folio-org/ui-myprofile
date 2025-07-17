@@ -5,9 +5,15 @@ import arrayMutators from 'final-form-arrays';
 import {
   useSettings,
   useStripes,
+  userOwnLocaleConfig,
 } from '@folio/stripes/core';
 import { ConfigManager } from '@folio/stripes/smart-components';
-import { render } from '@folio/jest-config-stripes/testing-library/react';
+import {
+  fireEvent,
+  render,
+  screen,
+  waitFor,
+} from '@folio/jest-config-stripes/testing-library/react';
 
 import LanguageLocalization from './LanguageLocalization';
 import Harness from '../../../test/jest/helpers/Harness';
@@ -49,12 +55,25 @@ const renderLanguageLocalization = (props = {}) => render(
 );
 
 describe('LanguageLocalization', () => {
+  const mockUpdateSetting = jest.fn();
+
   beforeEach(() => {
     jest.clearAllMocks();
 
-    useSettings.mockReturnValue({
-      settings: tenantSettings,
-      isLoading: false,
+    useSettings.mockImplementation(({ key }) => {
+      if (key === userOwnLocaleConfig.KEY) {
+        return {
+          settings: userSettings,
+          isLoading: false,
+          updateSetting: mockUpdateSetting,
+        };
+      }
+
+      return {
+        settings: tenantSettings,
+        isLoading: false,
+        updateSetting: mockUpdateSetting,
+      };
     });
 
     useStripes.mockReturnValue(stripes);
@@ -76,14 +95,7 @@ describe('LanguageLocalization', () => {
     it('should display the user locale', async () => {
       renderLanguageLocalization();
 
-      const initialValues = await act(() => ConfigManager.mock.calls[0][0].getInitialValues([{
-        value: {
-          locale: 'en-GB',
-          numberingSystem: 'arab',
-          currency: 'TRY',
-          timezone: 'Europe/Dublin',
-        },
-      }]));
+      const initialValues = await act(() => ConfigManager.mock.calls[0][0].getInitialValues());
 
       expect(initialValues).toEqual({
         locale: 'en-GB',
@@ -92,12 +104,26 @@ describe('LanguageLocalization', () => {
   });
 
   describe('when there is no locale in user settings, but it is present in tenant settings', () => {
+    beforeEach(() => {
+      useSettings.mockImplementation(({ scope }) => {
+        if (scope === userOwnLocaleConfig) {
+          return {
+            settings: {},
+            isLoading: false,
+          };
+        }
+
+        return {
+          settings: tenantSettings,
+          isLoading: false,
+        };
+      });
+    });
+
     it('should display the tenant locale', async () => {
       renderLanguageLocalization();
 
-      const initialValues = await act(() => ConfigManager.mock.calls[0][0].getInitialValues([{
-        value: {},
-      }]));
+      const initialValues = await act(() => ConfigManager.mock.calls[0][0].getInitialValues());
 
       expect(initialValues).toEqual({
         locale: 'en-US',
@@ -112,9 +138,7 @@ describe('LanguageLocalization', () => {
 
     renderLanguageLocalization();
 
-    await act(() => ConfigManager.mock.calls[0][0].getInitialValues([{
-      value: userSettings,
-    }]));
+    await act(() => ConfigManager.mock.calls[0][0].getInitialValues());
 
     const payload = ConfigManager.mock.calls.at(-1)[0].onBeforeSave(newUserSettings);
 
@@ -145,6 +169,24 @@ describe('LanguageLocalization', () => {
       });
 
       expect(mockSetLocale).toHaveBeenCalledWith('en-GB-u-nu-arab');
+    });
+  });
+
+  describe('when user clicks on "Reset to default" button', () => {
+    it('should apply clear user preferences and apply tenant locale', async () => {
+      renderLanguageLocalization();
+
+      await act(() => ConfigManager.mock.calls[0][0].getInitialValues());
+
+      const resetToDefaultButton = screen.getByRole('button', { name: 'ui-myprofile.settings.languageLocalization.resetToDefault' });
+
+      fireEvent.click(resetToDefaultButton);
+
+      expect(mockUpdateSetting).toHaveBeenCalledWith({
+        ...userSettings,
+        locale: null,
+      });
+      await waitFor(() => expect(mockSetLocale).toHaveBeenCalledWith('en-US-u-nu-latn'));
     });
   });
 });

@@ -1,12 +1,16 @@
 import {
+  useCallback,
   useMemo,
   useRef,
 } from 'react';
 import { Field } from 'react-final-form';
-import { useIntl } from 'react-intl';
+import { FormattedMessage, useIntl } from 'react-intl';
 
+import { config } from 'stripes-config';
 import {
+  Button,
   CommandList,
+  PaneMenu,
   Select,
   defaultKeyboardShortcuts
 } from '@folio/stripes/components';
@@ -39,12 +43,22 @@ const LanguageLocalization = () => {
     key: tenantLocaleConfig.KEY,
   });
 
+  const {
+    settings: userSettings,
+    updateSetting: updateUserSetting,
+  } = useSettings({
+    scope: userOwnLocaleConfig.SCOPE,
+    key: userOwnLocaleConfig.KEY,
+    userId: stripes.user?.user?.id,
+  });
+
   const ConnectedConfigManager = useMemo(() => stripes.connect(ConfigManager), [stripes]);
   const paneTitle = intl.formatMessage({ id: 'ui-myprofile.settings.languageLocalization.label' });
+  const userHasSetLocalePreferences = !!userSettings[fieldNames.LOCALE];
 
-  const localesOptions = useMemo(() => {
-    return localesList(intl, tenantSettings[fieldNames.LOCALE]);
-  }, [intl, tenantSettings]);
+  // tenant configuration might not have a set locale - try stripes-config locale and default to en-US
+  const tenantLocale = tenantSettings[fieldNames.LOCALE] || config.locale || 'en-US';
+  const localesOptions = useMemo(() => localesList(intl, tenantSettings[fieldNames.LOCALE]), [intl, tenantSettings]);
 
   const formatPayload = (newSettings) => {
     return {
@@ -54,34 +68,47 @@ const LanguageLocalization = () => {
   };
 
   const afterSave = ({ value: settings }) => {
-    const userLocale = settings[fieldNames.LOCALE];
-    const tenantLocale = tenantSettings[fieldNames.LOCALE];
-
-    let locale = settings[fieldNames.LOCALE];
-
-    let numberingSystem = settings.numberingSystem;
-
-    if (userLocale === tenantLocale) {
-      locale = tenantLocale;
-      numberingSystem = tenantSettings.numberingSystem;
-    }
-
+    const locale = settings[fieldNames.LOCALE];
+    const numberingSystem = settings.numberingSystem;
     const fullLocale = getFullLocale(locale, numberingSystem);
 
     stripes.setLocale(fullLocale);
   };
 
-  const getInitialValues = ([data]) => {
-    const initialUserSettings = data?.value;
-    const userLocale = initialUserSettings?.[fieldNames.LOCALE];
-    const tenantLocale = tenantSettings[fieldNames.LOCALE];
+  const getInitialValues = () => {
+    const userLocale = userSettings?.[fieldNames.LOCALE];
 
-    initialSettings.current = initialUserSettings;
+    initialSettings.current = userSettings;
 
     return {
       [fieldNames.LOCALE]: userLocale || tenantLocale,
     };
   };
+
+  const handleResetToDefault = useCallback(async () => {
+    const numberingSystem = tenantSettings.numberingSystem;
+    const fullLocale = getFullLocale(tenantLocale, numberingSystem);
+
+    await updateUserSetting({
+      ...initialSettings.current,
+      [fieldNames.LOCALE]: null,
+    });
+
+    stripes.setLocale(fullLocale);
+  }, [updateUserSetting, stripes, tenantSettings, tenantLocale]);
+
+  const lastMenu = useMemo(() => (
+    <PaneMenu>
+      <Button
+        onClick={handleResetToDefault}
+        buttonStyle="primary"
+        disabled={!userHasSetLocalePreferences}
+        marginBottom0
+      >
+        <FormattedMessage id="ui-myprofile.settings.languageLocalization.resetToDefault" />
+      </Button>
+    </PaneMenu>
+  ), [handleResetToDefault, userHasSetLocalePreferences]);
 
   return (
     <CommandList commands={defaultKeyboardShortcuts}>
@@ -96,6 +123,7 @@ const LanguageLocalization = () => {
           stripes={stripes}
           onBeforeSave={formatPayload}
           onAfterSave={afterSave}
+          lastMenu={lastMenu}
         >
           <Field
             id={fieldNames.LOCALE}
