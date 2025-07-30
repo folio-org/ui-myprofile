@@ -33,5 +33,6 @@
     "settings.appNavOrder.newItem": "Новий",
     "settings.languageLocalization.label": "Мова та локалізація",
     "settings.languageLocalization.fieldLocale.label": "Мовний стандарт (для мови відображення, формату дати тощо)",
-    "settings.languageLocalization.tenantDefault": "Клієнт за замовчуванням"
+    "settings.languageLocalization.tenantDefault": "Клієнт за замовчуванням",
+    "settings.languageLocalization.resetToDefault": "Скинути до стандартних налаштувань"
 }

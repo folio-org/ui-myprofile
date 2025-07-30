@@ -33,5 +33,6 @@
     "settings.appNavOrder.newItem": "Novo",
     "settings.languageLocalization.label": "Idioma e localização",
     "settings.languageLocalization.fieldLocale.label": "Informações locais (para exibição do idioma, formato da data, etc.)",
-    "settings.languageLocalization.tenantDefault": "Padrão do tenant"
+    "settings.languageLocalization.tenantDefault": "Padrão do tenant",
+    "settings.languageLocalization.resetToDefault": "Redefinir para o padrão"
 }

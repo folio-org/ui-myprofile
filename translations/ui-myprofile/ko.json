@@ -33,5 +33,6 @@
     "settings.appNavOrder.newItem": "New",
     "settings.languageLocalization.label": "Language & localization",
     "settings.languageLocalization.fieldLocale.label": "Locale (for language display, date format etc.)",
-    "settings.languageLocalization.tenantDefault": "Tenant default"
+    "settings.languageLocalization.tenantDefault": "Tenant default",
+    "settings.languageLocalization.resetToDefault": "Reset to default"
 }
