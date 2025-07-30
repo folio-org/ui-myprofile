@@ -33,5 +33,6 @@
     "settings.appNavOrder.newItem": "Nový",
     "settings.languageLocalization.label": "Jazyk a lokalizace",
     "settings.languageLocalization.fieldLocale.label": "Uživatelské prostředí (pro zobrazení jazyka, formátu data atd.)",
-    "settings.languageLocalization.tenantDefault": "Výchozí nastavení nájemce"
+    "settings.languageLocalization.tenantDefault": "Výchozí nastavení nájemce",
+    "settings.languageLocalization.resetToDefault": "Obnovení výchozího nastavení"
 }

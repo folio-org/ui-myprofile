@@ -33,5 +33,6 @@
     "settings.appNavOrder.newItem": "Nieuw",
     "settings.languageLocalization.label": "Taal & lokalisatie",
     "settings.languageLocalization.fieldLocale.label": "Locale (voor taalweergave, datumnotatie enz.)",
-    "settings.languageLocalization.tenantDefault": "Tenant in gebreke"
+    "settings.languageLocalization.tenantDefault": "Tenant in gebreke",
+    "settings.languageLocalization.resetToDefault": "Terugzetten naar standaard"
 }
