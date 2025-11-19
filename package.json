@@ -14,6 +14,13 @@
     "actsAs": [
       "settings"
     ],
+    "icons": [
+      {
+        "name": "app",
+        "alt": "Manage user profile settings",
+        "title": "My profile"
+      }
+    ],
     "okapiInterfaces": {
       "settings": "1.0"
     },
