@@ -32,7 +32,7 @@
     "settings.appNavOrder.reset": "Przywróć domyślne",
     "settings.appNavOrder.newItem": "Nowy",
     "settings.languageLocalization.label": "Język i lokalizacja",
-    "settings.languageLocalization.fieldLocale.label": "Lokalne (dla wyświetlanego języka, formatu daty itp.)",
-    "settings.languageLocalization.tenantDefault": "Domyślny tenant",
+    "settings.languageLocalization.fieldLocale.label": "Ustawienia lokalne (dla wyświetlanego języka, formatu daty itp.)",
+    "settings.languageLocalization.tenantDefault": "Domyślna wartość dla tenanta",
     "settings.languageLocalization.resetToDefault": "Przywróć ustawienia domyślne"
 }
