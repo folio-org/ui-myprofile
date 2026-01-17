@@ -29,7 +29,7 @@
     "settings.appNavOrder.resetSuccess": "Przywrócono domyślną kolejność wyświetlania aplikacji.",
     "settings.appNavOrder.saveSuccess": "Kolejność wyświetlania aplikacji została pomyślnie zaktualizowana.",
     "settings.appNavOrder.save": "Zapisz",
-    "settings.appNavOrder.reset": "Przywróć domyślne",
+    "settings.appNavOrder.reset": "Przywróć ustawienia domyślne",
     "settings.appNavOrder.newItem": "Nowy",
     "settings.languageLocalization.label": "Język i lokalizacja",
     "settings.languageLocalization.fieldLocale.label": "Ustawienia lokalne (dla wyświetlanego języka, formatu daty itp.)",
