@@ -22,12 +22,16 @@
     "permissionSets": [
       {
         "permissionName": "module.myprofile.enabled",
-        "displayName": "UI: My-profile module is enabled"
+        "displayName": "UI: My-profile module is enabled",
+        "subPermissions": [
+          "stripes-core.settings.read"
+        ]
       },
       {
         "permissionName": "settings.myprofile.enabled",
         "displayName": "Settings (My profile): display list of settings pages",
         "subPermissions": [
+          "stripes-core.settings.read",
           "settings.enabled",
           "mod-settings.entries.collection.get",
           "mod-settings.entries.item.post",
