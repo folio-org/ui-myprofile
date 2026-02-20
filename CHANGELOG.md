@@ -4,6 +4,7 @@
 
 * *BREAKING* Add `Language & Localization` setting. Refs UIMPROF-107.
 * User preference: Select a language > Reset to tenant default language. Refs UIMPROF-115.
+* Provide application icon. Refs UIMPROF-106.
 * Add `stripes-core.settings.read` permission to app and settings permissions. Refs UIMPROF-122.
 
 ## 10.0.0 (https://github.com/folio-org/ui-myprofile/tree/v10.0.0) (2025-03-14)
