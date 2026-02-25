@@ -6,7 +6,6 @@ import {
 import { Field } from 'react-final-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 
-import { config } from 'stripes-config';
 import {
   Button,
   CommandList,
@@ -57,7 +56,7 @@ const LanguageLocalization = () => {
   const userHasSetLocalePreferences = !!userSettings[fieldNames.LOCALE];
 
   // tenant configuration might not have a set locale - try stripes-config locale and default to en-US
-  const tenantLocale = tenantSettings[fieldNames.LOCALE] || config.locale || 'en-US';
+  const tenantLocale = tenantSettings[fieldNames.LOCALE] || stripes.locale || 'en-US';
   const localesOptions = useMemo(() => localesList(intl, tenantSettings[fieldNames.LOCALE]), [intl, tenantSettings]);
 
   const formatPayload = (newSettings) => {
