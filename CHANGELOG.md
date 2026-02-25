@@ -6,6 +6,7 @@
 * User preference: Select a language > Reset to tenant default language. Refs UIMPROF-115.
 * Provide application icon. Refs UIMPROF-106.
 * Add `stripes-core.settings.read` permission to app and settings permissions. Refs UIMPROF-122.
+* Read config data from `stripes-core` instead of `stripes-config`. Refs UIMPROF-123.
 
 ## 10.0.0 (https://github.com/folio-org/ui-myprofile/tree/v10.0.0) (2025-03-14)
 [Full Changelog](https://github.com/folio-org/ui-myprofile/compare/v9.2.0...v10.0.0)

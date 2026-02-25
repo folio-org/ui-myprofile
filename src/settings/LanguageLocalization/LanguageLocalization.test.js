@@ -131,6 +131,39 @@ describe('LanguageLocalization', () => {
     });
   });
 
+  describe('when tenant settings do not have a locale but stripes.locale is set', () => {
+    it('should use stripes.locale', async () => {
+      useSettings.mockImplementation(({ key }) => {
+        if (key === userOwnLocaleConfig.KEY) {
+          return {
+            settings: {},
+            isLoading: false,
+            updateSetting: mockUpdateSetting,
+          };
+        }
+
+        return {
+          settings: {},
+          isLoading: false,
+          updateSetting: mockUpdateSetting,
+        };
+      });
+
+      useStripes.mockReturnValue({
+        ...stripes,
+        locale: 'de-DE',
+      });
+
+      renderLanguageLocalization();
+
+      const initialValues = await act(() => ConfigManager.mock.calls[0][0].getInitialValues());
+
+      expect(initialValues).toEqual({
+        locale: 'de-DE',
+      });
+    });
+  });
+
   it('should save both initial and new settings', async () => {
     const newUserSettings = {
       locale: 'en-SE',
