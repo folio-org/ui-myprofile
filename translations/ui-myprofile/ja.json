@@ -28,7 +28,7 @@
     "settings.appNavOrder.resetError": "There was a problem resetting the app order.",
     "settings.appNavOrder.resetSuccess": "Application display order reset to default.",
     "settings.appNavOrder.saveSuccess": "Application display order has been successfully updated.",
-    "settings.appNavOrder.save": "Save",
+    "settings.appNavOrder.save": "保存",
     "settings.appNavOrder.reset": "初期設定に戻す",
     "settings.appNavOrder.newItem": "New",
     "settings.languageLocalization.label": "Language & localization",
