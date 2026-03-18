@@ -6,17 +6,24 @@ import {
   QueryClient,
 } from 'react-query';
 
-import { CalloutContext } from '@folio/stripes/core';
+import {
+  CalloutContext,
+  StripesContext,
+} from '@folio/stripes/core';
 
 import translationsProperties from './translationsProperties';
-import translations from '../../../translations/ui-myprofile/en';
 import prefixKeys from './prefixKeys';
+import buildStripes from '../__mock__/stripesCore.mock';
+import translations from '../../../translations/ui-myprofile/en';
 
 const client = new QueryClient();
+
+const STRIPES = buildStripes();
 
 const Harness = ({
   children,
   translations: translationsConfig,
+  stripes,
 }) => {
   const allTranslations = prefixKeys(translations);
 
@@ -32,19 +39,21 @@ const Harness = ({
 
   return (
     <QueryClientProvider client={client}>
-      <CalloutContext.Provider value={{ sendCallout: () => { } }}>
-        <IntlProvider
-          locale="en"
-          key="en"
-          timeZone="UTC"
-          onWarn={() => {}}
-          onError={() => {}}
-          defaultRichTextElements={defaultRichTextElements}
-          messages={allTranslations}
-        >
-          {children}
-        </IntlProvider>
-      </CalloutContext.Provider>
+      <StripesContext.Provider value={stripes || STRIPES}>
+        <CalloutContext.Provider value={{ sendCallout: () => { } }}>
+          <IntlProvider
+            locale="en"
+            key="en"
+            timeZone="UTC"
+            onWarn={() => {}}
+            onError={() => {}}
+            defaultRichTextElements={defaultRichTextElements}
+            messages={allTranslations}
+          >
+            {children}
+          </IntlProvider>
+        </CalloutContext.Provider>
+      </StripesContext.Provider>
     </QueryClientProvider>
   );
 };

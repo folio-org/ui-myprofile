@@ -15,15 +15,16 @@ import {
 } from '@folio/stripes/components';
 import {
   TitleManager,
-  tenantLocaleConfig,
   useStripes,
   userOwnLocaleConfig,
   getFullLocale,
   useSettings,
+  useConfigurations,
 } from '@folio/stripes/core';
 import { ConfigManager } from '@folio/stripes/smart-components';
 
 import { localesList } from './utils';
+import { useTenantLocale } from '../../queries';
 
 const fieldNames = {
   LOCALE: 'locale',
@@ -35,12 +36,21 @@ const LanguageLocalization = () => {
 
   const initialSettings = useRef();
 
-  const {
-    settings: tenantSettings,
-  } = useSettings({
-    scope: tenantLocaleConfig.SCOPE,
-    key: tenantLocaleConfig.KEY,
+  const { tenantLocale: tenantLocaleModLocale } = useTenantLocale();
+
+  const { data: tenantLocaleConfigurations = {} } = useConfigurations({
+    module: 'ORG',
+    configName: 'localeSettings',
   });
+
+  const tenantLocaleConfigurationsJsonString = tenantLocaleConfigurations?.configs?.[0]?.value;
+  const tenantLocaleConfigurationsParsed = tenantLocaleConfigurationsJsonString
+    ? JSON.parse(tenantLocaleConfigurationsJsonString)
+    : {};
+
+  const tenantLocaleSetting = stripes.hasInterface('locale')
+    ? tenantLocaleModLocale
+    : tenantLocaleConfigurationsParsed;
 
   const {
     settings: userSettings,
@@ -56,8 +66,8 @@ const LanguageLocalization = () => {
   const userHasSetLocalePreferences = !!userSettings[fieldNames.LOCALE];
 
   // tenant configuration might not have a set locale - try stripes-config locale and default to en-US
-  const tenantLocale = tenantSettings[fieldNames.LOCALE] || stripes.locale || 'en-US';
-  const localesOptions = useMemo(() => localesList(intl, tenantSettings[fieldNames.LOCALE]), [intl, tenantSettings]);
+  const tenantLocale = tenantLocaleSetting?.[fieldNames.LOCALE] || stripes.locale || 'en-US';
+  const localesOptions = useMemo(() => localesList(intl, tenantLocaleSetting?.[fieldNames.LOCALE]), [intl, tenantLocaleSetting]);
 
   const formatPayload = (newSettings) => {
     return {
@@ -85,7 +95,7 @@ const LanguageLocalization = () => {
   };
 
   const handleResetToDefault = useCallback(async () => {
-    const numberingSystem = tenantSettings.numberingSystem;
+    const numberingSystem = tenantLocaleSetting?.numberingSystem;
     const fullLocale = getFullLocale(tenantLocale, numberingSystem);
 
     await updateUserSetting({
@@ -94,7 +104,7 @@ const LanguageLocalization = () => {
     });
 
     stripes.setLocale(fullLocale);
-  }, [updateUserSetting, stripes, tenantSettings, tenantLocale]);
+  }, [updateUserSetting, stripes, tenantLocaleSetting, tenantLocale]);
 
   const lastMenu = useMemo(() => (
     <PaneMenu>

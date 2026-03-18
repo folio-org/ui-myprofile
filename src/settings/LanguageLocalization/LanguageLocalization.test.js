@@ -5,6 +5,7 @@ import arrayMutators from 'final-form-arrays';
 import {
   useSettings,
   useStripes,
+  useConfigurations,
   userOwnLocaleConfig,
 } from '@folio/stripes/core';
 import { ConfigManager } from '@folio/stripes/smart-components';
@@ -16,8 +17,14 @@ import {
 } from '@folio/jest-config-stripes/testing-library/react';
 
 import LanguageLocalization from './LanguageLocalization';
+import { useTenantLocale } from '../../queries';
 import Harness from '../../../test/jest/helpers/Harness';
 import buildStripes from '../../../test/jest/__mock__/stripesCore.mock';
+
+jest.mock('../../queries', () => ({
+  ...jest.requireActual('../../queries'),
+  useTenantLocale: jest.fn().mockReturnValue({}),
+}));
 
 const tenantSettings = {
   locale: 'en-US',
@@ -60,20 +67,26 @@ describe('LanguageLocalization', () => {
   beforeEach(() => {
     jest.clearAllMocks();
 
-    useSettings.mockImplementation(({ key }) => {
-      if (key === userOwnLocaleConfig.KEY) {
-        return {
-          settings: userSettings,
-          isLoading: false,
-          updateSetting: mockUpdateSetting,
-        };
-      }
-
+    useSettings.mockImplementation(() => {
       return {
-        settings: tenantSettings,
+        settings: userSettings,
         isLoading: false,
         updateSetting: mockUpdateSetting,
       };
+    });
+
+    useConfigurations.mockReturnValue({
+      data: {
+        configs: [{
+          value: JSON.stringify(tenantSettings),
+        }]
+      },
+      isLoading: false,
+    });
+
+    useTenantLocale.mockReturnValue({
+      tenantLocale: tenantSettings,
+      isLoadingTenantLocale: false,
     });
 
     useStripes.mockReturnValue(stripes);
@@ -131,22 +144,25 @@ describe('LanguageLocalization', () => {
     });
   });
 
-  describe('when tenant settings do not have a locale but stripes.locale is set', () => {
+  describe('when tenant settings and user settings do not have a locale but stripes.locale is set', () => {
     it('should use stripes.locale', async () => {
-      useSettings.mockImplementation(({ key }) => {
-        if (key === userOwnLocaleConfig.KEY) {
-          return {
-            settings: {},
-            isLoading: false,
-            updateSetting: mockUpdateSetting,
-          };
-        }
-
+      useTenantLocale.mockImplementation(() => {
         return {
-          settings: {},
-          isLoading: false,
-          updateSetting: mockUpdateSetting,
+          tenantLocale: {},
+          isLoadingTenantLocale: false,
         };
+      });
+
+      useConfigurations.mockReturnValue({
+        data: {
+          configs: [],
+        },
+        isLoading: false,
+      });
+
+      useSettings.mockReturnValue({
+        settings: {},
+        isLoading: false,
       });
 
       useStripes.mockReturnValue({
