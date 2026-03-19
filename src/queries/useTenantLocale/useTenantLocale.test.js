@@ -1,5 +1,3 @@
-import { waitFor } from '@testing-library/react';
-import { renderHook } from '@testing-library/react-hooks';
 import {
   QueryClient,
   QueryClientProvider,
@@ -10,6 +8,10 @@ import {
   useNamespace,
   useStripes,
 } from '@folio/stripes/core';
+import {
+  waitFor,
+  renderHook,
+} from '@folio/jest-config-stripes/testing-library/react';
 
 import buildStripes from '../../../test/jest/__mock__/stripesCore.mock';
 import { useTenantLocale } from './useTenantLocale';

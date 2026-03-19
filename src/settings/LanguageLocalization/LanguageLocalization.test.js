@@ -5,8 +5,6 @@ import arrayMutators from 'final-form-arrays';
 import {
   useSettings,
   useStripes,
-  useConfigurations,
-  userOwnLocaleConfig,
 } from '@folio/stripes/core';
 import { ConfigManager } from '@folio/stripes/smart-components';
 import {
@@ -67,22 +65,11 @@ describe('LanguageLocalization', () => {
   beforeEach(() => {
     jest.clearAllMocks();
 
-    useSettings.mockImplementation(() => {
-      return {
-        settings: userSettings,
-        isLoading: false,
-        updateSetting: mockUpdateSetting,
-      };
-    });
-
-    useConfigurations.mockReturnValue({
-      data: {
-        configs: [{
-          value: JSON.stringify(tenantSettings),
-        }]
-      },
+    useSettings.mockImplementation(() => ({
+      settings: userSettings,
       isLoading: false,
-    });
+      updateSetting: mockUpdateSetting,
+    }));
 
     useTenantLocale.mockReturnValue({
       tenantLocale: tenantSettings,
@@ -118,19 +105,10 @@ describe('LanguageLocalization', () => {
 
   describe('when there is no locale in user settings, but it is present in tenant settings', () => {
     beforeEach(() => {
-      useSettings.mockImplementation(({ scope }) => {
-        if (scope === userOwnLocaleConfig) {
-          return {
-            settings: {},
-            isLoading: false,
-          };
-        }
-
-        return {
-          settings: tenantSettings,
-          isLoading: false,
-        };
-      });
+      useSettings.mockImplementation(() => ({
+        settings: {},
+        isLoading: false,
+      }));
     });
 
     it('should display the tenant locale', async () => {
@@ -151,13 +129,6 @@ describe('LanguageLocalization', () => {
           tenantLocale: {},
           isLoadingTenantLocale: false,
         };
-      });
-
-      useConfigurations.mockReturnValue({
-        data: {
-          configs: [],
-        },
-        isLoading: false,
       });
 
       useSettings.mockReturnValue({
