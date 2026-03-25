@@ -5,7 +5,6 @@ import arrayMutators from 'final-form-arrays';
 import {
   useSettings,
   useStripes,
-  userOwnLocaleConfig,
 } from '@folio/stripes/core';
 import { ConfigManager } from '@folio/stripes/smart-components';
 import {
@@ -16,8 +15,14 @@ import {
 } from '@folio/jest-config-stripes/testing-library/react';
 
 import LanguageLocalization from './LanguageLocalization';
+import { useTenantLocale } from '../../queries';
 import Harness from '../../../test/jest/helpers/Harness';
 import buildStripes from '../../../test/jest/__mock__/stripesCore.mock';
+
+jest.mock('../../queries', () => ({
+  ...jest.requireActual('../../queries'),
+  useTenantLocale: jest.fn().mockReturnValue({}),
+}));
 
 const tenantSettings = {
   locale: 'en-US',
@@ -60,20 +65,15 @@ describe('LanguageLocalization', () => {
   beforeEach(() => {
     jest.clearAllMocks();
 
-    useSettings.mockImplementation(({ key }) => {
-      if (key === userOwnLocaleConfig.KEY) {
-        return {
-          settings: userSettings,
-          isLoading: false,
-          updateSetting: mockUpdateSetting,
-        };
-      }
+    useSettings.mockImplementation(() => ({
+      settings: userSettings,
+      isLoading: false,
+      updateSetting: mockUpdateSetting,
+    }));
 
-      return {
-        settings: tenantSettings,
-        isLoading: false,
-        updateSetting: mockUpdateSetting,
-      };
+    useTenantLocale.mockReturnValue({
+      tenantLocale: tenantSettings,
+      isLoadingTenantLocale: false,
     });
 
     useStripes.mockReturnValue(stripes);
@@ -105,19 +105,10 @@ describe('LanguageLocalization', () => {
 
   describe('when there is no locale in user settings, but it is present in tenant settings', () => {
     beforeEach(() => {
-      useSettings.mockImplementation(({ scope }) => {
-        if (scope === userOwnLocaleConfig) {
-          return {
-            settings: {},
-            isLoading: false,
-          };
-        }
-
-        return {
-          settings: tenantSettings,
-          isLoading: false,
-        };
-      });
+      useSettings.mockImplementation(() => ({
+        settings: {},
+        isLoading: false,
+      }));
     });
 
     it('should display the tenant locale', async () => {
@@ -131,22 +122,18 @@ describe('LanguageLocalization', () => {
     });
   });
 
-  describe('when tenant settings do not have a locale but stripes.locale is set', () => {
+  describe('when tenant settings and user settings do not have a locale but stripes.locale is set', () => {
     it('should use stripes.locale', async () => {
-      useSettings.mockImplementation(({ key }) => {
-        if (key === userOwnLocaleConfig.KEY) {
-          return {
-            settings: {},
-            isLoading: false,
-            updateSetting: mockUpdateSetting,
-          };
-        }
-
+      useTenantLocale.mockImplementation(() => {
         return {
-          settings: {},
-          isLoading: false,
-          updateSetting: mockUpdateSetting,
+          tenantLocale: {},
+          isLoadingTenantLocale: false,
         };
+      });
+
+      useSettings.mockReturnValue({
+        settings: {},
+        isLoading: false,
       });
 
       useStripes.mockReturnValue({

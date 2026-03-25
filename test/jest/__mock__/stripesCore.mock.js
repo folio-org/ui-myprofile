@@ -101,6 +101,17 @@ jest.mock('@folio/stripes/core', () => {
     removeSetting: jest.fn(),
   }));
 
+  const useConfigurations = jest.fn(() => ({
+    data: {
+      configs: [{
+        value: null
+      }]
+    },
+    isLoading: false,
+  }));
+
+  const useNamespace = () => ['@folio/myprofile', jest.fn()];
+
   return {
     ...jest.requireActual('@folio/stripes/core'),
     stripesConnect: connect,
@@ -112,6 +123,8 @@ jest.mock('@folio/stripes/core', () => {
     useStripes: jest.fn(() => STRIPES),
     getFullLocale: jest.fn((languageRegion, numberingSystem) => [languageRegion, numberingSystem].filter(Boolean).join('-u-nu-')),
     useSettings,
+    useConfigurations,
+    useNamespace,
   };
 }, { virtual: true });
 

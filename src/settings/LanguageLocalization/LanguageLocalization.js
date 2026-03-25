@@ -15,7 +15,6 @@ import {
 } from '@folio/stripes/components';
 import {
   TitleManager,
-  tenantLocaleConfig,
   useStripes,
   userOwnLocaleConfig,
   getFullLocale,
@@ -24,6 +23,7 @@ import {
 import { ConfigManager } from '@folio/stripes/smart-components';
 
 import { localesList } from './utils';
+import { useTenantLocale } from '../../queries';
 
 const fieldNames = {
   LOCALE: 'locale',
@@ -35,12 +35,7 @@ const LanguageLocalization = () => {
 
   const initialSettings = useRef();
 
-  const {
-    settings: tenantSettings,
-  } = useSettings({
-    scope: tenantLocaleConfig.SCOPE,
-    key: tenantLocaleConfig.KEY,
-  });
+  const { tenantLocale: tenantLocaleConfig } = useTenantLocale();
 
   const {
     settings: userSettings,
@@ -56,8 +51,8 @@ const LanguageLocalization = () => {
   const userHasSetLocalePreferences = !!userSettings[fieldNames.LOCALE];
 
   // tenant configuration might not have a set locale - try stripes-config locale and default to en-US
-  const tenantLocale = tenantSettings[fieldNames.LOCALE] || stripes.locale || 'en-US';
-  const localesOptions = useMemo(() => localesList(intl, tenantSettings[fieldNames.LOCALE]), [intl, tenantSettings]);
+  const tenantLocale = tenantLocaleConfig?.[fieldNames.LOCALE] || stripes.locale || 'en-US';
+  const localesOptions = useMemo(() => localesList(intl, tenantLocaleConfig?.[fieldNames.LOCALE]), [intl, tenantLocaleConfig]);
 
   const formatPayload = (newSettings) => {
     return {
@@ -85,7 +80,7 @@ const LanguageLocalization = () => {
   };
 
   const handleResetToDefault = useCallback(async () => {
-    const numberingSystem = tenantSettings.numberingSystem;
+    const numberingSystem = tenantLocaleConfig?.numberingSystem;
     const fullLocale = getFullLocale(tenantLocale, numberingSystem);
 
     await updateUserSetting({
@@ -94,7 +89,7 @@ const LanguageLocalization = () => {
     });
 
     stripes.setLocale(fullLocale);
-  }, [updateUserSetting, stripes, tenantSettings, tenantLocale]);
+  }, [updateUserSetting, stripes, tenantLocaleConfig, tenantLocale]);
 
   const lastMenu = useMemo(() => (
     <PaneMenu>
