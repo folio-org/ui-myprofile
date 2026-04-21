@@ -1,6 +1,9 @@
 # Change history for ui-myprofile
 
-## 11.0.0 IN PROGRESS
+## IN PROGRESS
+
+## 11.0.0 (https://github.com/folio-org/ui-myprofile/tree/v11.0.0) (2026-04-16)
+[Full Changelog](https://github.com/folio-org/ui-myprofile/compare/v10.0.0...v11.0.0)
 
 * *BREAKING* Add `Language & Localization` setting. Refs UIMPROF-107.
 * User preference: Select a language > Reset to tenant default language. Refs UIMPROF-115.
