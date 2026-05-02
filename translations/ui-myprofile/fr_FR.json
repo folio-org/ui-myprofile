@@ -32,7 +32,7 @@
     "settings.appNavOrder.reset": "Réinitialiser",
     "settings.appNavOrder.newItem": "Nouveau",
     "settings.languageLocalization.label": "Language & localization",
-    "settings.languageLocalization.fieldLocale.label": "Locale (for language display, date format etc.)",
+    "settings.languageLocalization.fieldLocale.label": "Paramètres régionaux (pour l'affichage de la langue, le format de la date, etc.)",
     "settings.languageLocalization.tenantDefault": "Tenant default",
-    "settings.languageLocalization.resetToDefault": "Reset to default"
+    "settings.languageLocalization.resetToDefault": "Réinitialiser"
 }
