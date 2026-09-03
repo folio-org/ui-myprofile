@@ -12,6 +12,7 @@ import {
   render,
   screen,
   waitFor,
+  within,
 } from '@folio/jest-config-stripes/testing-library/react';
 
 import LanguageLocalization from './LanguageLocalization';
@@ -207,6 +208,75 @@ describe('LanguageLocalization', () => {
         locale: null,
       });
       await waitFor(() => expect(mockSetLocale).toHaveBeenCalledWith('en-US-u-nu-latn'));
+    });
+  });
+
+  describe('locale field filtering', () => {
+    const originalConfigManagerImpl = ConfigManager.getMockImplementation();
+
+    beforeEach(() => {
+      // render the ConfigManager's children so the Selection field under test is in the DOM
+      ConfigManager.mockImplementation(({ children, lastMenu }) => (
+        <div>
+          ConfigManager
+          {lastMenu}
+          {children}
+        </div>
+      ));
+    });
+
+    afterEach(() => {
+      ConfigManager.mockImplementation(originalConfigManagerImpl);
+    });
+
+    it('renders the locale field as a Selection control with a filterable options list', async () => {
+      renderLanguageLocalization();
+
+      const toggleButton = screen.getByRole('button', { name: /Locale/i });
+
+      fireEvent.click(toggleButton);
+
+      expect(screen.getByRole('combobox')).toBeInTheDocument();
+      expect(screen.getByRole('listbox')).toBeInTheDocument();
+    });
+
+    it('matches options by a substring that only appears in the middle of the label ("contains" filtering)', async () => {
+      renderLanguageLocalization();
+
+      const toggleButton = screen.getByRole('button', { name: /Locale/i });
+
+      fireEvent.click(toggleButton);
+
+      const filterInput = screen.getByRole('combobox');
+
+      // "China" only appears mid-label, e.g. "Chinese (China) / 中文（中国）" - it would not
+      // match under the component's default starts-with filtering.
+      fireEvent.change(filterInput, { target: { value: 'China' } });
+
+      await waitFor(() => {
+        const options = within(screen.getByRole('listbox')).getAllByRole('option');
+
+        expect(options.some((option) => option.textContent.includes('China'))).toBe(true);
+      });
+    });
+
+    it('returns no options when the filter text does not match any locale label', async () => {
+      renderLanguageLocalization();
+
+      const toggleButton = screen.getByRole('button', { name: /Locale/i });
+
+      fireEvent.click(toggleButton);
+
+      const filterInput = screen.getByRole('combobox');
+
+      fireEvent.change(filterInput, { target: { value: 'this-does-not-match-any-locale' } });
+
+      await waitFor(() => {
+        const options = within(screen.getByRole('listbox')).getAllByRole('option');
+
+        expect(options).toHaveLength(1);
+        expect(options[0]).toHaveTextContent('List is empty');
+      });
     });
   });
 });
