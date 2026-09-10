@@ -7,6 +7,7 @@ import {
   useStripes,
 } from '@folio/stripes/core';
 import { ConfigManager } from '@folio/stripes/smart-components';
+import { Selection } from '@folio/stripes/components';
 import {
   fireEvent,
   render,
@@ -15,6 +16,7 @@ import {
 } from '@folio/jest-config-stripes/testing-library/react';
 
 import LanguageLocalization from './LanguageLocalization';
+import { containsFilter } from './utils';
 import { useTenantLocale } from '../../queries';
 import Harness from '../../../test/jest/helpers/Harness';
 import buildStripes from '../../../test/jest/__mock__/stripesCore.mock';
@@ -89,6 +91,15 @@ describe('LanguageLocalization', () => {
       configName: 'user-locale-key',
       userId: 'b1add99d-530b-5912-94f3-4091b4d87e2c',
     }), {});
+  });
+
+  it('should render the locale field with the Selection component configured for contains filtering', () => {
+    renderLanguageLocalization();
+
+    const { children: localeField } = ConfigManager.mock.calls[0][0];
+
+    expect(localeField.props.component).toBe(Selection);
+    expect(localeField.props.onFilter).toBe(containsFilter);
   });
 
   describe('when there is a locale in user settings', () => {
@@ -207,6 +218,22 @@ describe('LanguageLocalization', () => {
         locale: null,
       });
       await waitFor(() => expect(mockSetLocale).toHaveBeenCalledWith('en-US-u-nu-latn'));
+    });
+  });
+
+  describe('when filtering the locale options', () => {
+    it('matches a locale whose label contains the filter text but does not start with it', async () => {
+      renderLanguageLocalization();
+
+      fireEvent.click(document.getElementById('locale'));
+      fireEvent.change(screen.getByRole('combobox'), { target: { value: 'France' } });
+
+      await waitFor(() => {
+        const options = screen.getAllByRole('option');
+
+        expect(options).toHaveLength(1);
+        expect(options[0].textContent).toMatch(/France/);
+      });
     });
   });
 });

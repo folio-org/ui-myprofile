@@ -58,3 +58,18 @@ export const localesList = (intl, tenantLocale) => {
 
   return locales;
 };
+
+/**
+ * containsFilter: filters a flat list of { value, label } options to those
+ * whose label contains the given filter text, case-insensitively, anywhere
+ * in the string (not just at the start).
+ *
+ * @param {string} filterText text typed into the Selection filter input
+ * @param {array} list array of {value, label} options to filter
+ * @returns {array} filtered array of {value, label} options
+ */
+export const containsFilter = (filterText, list = []) => {
+  const search = filterText.toLowerCase();
+
+  return list.filter(({ label }) => label.toLowerCase().includes(search));
+};
