@@ -14,7 +14,7 @@ import {
   waitFor,
 } from '@folio/jest-config-stripes/testing-library/react';
 
-import LanguageLocalization from './LanguageLocalization';
+import LanguageLocalization, { filterByContains } from './LanguageLocalization';
 import { useTenantLocale } from '../../queries';
 import Harness from '../../../test/jest/helpers/Harness';
 import buildStripes from '../../../test/jest/__mock__/stripesCore.mock';
@@ -208,5 +208,78 @@ describe('LanguageLocalization', () => {
       });
       await waitFor(() => expect(mockSetLocale).toHaveBeenCalledWith('en-US-u-nu-latn'));
     });
+  });
+
+  describe('locale Selection field filtering', () => {
+    // ConfigManager is normally mocked to render only its "lastMenu" prop. react-final-form
+    // re-renders LanguageLocalization (and so ConfigManager) after the initial mount, so a
+    // mockImplementationOnce override would only apply to the first, discarded render; use a
+    // regular mockImplementation, restored afterwards, so every render for this test shows children.
+    const defaultConfigManagerImpl = ConfigManager.getMockImplementation();
+
+    afterEach(() => {
+      ConfigManager.mockImplementation(defaultConfigManagerImpl);
+    });
+
+    it('should narrow the options by a substring that is not a prefix of any label', async () => {
+      ConfigManager.mockImplementation(({ children, lastMenu }) => (
+        <div>
+          {children}
+          {lastMenu}
+        </div>
+      ));
+
+      renderLanguageLocalization();
+
+      // the Selection field's id mirrors the "locale" field name
+      fireEvent.click(document.getElementById('locale'));
+
+      const filterInput = screen.getByRole('combobox');
+
+      fireEvent.change(filterInput, { target: { value: 'ish' } });
+
+      await waitFor(() => {
+        const options = screen.getAllByRole('option');
+
+        expect(options.length).toBeGreaterThan(0);
+        options.forEach((option) => {
+          expect(option.textContent.toLowerCase()).toContain('ish');
+        });
+      });
+
+      const matchesOnlyAsSubstring = screen.getAllByRole('option').some((option) => {
+        const text = option.textContent.toLowerCase();
+
+        return text.includes('ish') && !text.startsWith('ish');
+      });
+
+      expect(matchesOnlyAsSubstring).toBe(true);
+    });
+  });
+});
+
+describe('filterByContains', () => {
+  const list = [
+    { value: 'en-US', label: 'American English' },
+    { value: 'en-GB', label: 'British English' },
+    { value: 'pl', label: 'Polish' },
+  ];
+
+  it('matches labels by a substring regardless of its position', () => {
+    expect(filterByContains('lish', list)).toEqual([
+      { value: 'en-US', label: 'American English' },
+      { value: 'en-GB', label: 'British English' },
+      { value: 'pl', label: 'Polish' },
+    ]);
+  });
+
+  it('matches case-insensitively', () => {
+    expect(filterByContains('POLISH', list)).toEqual([
+      { value: 'pl', label: 'Polish' },
+    ]);
+  });
+
+  it('returns an empty array when no label contains the filter text', () => {
+    expect(filterByContains('xyz', list)).toEqual([]);
   });
 });

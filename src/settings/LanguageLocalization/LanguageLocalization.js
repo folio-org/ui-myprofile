@@ -30,7 +30,7 @@ const fieldNames = {
 };
 
 // contains matching, rather than Selection's default starts-with behavior
-const filterByContains = (filterText, list) => {
+export const filterByContains = (filterText, list) => {
   const normalizedFilter = filterText.toLowerCase();
 
   return list.filter(({ label }) => label.toLowerCase().includes(normalizedFilter));
