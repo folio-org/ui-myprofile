@@ -14,9 +14,14 @@ import { supportedLocales } from '@folio/stripes/core';
  * e.g. given the context's locale is `ar` and the keys `ar` and `zh-CN` show:
  *     العربية / العربية
  *     الصينية (الصين) / 中文（中国）
+ * The entry matching `tenantLocale`, if any, has its label suffixed with a
+ * "tenant default" marker. The returned array is sorted by `label`.
  *
  * @param {object} intl react-intl object in the current context's locale
- * @returns {array} array of {value, label} suitable for a Select
+ * @param {string} [tenantLocale] the tenant's configured default locale code, if any
+ * @returns {Array<{value: string, label: string}>} locale entries, sorted by
+ *   `label`; `value` is the locale code and `label` is its display name
+ *   (with a tenant-default marker appended when it matches `tenantLocale`)
  */
 export const localesList = (intl, tenantLocale) => {
   // This is optional but highly recommended
