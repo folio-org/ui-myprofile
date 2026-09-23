@@ -13,6 +13,7 @@ import {
   screen,
   waitFor,
 } from '@folio/jest-config-stripes/testing-library/react';
+import userEvent from '@folio/jest-config-stripes/testing-library/user-event';
 
 import LanguageLocalization from './LanguageLocalization';
 import { useTenantLocale } from '../../queries';
@@ -189,6 +190,30 @@ describe('LanguageLocalization', () => {
       });
 
       expect(mockSetLocale).toHaveBeenCalledWith('en-GB-u-nu-arab');
+    });
+  });
+
+  describe('when filtering the locale options', () => {
+    it('matches a locale by a substring occurring anywhere in the label, not just at the start', async () => {
+      renderLanguageLocalization();
+
+      await act(() => ConfigManager.mock.calls[0][0].getInitialValues());
+
+      await userEvent.click(document.getElementById('locale'));
+      // "razil" occurs mid-label ("Brazilian Portuguese"), never at the start of any
+      // label, so a match here proves contains-matching rather than prefix-matching.
+      await userEvent.type(screen.getByPlaceholderText('Filter options list'), 'razil');
+
+      await waitFor(() => {
+        const optionLabels = screen.getAllByRole('option').map(option => option.textContent);
+
+        expect(optionLabels.some(label => /brazilian portuguese/i.test(label))).toBe(true);
+      });
+
+      const optionLabels = screen.getAllByRole('option').map(option => option.textContent);
+
+      expect(optionLabels).toHaveLength(1);
+      expect(optionLabels.some(label => /european portuguese/i.test(label))).toBe(false);
     });
   });
 

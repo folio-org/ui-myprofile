@@ -6,7 +6,7 @@ import {
 import { supportedLocales } from '@folio/stripes/core';
 
 /**
- * localesList: list of available locales suitable for a Select
+ * localesList: list of available locales suitable for a Selection
  * label contains language in context's locale and in iteree's locale
  * e.g. given the context's locale is `en` and the keys `ar` and `zh-CN` show:
  *     Arabic / العربية
@@ -16,7 +16,7 @@ import { supportedLocales } from '@folio/stripes/core';
  *     الصينية (الصين) / 中文（中国）
  *
  * @param {object} intl react-intl object in the current context's locale
- * @returns {array} array of {value, label} suitable for a Select
+ * @returns {array} array of {value, label} suitable for a Selection
  */
 export const localesList = (intl, tenantLocale) => {
   // This is optional but highly recommended
@@ -57,4 +57,18 @@ export const localesList = (intl, tenantLocale) => {
   locales.sort((a, b) => a.label.localeCompare(b.label));
 
   return locales;
+};
+
+/**
+ * filterLocalesByContains: filter for Selection's onFilter, matching
+ * anywhere in the label rather than only at the start.
+ *
+ * @param {string} filterText text typed into the Selection's filter input
+ * @param {array} dataOptions array of {value, label} to filter
+ * @returns {array} filtered array of {value, label}
+ */
+export const filterLocalesByContains = (filterText, dataOptions = []) => {
+  const term = filterText.toLowerCase();
+
+  return dataOptions.filter(({ label }) => label.toLowerCase().includes(term));
 };

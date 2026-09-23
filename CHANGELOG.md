@@ -2,6 +2,8 @@
 
 ## IN PROGRESS
 
+* Replace Language dropdown with Selection component and use contains-based search. Refs UIMPROF-127.
+
 ## 11.0.0 (https://github.com/folio-org/ui-myprofile/tree/v11.0.0) (2026-04-16)
 [Full Changelog](https://github.com/folio-org/ui-myprofile/compare/v10.0.0...v11.0.0)
 
