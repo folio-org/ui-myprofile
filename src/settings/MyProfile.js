@@ -1,84 +1,54 @@
-import React, { Component } from 'react';
-import { FormattedMessage, injectIntl } from 'react-intl';
+import { useIntl, FormattedMessage } from 'react-intl';
 import { PropTypes } from 'prop-types';
 
 import { Settings } from '@folio/stripes/smart-components';
-import { stripesShape, TitleManager } from '@folio/stripes/core';
+import { TitleManager, useStripes } from '@folio/stripes/core';
 
 import ChangePassword from './ChangePassword';
 import AppListSettings from './AppOrderSettings';
 import LanguageLocalization from './LanguageLocalization';
+import useApplicationSettings from './useApplicationSettings';
 
-class MyProfile extends Component {
-  static isLocalLogin(stripes) {
-    return !stripes.okapi.ssoEnabled;
-  }
+const MyProfile = ({
+  actAs,
+  location,
+  match,
+  showSettings,
+}) => {
+  const { formatMessage } = useIntl();
+  const stripes = useStripes();
 
-  static propTypes = {
-    actAs: PropTypes.string.isRequired,
-    location: PropTypes.object.isRequired,
-    match: PropTypes.object.isRequired,
-    showSettings: PropTypes.bool.isRequired,
-    stripes: stripesShape.isRequired,
-    intl: PropTypes.object.isRequired,
-  };
-
-  constructor(props) {
-    super(props);
-
-    this.pages = this.createSettingsPages();
-  }
-
-  createSettingsPages() {
-    return [
-      {
-        route: 'app-order',
-        label: <FormattedMessage id="ui-myprofile.settings.appNavOrder.label" />,
-        component: AppListSettings,
-        perm: 'ui-myprofile.settings.main-nav-order.manage',
-      }
-    ]
-      .concat(
-        this.registerChangePasswordPage()
-      )
-      .concat({
-        route: 'language-localization',
-        label: <FormattedMessage id="ui-myprofile.settings.languageLocalization.label" />,
-        component: LanguageLocalization,
-      })
-      .filter((page) => page);
-  }
-
-  registerChangePasswordPage() {
-    const { ssoEnabled } = this.props.stripes.okapi;
-    const showPasswordPage = !ssoEnabled;
-
-    /* istanbul ignore if  */
-    if (!showPasswordPage) {
-      return undefined;
+  const pages = [
+    {
+      route: 'app-order',
+      label: <FormattedMessage id="ui-myprofile.settings.appNavOrder.label" />,
+      component: AppListSettings,
+      perm: 'ui-myprofile.settings.main-nav-order.manage',
     }
+  ]
+    .concat(
+      stripes.okapi.ssoEnabled ? undefined : {
+        route: 'password',
+        label: <FormattedMessage id="ui-myprofile.settings.changePassword.label" />,
+        component: ChangePassword,
+        perm: 'ui-myprofile.settings.change-password',
+      }
+    )
+    .concat({
+      route: 'language-localization',
+      label: <FormattedMessage id="ui-myprofile.settings.languageLocalization.label" />,
+      component: LanguageLocalization,
+    })
+    .filter(Boolean);
 
-    return {
-      route: 'password',
-      label: <FormattedMessage id="ui-myprofile.settings.changePassword.label" />,
-      component: ChangePassword,
-      perm: 'ui-myprofile.settings.change-password',
-    };
-  }
+  const applicationPages = useApplicationSettings();
 
-  render() {
-    /* istanbul ignore if  */
-    if (!this.pages.length) return null;
+  const sections = [
+    { label: formatMessage({ id: 'ui-myprofile.label.section.myprofileSettings' }), pages },
+    { label: formatMessage({ id: 'ui-myprofile.label.section.applicationSettings' }), pages: applicationPages },
+  ];
 
-    const {
-      actAs,
-      location,
-      match,
-      showSettings,
-      stripes,
-      intl: { formatMessage },
-    } = this.props;
-
+  if (pages.length || applicationPages.length) {
     return (
       <TitleManager page={formatMessage({ id: 'ui-myprofile.label.settings' })}>
         <Settings
@@ -87,12 +57,21 @@ class MyProfile extends Component {
           match={match}
           showSettings={showSettings}
           stripes={stripes}
-          pages={this.pages}
+          sections={sections}
           paneTitle={<FormattedMessage id="ui-myprofile.settings.index.paneTitle" />}
         />
       </TitleManager>
     );
   }
-}
 
-export default injectIntl(MyProfile);
+  return null;
+};
+
+MyProfile.propTypes = {
+  actAs: PropTypes.string.isRequired,
+  location: PropTypes.object.isRequired,
+  match: PropTypes.object.isRequired,
+  showSettings: PropTypes.bool.isRequired,
+};
+
+export default MyProfile;
