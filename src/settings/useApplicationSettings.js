@@ -1,6 +1,5 @@
 import { useMemo } from 'react';
 
-import { connectFor } from '@folio/stripes/connect';
 import { useStripes, useModules, AppIcon } from '@folio/stripes/core';
 
 const packageName = {
@@ -34,32 +33,34 @@ const useApplicationSettings = () => {
     </AppIcon>
   );
 
- return useMemo(() => (modules.myprofile || [])
-  .filter(x => stripes.hasPerm(`settings.${x.module.replace(packageName.PACKAGE_SCOPE_REGEX, '')}.enabled`))
-  .sort((x, y) => x.displayName.toLowerCase().localeCompare(y.displayName.toLowerCase()))
-  .map((m) => {
-    try {
-      const connect = connectFor(m.module, stripes.epics, stripes.logger);
-      const ModuleComponent = connect(m.getModule());
-      const moduleStripes = stripes.clone({ connect });
+  return useMemo(() => (modules.myprofile || [])
+    .filter(x => stripes.hasPerm(`settings.${x.module.replace(packageName.PACKAGE_SCOPE_REGEX, '')}.enabled`))
+    .sort((x, y) => x.displayName.toLowerCase().localeCompare(y.displayName.toLowerCase()))
+    .map((m) => {
+      try {
+        const ModuleComponent = m.getModule();
 
-      // trim leading slashes so we can render relative routes under /settings/myprofile
-      const route = m.route.replace(/^\//, '');
+        // trim leading slashes so we can render relative routes under /settings/myprofile
+        const route = m.route.replace(/^\//, '');
 
-      const Delegate = (props) => (
-        <ModuleComponent
-          {...props}
-          stripes={moduleStripes}
-          showMyprofile
-        />
-      );
+        const Delegate = (props) => (
+          <ModuleComponent
+            {...props}
+            stripes={stripes}
+            showMyprofile
+          />
+        );
 
-      return { route, label: labelForModule(m), component: Delegate };
-    } catch (error) {
-      console.error(`ERROR: could not load mysettings for ${m.module}`)
-      console.error(error); // eslint-disable-line no-console
-    }
-  }), [modules.myprofile, stripes]);
+        return { route, label: labelForModule(m), component: Delegate };
+      } catch (error) {
+        // eslint-disable-next-line no-console
+        console.error(`ERROR: could not load mysettings for ${m.module}`, error);
+
+        return null;
+      }
+    })
+    .filter(Boolean),
+  [modules.myprofile, stripes]);
 };
 
 export default useApplicationSettings;

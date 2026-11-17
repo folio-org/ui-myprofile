@@ -1,7 +1,6 @@
 import { render, renderHook, screen } from '@testing-library/react';
 
 import { useModules, useStripes } from '@folio/stripes/core';
-import { connectFor } from '@folio/stripes/connect';
 
 import useApplicationSettings from './useApplicationSettings';
 
@@ -9,10 +8,6 @@ jest.mock('@folio/stripes/core', () => ({
   useModules: jest.fn(),
   useStripes: jest.fn(),
   AppIcon: ({ children }) => <span>{children}</span>, // eslint-disable-line react/prop-types
-}));
-
-jest.mock('@folio/stripes/connect', () => ({
-  connectFor: jest.fn(),
 }));
 
 const makeModule = (name, displayName, route) => ({
@@ -36,12 +31,12 @@ describe('useApplicationSettings', () => {
       clone: jest.fn(() => moduleStripes),
     };
     useStripes.mockReturnValue(stripes);
-    connectFor.mockReturnValue(C => C);
   });
 
   it('returns an empty array when there are no myprofile modules', () => {
     useModules.mockReturnValue({});
     const { result } = renderHook(() => useApplicationSettings());
+
     expect(result.current).toEqual([]);
   });
 
@@ -77,17 +72,15 @@ describe('useApplicationSettings', () => {
     const { result } = renderHook(() => useApplicationSettings());
     const [{ label, component: Delegate }] = result.current;
 
-    expect(connectFor).toHaveBeenCalledWith('@folio/alpha', stripes.epics, stripes.logger);
-    expect(stripes.clone).toHaveBeenCalledWith({ connect: expect.any(Function) });
-
     render(<>{label}<Delegate /></>);
     expect(screen.getByText('Alpha')).toBeDefined();
-    expect(screen.getByText('alpha showMyprofile=true stripes=moduleStripes')).toBeDefined();
+    expect(screen.getByText(/alpha showMyprofile=true/)).toBeDefined();
   });
 
   it('traps errors when a module fails to load and logs an error', () => {
     const spy = jest.spyOn(console, 'error').mockImplementation(() => {});
     const bad = makeModule('bad', 'Bad', '/bad');
+
     bad.getModule.mockImplementation(() => { throw new Error('boom'); });
     useModules.mockReturnValue({ myprofile: [bad] });
 
