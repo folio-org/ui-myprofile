@@ -1,4 +1,4 @@
-import { useRef } from 'react';
+import { useCallback } from 'react';
 import {
   KeyboardCode,
 } from '@dnd-kit/core';
@@ -34,7 +34,7 @@ const collectDOMRects = (id) => {
 };
 
 export const useDOMKeyboardCoordinates = ({ id }) => {
-  const MultiColumnKeyboarCoordinateGetter = useRef((
+  const getter = useCallback((
     event,
     {
       context: {
@@ -89,9 +89,7 @@ export const useDOMKeyboardCoordinates = ({ id }) => {
     }
 
     return undefined;
-  });
+  }, [id]);
 
-  return {
-    getter: MultiColumnKeyboarCoordinateGetter.current
-  };
+  return { getter };
 };

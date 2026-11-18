@@ -1,4 +1,4 @@
-import { useCallback, useState, useEffect } from 'react';
+import { useCallback, useState } from 'react';
 import isEqual from 'lodash/isEqual';
 import { Pane, PaneFooter, Button, LoadingPane } from '@folio/stripes/components';
 import { useAppOrderContext, useCallout } from '@folio/stripes/core';
@@ -18,17 +18,20 @@ const AppListSettings = () => {
 
 
   const [items, setItems] = useState(appNavOrder);
+  const [prevAppNavOrder, setPrevAppNavOrder] = useState(appNavOrder);
 
-  useEffect(() => {
+  // re-sync local state when the context value changes
+  if (prevAppNavOrder !== appNavOrder) {
+    setPrevAppNavOrder(appNavOrder);
     setItems(appNavOrder);
-  }, [appNavOrder]);
+  }
 
   // Save the preference using `updateList` function from the AppOrderContext
   const handleSave = useCallback(() => {
     try {
       updateList(items);
       callout.sendCallout({ message: formatMessage({ id: 'ui-myprofile.settings.appNavOrder.saveSuccess' }) });
-    } catch (err) {
+    } catch {
       callout.sendCallout({ type: 'error', message: formatMessage({ id: 'ui-myprofile.settings.appNavOrder.saveError' }) });
     }
   }, [items, callout, updateList, formatMessage]);
@@ -39,7 +42,7 @@ const AppListSettings = () => {
       reset();
       setItems(appNavOrder);
       callout.sendCallout({ message: formatMessage({ id: 'ui-myprofile.settings.appNavOrder.resetSuccess' }) });
-    } catch (err) {
+    } catch {
       callout.sendCallout({ type: 'error', message: formatMessage({ id: 'ui-myprofile.settings.appNavOrder.resetError' }) });
     }
   }, [formatMessage, appNavOrder, reset, callout]);

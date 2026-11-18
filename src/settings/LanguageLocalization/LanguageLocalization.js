@@ -107,6 +107,7 @@ const LanguageLocalization = () => {
   return (
     <CommandList commands={defaultKeyboardShortcuts}>
       <TitleManager record={paneTitle}>
+        {/* oxlint-disable-next-line react/static-components -- memoized on stripes */}
         <ConnectedConfigManager
           formType="final-form"
           label={paneTitle}
