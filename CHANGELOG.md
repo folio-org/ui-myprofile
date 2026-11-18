@@ -4,6 +4,7 @@
 
 * Update `@folio/jest-config-stripes` package to ^4.0.0. Refs UIMPROF-129.
 * Update `@folio/jest-config-stripes` to ^5, `@folio/eslint-config-stripes` to ^10, `@folio/stripes-cli` to ^6. Refs UIMPROF-131.
+* Show application settings. Refs UIMPROF-130.
 
 ## 11.0.0 (https://github.com/folio-org/ui-myprofile/tree/v11.0.0) (2026-04-16)
 [Full Changelog](https://github.com/folio-org/ui-myprofile/compare/v10.0.0...v11.0.0)
