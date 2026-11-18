@@ -226,7 +226,7 @@ class ChangePassword extends Component {
                     id="current-password"
                     name="currentPassword"
                     label={<FormattedMessage id="ui-myprofile.settings.changePassword.currentPassword" />}
-                    autoFocus
+                    autoFocus // oxlint-disable-line jsx-a11y/no-autofocus
                     validate={this.validators.currentPassword}
                   />
                 </div>

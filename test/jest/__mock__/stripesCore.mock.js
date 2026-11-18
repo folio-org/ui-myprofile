@@ -8,6 +8,7 @@ const buildStripes = (otherProperties = {}) => ({
   currency: 'USD',
   hasInterface: () => true,
   hasPerm: () => {},
+  hasAnyPerm: () => {},
   locale: 'en-US',
   logger: {
     log: () => {},
@@ -19,6 +20,7 @@ const buildStripes = (otherProperties = {}) => ({
   plugins: {},
   setBindings: () => {},
   setCurrency: () => {},
+  setIsAuthenticated: () => {},
   setLocale: jest.fn(),
   setSinglePlugin: () => {},
   setTimezone: () => {},
