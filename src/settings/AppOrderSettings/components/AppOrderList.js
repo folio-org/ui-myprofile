@@ -1,4 +1,4 @@
-import React, { useCallback, useState, useEffect, useRef, useMemo } from 'react';
+import React, { useCallback, useState, useMemo } from 'react';
 import uniqueId from 'lodash/uniqueId';
 
 import {
@@ -105,12 +105,8 @@ export const AppOrderList = ({
   id: idProp,
 }) => {
   const { formatMessage, locale } = useIntl();
-  const id = useRef(idProp || uniqueId('draglist-')).current;
-  const [draggable, setDraggable] = useState(items.map(itemToString));
-
-  useEffect(() => {
-    setDraggable(items.map(itemToString));
-  }, [items, itemToString]);
+  const [id] = useState(() => idProp || uniqueId('draglist-'));
+  const draggable = useMemo(() => items.map(itemToString), [items, itemToString]);
 
   const announcements = useMemo(
     () => getAnnouncementMessages(draggable, formatMessage),

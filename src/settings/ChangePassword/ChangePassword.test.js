@@ -4,6 +4,7 @@ import { createStore, combineReducers } from 'redux';
 import { reducer as formReducer } from 'redux-form';
 import { MemoryRouter } from 'react-router-dom';
 import {
+  act,
   cleanup,
   render,
   fireEvent,
@@ -23,10 +24,14 @@ const reducer = combineReducers(reducers);
 
 let store = createStore(reducer);
 
-const renderChangePassword = (props = {}) => {
+// PasswordStrength lazy-loads its library and sets state when it resolves;
+// render inside an async act so that update is flushed before the test continues.
+const renderChangePassword = async (props = {}) => {
   const ChangePasswordWithStripes = ChangePassword;
+  let result;
 
-  return render(
+  await act(async () => {
+    result = render(
     <Harness>
       <CalloutContextProvider>
         <Provider store={store}>
@@ -44,11 +49,20 @@ const renderChangePassword = (props = {}) => {
         </Provider>
       </CalloutContextProvider>
     </Harness>
-  );
+    );
+  });
+
+  return result;
 };
 
 describe('Given ChangePassword', () => {
+  beforeEach(() => {
+    // stripes-form warns about submit failures, which several tests trigger on purpose
+//    jest.spyOn(console, 'warn').mockImplementation(() => {});
+  });
+
   afterEach(() => {
+    jest.restoreAllMocks();
     cleanup();
     store = createStore(reducer);
   });
@@ -56,8 +70,8 @@ describe('Given ChangePassword', () => {
   describe('when component is rendered', () => {
     let component;
 
-    beforeEach(() => {
-      component = renderChangePassword();
+    beforeEach(async () => {
+      component = await renderChangePassword();
     });
 
     it('should have a current password field', () => {
@@ -90,8 +104,8 @@ describe('Given ChangePassword', () => {
   describe('when toggling mask password', () => {
     let component;
 
-    beforeEach(() => {
-      component = renderChangePassword();
+    beforeEach(async () => {
+      component = await renderChangePassword();
 
       fireEvent.click(component.getByTestId('change-password-toggle-mask-btn'));
     });
@@ -110,8 +124,8 @@ describe('Given ChangePassword', () => {
   describe('validating current password', () => {
     let component;
 
-    beforeEach(() => {
-      component = renderChangePassword();
+    beforeEach(async () => {
+      component = await renderChangePassword();
       const field = component.getByTestId('current-password-field');
 
       fireEvent.change(field, { target: { value: 'a' } });
@@ -127,8 +141,8 @@ describe('Given ChangePassword', () => {
   describe('validating new password', () => {
     let component;
 
-    beforeEach(() => {
-      component = renderChangePassword();
+    beforeEach(async () => {
+      component = await renderChangePassword();
       const field = component.getByTestId('new-password-field');
 
       fireEvent.change(field, { target: { value: 'a' } });
@@ -144,8 +158,8 @@ describe('Given ChangePassword', () => {
   describe('validating confirm password', () => {
     let component;
 
-    beforeEach(() => {
-      component = renderChangePassword();
+    beforeEach(async () => {
+      component = await renderChangePassword();
       const field = component.getByTestId('confirm-password-field');
 
       fireEvent.change(field, { target: { value: 'a' } });
@@ -161,8 +175,8 @@ describe('Given ChangePassword', () => {
   describe('validating new and confirm password fails', () => {
     let component;
 
-    beforeEach(() => {
-      component = renderChangePassword();
+    beforeEach(async () => {
+      component = await renderChangePassword();
 
       const newPasswordField = component.getByTestId('new-password-field');
       const confirmPasswordField = component.getByTestId('confirm-password-field');
@@ -180,8 +194,8 @@ describe('Given ChangePassword', () => {
   describe('validating new and confirm password pass', () => {
     let component;
 
-    beforeEach(() => {
-      component = renderChangePassword();
+    beforeEach(async () => {
+      component = await renderChangePassword();
 
       const newPasswordField = component.getByTestId('new-password-field');
       const confirmPasswordField = component.getByTestId('confirm-password-field');
@@ -201,7 +215,7 @@ describe('Given ChangePassword', () => {
 
     beforeEach(async () => {
       changePasswordPostSpy.mockResolvedValue();
-      component = renderChangePassword();
+      component = await renderChangePassword();
 
       const currentPasswordField = component.getByTestId('current-password-field');
       const newPasswordField = component.getByTestId('new-password-field');
@@ -214,7 +228,9 @@ describe('Given ChangePassword', () => {
       fireEvent.click(submitButton);
 
       // wait for response
-      await new Promise(resolve => setTimeout(resolve, 1000));
+      await act(async () => {
+        await new Promise(resolve => setTimeout(resolve, 1000));
+      });
     });
 
     it('all fields should be reset upon successful submit', () => {
@@ -235,7 +251,7 @@ describe('Given ChangePassword', () => {
       changePasswordPostSpy.mockRejectedValue({
         status: 401,
       });
-      component = renderChangePassword();
+      component = await renderChangePassword();
 
       const currentPasswordField = component.getByTestId('current-password-field');
       const newPasswordField = component.getByTestId('new-password-field');
@@ -248,7 +264,9 @@ describe('Given ChangePassword', () => {
       fireEvent.click(submitButton);
 
       // wait for error message
-      await new Promise(resolve => setTimeout(resolve, 1000));
+      await act(async () => {
+        await new Promise(resolve => setTimeout(resolve, 1000));
+      });
     });
 
     it('all fields should not be reset upon failed submit', () => {
@@ -269,7 +287,7 @@ describe('Given ChangePassword', () => {
       changePasswordPostSpy.mockRejectedValue({
         status: 500,
       });
-      component = renderChangePassword();
+      component = await renderChangePassword();
 
       const currentPasswordField = component.getByTestId('current-password-field');
       const newPasswordField = component.getByTestId('new-password-field');
@@ -282,7 +300,9 @@ describe('Given ChangePassword', () => {
       fireEvent.click(submitButton);
 
       // wait for error message
-      await new Promise(resolve => setTimeout(resolve, 100));
+      await act(async () => {
+        await new Promise(resolve => setTimeout(resolve, 100));
+      });
     });
 
     it('all fields should be reset upon failed submit', () => {
@@ -304,7 +324,7 @@ describe('Given ChangePassword', () => {
           }],
         }),
       });
-      component = renderChangePassword();
+      component = await renderChangePassword();
 
       const currentPasswordField = component.getByTestId('current-password-field');
       const newPasswordField = component.getByTestId('new-password-field');
@@ -317,7 +337,9 @@ describe('Given ChangePassword', () => {
       fireEvent.click(submitButton);
 
       // wait for error message
-      await new Promise(resolve => setTimeout(resolve, 100));
+      await act(async () => {
+        await new Promise(resolve => setTimeout(resolve, 100));
+      });
     });
 
     it('all fields should not be reset upon failed submit', () => {
@@ -345,7 +367,7 @@ describe('Given ChangePassword', () => {
           }],
         }),
       });
-      component = renderChangePassword();
+      component = await renderChangePassword();
 
       const currentPasswordField = component.getByTestId('current-password-field');
       const newPasswordField = component.getByTestId('new-password-field');
@@ -358,7 +380,9 @@ describe('Given ChangePassword', () => {
       fireEvent.click(submitButton);
 
       // wait for error message
-      await new Promise(resolve => setTimeout(resolve, 100));
+      await act(async () => {
+        await new Promise(resolve => setTimeout(resolve, 100));
+      });
     });
 
     it('all fields should not be reset upon failed submit', () => {
